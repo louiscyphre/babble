@@ -1,3 +1,2 @@
-# babble
-test
+# babble - simple chat
 
