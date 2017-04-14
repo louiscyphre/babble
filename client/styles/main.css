@@ -20,7 +20,8 @@ body {
   border-style: solid;
 }
 
-.MainHeader {
+.MainHeader,
+.Chat-header {
   flex: 1 auto;
 }
 
@@ -29,7 +30,8 @@ body {
   flex: 7 auto;
 }
 
-.ChatSideBar {
+.ChatSideBar,
+.Chat-sendMessageArea {
   flex: 2 auto;
 }
 
@@ -39,14 +41,6 @@ body {
   flex-direction: column;
 }
 
-.Chat-header {
-  flex: 1 auto;
-}
-
 .Chat-messages {
   flex: 12 auto;
-}
-
-.Chat-sendMessageArea {
-  flex: 2 auto;
 }
