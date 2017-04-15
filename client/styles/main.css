@@ -10,7 +10,6 @@ html,
 body {
   margin: 0;
   height: 100%;
-  display: flex;
   flex-direction: column;
 }
 
@@ -20,27 +19,51 @@ body {
   border-style: solid;
 }
 
+html,
+body,
+.ChatContainer,
+.Chat,
+.Chat-sendMessageArea {
+  display: flex;
+}
+
 .MainHeader,
-.Chat-header {
+.Chat-header,
+.Chat-sendMessageArea,
+.Chat-sendMessageArea textarea {
   flex: 1 auto;
 }
 
 .ChatContainer {
-  display: flex;
   flex: 7 auto;
 }
 
-.ChatSideBar,
-.Chat-sendMessageArea {
+.ChatSideBar {
   flex: 2 auto;
 }
 
 .Chat {
   flex: 9 auto;
-  display: flex;
   flex-direction: column;
 }
 
 .Chat-messages {
   flex: 12 auto;
+}
+
+.Chat-sendMessageArea textarea {
+  resize: none;
+}
+
+.Chat-messages,
+.Chat-header {
+  background-color: #F6F6F6;
+}
+
+.MainHeader {
+  background-color: #353744;
+}
+
+.ChatSideBar {
+  background-color: #61D290;
 }

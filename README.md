@@ -1,2 +1,4 @@
-# babble - simple chat
+# babble
+
+Babble - simple chat
 
