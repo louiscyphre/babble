@@ -1,4 +1,9 @@
+/* -------------------------------------------------------------------------- */
+
 @import url(//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600);
+
+/* -------------------------------------------------------------------------- */
+
 html {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
@@ -10,15 +15,20 @@ html,
 body {
   margin: 0;
   height: 100%;
-  flex: 1 auto;
   flex-direction: column;
 }
+
+
+/* -------------------------------------------------------------------------- */
 
 .dbg {
   border: 1px;
   border-color: black;
   border-style: solid;
 }
+
+
+/* -------------------------------------------------------------------------- */
 
 html,
 body,
@@ -45,7 +55,6 @@ body,
 }
 
 .ChatSideBar {
-  flex: 4 auto;
   min-width: 20%;
   max-width: 20%;
 }
@@ -61,6 +70,7 @@ body,
 }
 
 .Chat-messages ol {
+  list-style: none;
   margin: 0;
 }
 
