@@ -10,6 +10,7 @@ html,
 body {
   margin: 0;
   height: 100%;
+  flex: 1 auto;
   flex-direction: column;
 }
 
@@ -27,11 +28,16 @@ body,
   display: flex;
 }
 
-.MainHeader,
-.Chat-header,
 .Chat-sendMessageArea,
 .Chat-sendMessageArea textarea {
   flex: 1 auto;
+  min-height: 1em;
+}
+
+.MainHeader,
+.Chat-header {
+  min-height: 10%;
+  max-height: 20%;
 }
 
 .ChatContainer {
@@ -39,7 +45,9 @@ body,
 }
 
 .ChatSideBar {
-  flex: 2 auto;
+  flex: 4 auto;
+  min-width: 20%;
+  max-width: 20%;
 }
 
 .Chat {
@@ -49,6 +57,11 @@ body,
 
 .Chat-messages {
   flex: 12 auto;
+  overflow: auto;
+}
+
+.Chat-messages ol {
+  margin: 0;
 }
 
 .Chat-sendMessageArea textarea {
