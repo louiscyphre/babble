@@ -38,9 +38,7 @@ body,
   display: flex;
 }
 
-.Chat-sendMessageArea,
-.Chat-sendMessageArea textarea {
-  flex: 1 auto;
+.Chat-sendMessageArea {
   min-height: 1em;
 }
 
@@ -55,8 +53,8 @@ body,
 }
 
 .ChatSideBar {
-  min-width: 20%;
-  max-width: 20%;
+  min-width: 10%;
+  max-width: 10%;
 }
 
 .Chat {
@@ -74,8 +72,13 @@ body,
   margin: 0;
 }
 
-.Chat-sendMessageArea textarea {
+.Chat-sendMessageAreaText {
+  flex: 8;
   resize: none;
+}
+
+.Chat-sendMessageAreaButton {
+  flex: 2;
 }
 
 .Chat-messages,
