@@ -1,95 +1,72 @@
 /* -------------------------------------------------------------------------- */
-
 @import url(//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600);
-
 /* -------------------------------------------------------------------------- */
-
 html {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
   font-size: 1em;
-  overflow: hidden;
-}
+  overflow: hidden; }
 
 html,
 body {
   margin: 0;
   height: 100%;
-  flex-direction: column;
-}
-
+  flex-direction: column; }
 
 /* -------------------------------------------------------------------------- */
-
 .dbg {
   border: 1px;
   border-color: black;
-  border-style: solid;
-}
-
+  border-style: solid; }
 
 /* -------------------------------------------------------------------------- */
-
 html,
 body,
 .ChatContainer,
 .Chat,
 .Chat-sendMessageArea {
-  display: flex;
-}
+  display: flex; }
 
 .Chat-sendMessageArea {
-  min-height: 1em;
-}
+  min-height: 1em; }
 
 .MainHeader,
 .Chat-header {
   min-height: 10%;
-  max-height: 20%;
-}
+  max-height: 20%; }
 
 .ChatContainer {
-  flex: 7 auto;
-}
+  flex: 7 auto; }
 
 .ChatSideBar {
   min-width: 10%;
-  max-width: 10%;
-}
+  max-width: 10%; }
 
 .Chat {
   flex: 9 auto;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
 .Chat-messages {
   flex: 12 auto;
-  overflow: auto;
-}
+  overflow: auto; }
 
 .Chat-messages ol {
   list-style: none;
-  margin: 0;
-}
+  margin: 0; }
 
 .Chat-sendMessageAreaText {
   flex: 8;
-  resize: none;
-}
+  resize: none; }
 
 .Chat-sendMessageAreaButton {
-  flex: 2;
-}
+  flex: 2; }
 
 .Chat-messages,
 .Chat-header {
-  background-color: #F6F6F6;
-}
+  background-color: #F6F6F6; }
 
 .MainHeader {
-  background-color: #353744;
-}
+  background-color: #353744; }
 
 .ChatSideBar {
-  background-color: #61D290;
-}
+  background-color: #61D290; }
