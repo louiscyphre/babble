@@ -1,0 +1,94 @@
+/* -------------------------------------------------------------------------- */
+
+@import url(//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600);
+
+/* -------------------------------------------------------------------------- */
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 1em;
+  overflow: hidden;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  flex-direction: column;
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+.dbg {
+  border: 1px solid black;
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+html,
+body,
+.ChatContainer,
+.Chat,
+.Chat-sendMessageArea {
+  display: flex;
+}
+
+.Chat-sendMessageArea {
+  min-height: 1em;
+}
+
+.MainHeader,
+.Chat-header {
+  min-height: 10%;
+  max-height: 20%;
+}
+
+.ChatContainer {
+  flex: 7 auto;
+}
+
+.ChatSideBar {
+  min-width: 10%;
+  max-width: 10%;
+}
+
+.Chat {
+  flex: 9 auto;
+  flex-direction: column;
+}
+
+.Chat-messages {
+  flex: 12 auto;
+  overflow: auto;
+}
+
+.Chat-messages ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Chat-sendMessageAreaText {
+  flex: 8;
+  resize: none;
+}
+
+.Chat-sendMessageAreaButton {
+  flex: 2;
+}
+
+.Chat-messages,
+.Chat-header {
+  background-color: #F6F6F6;
+}
+
+.MainHeader {
+  background-color: #353744;
+}
+
+.ChatSideBar {
+  background-color: #61D290;
+}
