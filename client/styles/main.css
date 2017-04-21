@@ -15,9 +15,7 @@ body {
 
 /* -------------------------------------------------------------------------- */
 .dbg {
-  border: 1px;
-  border-color: black;
-  border-style: solid; }
+  border: 1px solid black; }
 
 /* -------------------------------------------------------------------------- */
 html,
@@ -52,7 +50,8 @@ body,
 
 .Chat-messages ol {
   list-style: none;
-  margin: 0; }
+  margin: 0;
+  padding: 0; }
 
 .Chat-sendMessageAreaText {
   flex: 8;
