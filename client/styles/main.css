@@ -3,6 +3,9 @@
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- 
 
+.dbg {
+  border: 1px solid black;
+}
 @mixin displayflex($thisDisplayFlex, $thisFlexSize:"", $flexDirection:"", ) {}
 /* -------------------------------------------------------------------------- */
 .Chat-msg-text {
@@ -17,8 +20,7 @@
 html {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
-  font-size: 1em;
-  overflow: hidden; }
+  font-size: 1em; }
 
 html,
 body {
@@ -26,23 +28,17 @@ body {
   height: 100%;
   flex-direction: column; }
 
-/* -------------------------------------------------------------------------- 
-
-.dbg {
-  border: 1px solid black;
-}
-
-
-/* -------------------------------------------------------------------------- */
 html,
 body,
 .ChatContainer,
 .Chat,
+.Chat-msg,
 .Chat-sendMessageArea {
   display: flex; }
 
 .ChatContainer {
-  flex: 7; }
+  flex: 7;
+  overflow: auto; }
 
 /* -------------------------------------------------------------------------- */
 .ChatSideBar {
@@ -74,7 +70,6 @@ body,
 /* -------------------------------------------------------------------------- */
 .Chat-msg {
   vertical-align: top;
-  display: flex;
   margin: 1em; }
 
 .Chat-msg-avatar {
