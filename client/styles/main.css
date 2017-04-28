@@ -1,6 +1,19 @@
 /* -------------------------------------------------------------------------- */
 @import url(//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600);
 /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- 
+
+@mixin displayflex($thisDisplayFlex, $thisFlexSize:"", $flexDirection:"", ) {}
+/* -------------------------------------------------------------------------- */
+.Chat-msg-text {
+  padding: 5px;
+  border-radius: 10px;
+  border: 2px solid #DBDBDB; }
+
+.Chat-msg-avatar {
+  border-radius: 50%; }
+
+/* -------------------------------------------------------------------------- */
 html {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
@@ -28,55 +41,57 @@ body,
 .Chat-sendMessageArea {
   display: flex; }
 
-.MainHeader,
-.Chat-header {
-  min-height: 15%;
-  max-height: 20%; }
-
 .ChatContainer {
   flex: 7; }
 
 /* -------------------------------------------------------------------------- */
 .ChatSideBar {
   min-width: 18%;
-  max-width: 18%; }
+  max-width: 18%;
+  background-color: #61D290; }
 
 /* -------------------------------------------------------------------------- */
 .Chat {
-  flex: 9 auto;
-  flex-direction: column; }
+  flex: 9;
+  flex-direction: column;
+  background-color: #F6F6F6; }
 
-.Chat-msgList {
+.MainHeader,
+.Chat-header {
+  flex: 1; }
+
+.MainHeader {
+  background-color: #353744; }
+
+.Chat-messages {
   flex: 12;
-  overflow: auto; }
+  overflow-y: auto; }
 
-.Chat-msgList ol {
+.Chat-messages ol {
   list-style: none;
-  margin: 0;
   padding: 0; }
 
-.Chat-msgList ol li {
-  margin: 0; }
+/* -------------------------------------------------------------------------- */
+.Chat-msg {
+  vertical-align: top;
+  display: flex;
+  margin: 1em; }
+
+.Chat-msg-avatar {
+  width: 3em;
+  height: 3em;
+  float: left;
+  margin-right: 1em; }
 
 .Chat-msg-text {
   background-color: white;
-  border-radius: 8px;
-  margin: 15px;
-  padding: 5px;
-  display: inline-block; }
+  display: inline-block;
+  margin-top: 0; }
 
 /* -------------------------------------------------------------------------- */
 .Chat-sendMessageArea {
   flex: 2;
-  min-height: 2em;
-  max-height: 300px;
-  background-color: black; }
-
-.Chat-sendMessageAreaText,
-.Chat-sendMessageAreaButton {
-  height: 100%;
-  box-sizing: border-box;
-  opacity: 0.85; }
+  min-height: 1em; }
 
 .Chat-sendMessageAreaText {
   flex: 8;
@@ -86,12 +101,19 @@ body,
   flex: 2; }
 
 /* -------------------------------------------------------------------------- */
-.Chat-messages,
-.Chat-header {
-  background-color: #F6F6F6; }
+::-webkit-scrollbar {
+  width: auto; }
 
-.MainHeader {
-  background-color: #353744; }
+::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border: 2px solid #DBDBDB;
+  -webkit-border: 2px solid #DBDBDB; }
 
-.ChatSideBar {
-  background-color: #61D290; }
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #ebedec;
+  border: 2px solid #DBDBDB;
+  -webkit-border: 2px solid #DBDBDB; }

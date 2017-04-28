@@ -4,6 +4,37 @@
 
 /* -------------------------------------------------------------------------- */
 
+$avatarSize: 3em;
+$sidebarSize: 18%;
+$borderRadius: 10px;
+$c-header: #353744;
+$c-sidebar: #61D290;
+$c-chatArea: #F6F6F6;
+$c-border:#DBDBDB;
+
+/* -------------------------------------------------------------------------- 
+
+@mixin displayflex($thisDisplayFlex, $thisFlexSize:"", $flexDirection:"", ) {}
+/* -------------------------------------------------------------------------- */
+
+@mixin dimensions($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+%rounded-rectangle {
+  padding: 5px;
+  border-radius: $borderRadius;
+  border: 2px solid $c-border;
+}
+
+%circle {
+  border-radius: 50%;
+}
+
+
+/* -------------------------------------------------------------------------- */
+
 html {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
@@ -36,12 +67,6 @@ body,
   display: flex;
 }
 
-.MainHeader,
-.Chat-header {
-  min-height: 15%;
-  max-height: 20%;
-}
-
 .ChatContainer {
   flex: 7;
 }
@@ -50,41 +75,60 @@ body,
 /* -------------------------------------------------------------------------- */
 
 .ChatSideBar {
-  min-width: 18%;
-  max-width: 18%;
+  min-width: $sidebarSize;
+  max-width: $sidebarSize;
+  background-color: $c-sidebar;
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 .Chat {
-  flex: 9 auto;
+  flex: 9;
   flex-direction: column;
+  background-color: $c-chatArea;
 }
 
-.Chat-msgList {
+.MainHeader,
+.Chat-header {
+  flex: 1;
+}
+
+.MainHeader {
+  background-color: $c-header;
+}
+
+.Chat-messages {
   flex: 12;
-  overflow: auto;
+  overflow-y: auto;
 }
 
-.Chat-msgList ol {
+.Chat-messages ol {
   list-style: none;
-  margin: 0;
   padding: 0;
 }
 
-.Chat-msgList ol li {
-  margin: 0;
+
+/* -------------------------------------------------------------------------- */
+
+.Chat-msg {
+  vertical-align: top;
+  display: flex;
+  margin: 1em;
 }
 
-.Chat-msg-avatar {}
+.Chat-msg-avatar {
+  @extend %circle;
+  @include dimensions($avatarSize, $avatarSize);
+  float: left;
+  margin-right: 1em;
+}
 
 .Chat-msg-text {
+  @extend %rounded-rectangle;
   background-color: white;
-  border-radius: 8px;
-  margin: 15px;
-  padding: 5px;
   display: inline-block;
+  margin-top: 0;
 }
 
 
@@ -92,16 +136,7 @@ body,
 
 .Chat-sendMessageArea {
   flex: 2;
-  min-height: 2em;
-  max-height: 300px;
-  background-color: black;
-}
-
-.Chat-sendMessageAreaText,
-.Chat-sendMessageAreaButton {
-  height: 100%;
-  box-sizing: border-box;
-  opacity: 0.85;
+  min-height: 1em;
 }
 
 .Chat-sendMessageAreaText {
@@ -116,15 +151,22 @@ body,
 
 /* -------------------------------------------------------------------------- */
 
-.Chat-messages,
-.Chat-header {
-  background-color: #F6F6F6;
+ ::-webkit-scrollbar {
+  width: auto;
 }
 
-.MainHeader {
-  background-color: #353744;
+ ::-webkit-scrollbar-track {
+  background: white;
+  border-radius: $borderRadius;
+  -webkit-border-radius: $borderRadius;
+  border: 2px solid $c-border;
+  -webkit-border: 2px solid $c-border;
 }
 
-.ChatSideBar {
-  background-color: #61D290;
+ ::-webkit-scrollbar-thumb {
+  -webkit-border-radius: $borderRadius;
+  border-radius: $borderRadius;
+  background: $c-border + #101211;
+  border: 2px solid $c-border;
+  -webkit-border: 2px solid $c-border;
 }
