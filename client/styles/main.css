@@ -26,12 +26,11 @@ html,
 body {
   margin: 0;
   height: 100%;
-  flex-direction: column; }
+  flex-direction: column;
+  overflow: hidden; }
 
 html,
-body,
-.ChatContainer,
-.Chat,
+body, .ChatContainer, .Chat,
 .Chat-msg,
 .Chat-sendMessageArea {
   display: flex; }
@@ -42,8 +41,7 @@ body,
 
 /* -------------------------------------------------------------------------- */
 .ChatSideBar {
-  min-width: 18%;
-  max-width: 18%;
+  flex: 2;
   background-color: #61D290; }
 
 /* -------------------------------------------------------------------------- */

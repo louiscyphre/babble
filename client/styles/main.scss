@@ -49,6 +49,7 @@ body {
   margin: 0;
   height: 100%;
   flex-direction: column;
+  overflow: hidden;
 }
 
 html,
@@ -69,8 +70,7 @@ body,
 /* -------------------------------------------------------------------------- */
 
 .ChatSideBar {
-  min-width: $sidebarSize;
-  max-width: $sidebarSize;
+  flex: 2;
   background-color: $c-sidebar;
 }
 
