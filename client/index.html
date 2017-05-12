@@ -3,8 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Vegans - Babble</title>
-  <link rel="stylesheet" href="node_modules/normalize.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 
@@ -98,12 +99,13 @@
           </li>
         </ol>
       </section>
-      <form class="Chat-sendMessageArea dbg" method="POST" action="http://localhost:8000/login">
-        <textarea class="Chat-sendMessageAreaText"></textarea>
+      <form class="Chat-sendMessageArea dbg" method="POST" action="http://localhost:8000/">
+        <textarea name="message" class="Chat-sendMessageAreaText"></textarea>
         <button type="submit" class="Chat-sendMessageAreaButton" aria-label="Send message to chat"></button>
       </form>
     </section>
   </section>
 </body>
+<script src="scripts/main.js"></script>
 
 </html>
