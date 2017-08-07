@@ -22,7 +22,7 @@
 
     } else if (request.method === 'POST') {
 
-      var requestBody = '';
+      var requestBody = 'dfadfasd';
 
       request.on('data', function (chunk) {
         requestBody += chunk;

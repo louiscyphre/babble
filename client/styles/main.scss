@@ -1,7 +1,9 @@
 /* -------------------------------------------------------------------------- */
 
-@import url(//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600);
-@import url(//node_modules/normalize.css);
+//@import url(//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600);
+@import "~normalize.css/normalize.css";
+@media (min-width:320px) and (max-width:638px) {}
+
 
 /* -------------------------------------------------------------------------- */
 
@@ -58,7 +60,7 @@ body,
 .ChatContainer,
 .Chat,
 .Chat-msg,
-.Chat-sendMessageArea {
+.Chat-sendMessageForm {
   display: flex;
 }
 
@@ -91,6 +93,13 @@ body,
 
 .MainHeader {
   background-color: $c-header;
+  background-image: url("logoDesktop.png");
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: contain;
+  border: solid 0.1em;
+  border-color: $c-header;
+  padding: 0.2em;
 }
 
 .Chat-messages {
@@ -113,7 +122,8 @@ body,
 
 .Chat-msg-avatar {
   @extend %circle;
-  @include dimensions($avatarSize, $avatarSize);
+  @include dimensions($avatarSize,
+  $avatarSize);
   float: left;
   margin-right: 1em;
 }
@@ -128,18 +138,56 @@ body,
 
 /* -------------------------------------------------------------------------- */
 
-.Chat-sendMessageArea {
+.Chat-sendMessageForm {
   flex: 2;
   min-height: 1em;
 }
 
-.Chat-sendMessageAreaText {
+.Chat-sendMessageFormText {
   flex: 8;
   resize: none;
 }
 
-.Chat-sendMessageAreaButton {
+.Chat-sendMessageFormButton {
+  background-image: url("send-button.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   flex: 2;
+}
+
+
+/* -------------------------------------------------------------------------- */
+
+.Growable {
+  position: relative;
+  border: 1px solid;
+  max-height: 300px;
+  overflow: hidden;
+  -webkit-scrollbar: red;
+}
+
+.Growable textarea,
+.Growable pre {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 0.5em;
+}
+
+.Growable textarea {
+  width: 100%;
+  resize: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: visible;
 }
 
 
