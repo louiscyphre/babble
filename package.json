@@ -13,8 +13,8 @@
     },
     "scripts": {
         "test": "mocha",
-        "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
-        "start": "http-server ./client -p 8080"
+        "sass": "node-sass --watch styles/main.scss -o styles/",
+        "start": "http-server ./ -p 8080"
     },
     "repository": {
         "type": "git",
