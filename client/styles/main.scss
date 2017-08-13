@@ -1,8 +1,10 @@
 /* -------------------------------------------------------------------------- */
 
-//@import url(//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600);
-@import "~normalize.css/normalize.css";
-@media (min-width:320px) and (max-width:638px) {}
+@media (min-width:0px) and (max-width:638px) {
+    .ChatSideBar {
+        display: none;
+    }
+}
 
 
 /* -------------------------------------------------------------------------- */
@@ -24,35 +26,35 @@ $c-border:#DBDBDB;
 /* -------------------------------------------------------------------------- */
 
 @mixin dimensions($width, $height) {
-  width: $width;
-  height: $height;
+    width: $width;
+    height: $height;
 }
 
 %rounded-rectangle {
-  padding: 0.5em;
-  border-radius: $borderRadius;
-  border: 2px solid $c-border;
+    padding: 0.5em;
+    border-radius: $borderRadius;
+    border: 2px solid $c-border;
 }
 
 %circle {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 html {
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
-  font-size: 1em;
+    font-family: 'Nunito', 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 1em;
 }
 
 html,
 body {
-  margin: 0;
-  height: 100%;
-  flex-direction: column;
-  overflow: hidden;
+    margin: 0;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 html,
@@ -61,154 +63,179 @@ body,
 .Chat,
 .Chat-msg,
 .Chat-sendMessageForm {
-  display: flex;
+    display: flex;
 }
 
 .ChatContainer {
-  flex: 7;
-  overflow: auto;
+    flex: 7;
+    overflow: auto;
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 .ChatSideBar {
-  flex: 2;
-  background-color: $c-sidebar;
+    flex: 2;
+    background-color: $c-sidebar;
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 .Chat {
-  flex: 9;
-  flex-direction: column;
-  background-color: $c-chatArea;
+    flex: 9;
+    flex-direction: column;
+    background-color: $c-chatArea;
 }
 
 .MainHeader,
 .Chat-header {
-  flex: 1;
+    flex: 1;
 }
 
 .MainHeader {
-  background-color: $c-header;
-  background-image: url("logoDesktop.png");
-  background-repeat: no-repeat;
-  background-position: left top;
-  background-size: contain;
-  border: solid 0.1em;
-  border-color: $c-header;
-  padding: 0.2em;
+    background-color: $c-header;
+    background-image: url("logoDesktop.png");
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: contain;
+    border: solid 0.1em;
+    border-color: $c-header;
+    padding: 0.2em;
 }
 
 .Chat-messages {
-  flex: 12;
-  overflow-y: auto;
+    flex: 12;
+    overflow-y: auto;
 }
 
 .Chat-messages ol {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 .Chat-msg {
-  vertical-align: top;
-  margin: 1em;
+    vertical-align: top;
+    margin: 1em;
 }
 
 .Chat-msg-avatar {
-  @extend %circle;
-  @include dimensions($avatarSize,
-  $avatarSize);
-  float: left;
-  margin-right: 1em;
+    @extend %circle;
+    @include dimensions($avatarSize,
+    $avatarSize);
+    float: left;
+    margin-right: 1em;
 }
 
 .Chat-msg-text {
-  @extend %rounded-rectangle;
-  background-color: white;
-  display: inline-block;
-  margin-top: 0;
+    @extend %rounded-rectangle;
+    background-color: white;
+    display: inline-block;
+    margin-top: 0;
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 .Chat-sendMessageForm {
-  flex: 2;
-  min-height: 1em;
+    flex: 2;
+    min-height: 1em;
 }
 
 .Chat-sendMessageFormText {
-  flex: 8;
-  resize: none;
+    flex: 8;
+    resize: none;
 }
 
 .Chat-sendMessageFormButton {
-  background-image: url("send-button.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  flex: 2;
+    background-image: url("send-button.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    flex: 2;
 }
 
 
 /* -------------------------------------------------------------------------- */
 
 .Growable {
-  position: relative;
-  border: 1px solid;
-  max-height: 300px;
-  overflow: hidden;
-  -webkit-scrollbar: red;
+    position: relative;
+    border: 1px solid;
+    max-height: 300px;
+    overflow: hidden;
+    -webkit-scrollbar: red;
 }
 
 .Growable textarea,
 .Growable pre {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: inherit;
-  font-size: inherit;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  padding: 0.5em;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: inherit;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 0.5em;
 }
 
 .Growable textarea {
-  width: 100%;
-  resize: none;
-  border: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  overflow: visible;
+    width: 100%;
+    resize: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: visible;
 }
 
+.Modal {
+    //border: 1px solid black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    //width: 80%;
+    max-width: 600px;
+    max-height: 300px;
+    //margin: auto;
+    //background-color: white;
+    //padding: 20px;
+    box-shadow: 0 0 10px 0 black;
+    border-radius: 2px;
+    background-image: -moz-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
+    color: rgb(254, 254, 254);
+}
 
+.Modal {
+    //   display: block;
+}
+
+.Modal-buttons
 /* -------------------------------------------------------------------------- */
 
  ::-webkit-scrollbar {
-  width: auto;
+    width: auto;
 }
 
  ::-webkit-scrollbar-track {
-  background: white;
-  border-radius: $borderRadius;
-  -webkit-border-radius: $borderRadius;
-  border: 2px solid $c-border;
-  -webkit-border: 2px solid $c-border;
+    background: white;
+    border-radius: $borderRadius;
+    -webkit-border-radius: $borderRadius;
+    border: 2px solid $c-border;
+    -webkit-border: 2px solid $c-border;
 }
 
  ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: $borderRadius;
-  border-radius: $borderRadius;
-  background: $c-border + #101211;
-  border: 2px solid $c-border;
-  -webkit-border: 2px solid $c-border;
+    -webkit-border-radius: $borderRadius;
+    border-radius: $borderRadius;
+    background: $c-border + #101211;
+    border: 2px solid $c-border;
+    -webkit-border: 2px solid $c-border;
 }

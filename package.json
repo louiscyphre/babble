@@ -1,32 +1,36 @@
 {
-    "name": "babble",
-    "version": "1.0.0",
-    "description": "Web Chat",
-    "main": "server/main.js",
-    "dependencies": {
-        "node-sass": "^4.5.3",
-        "nodemon": "^1.11.0",
-        "normalize.css": "^7.0.0"
-    },
-    "devDependencies": {
-        "mocha": "^3.4.2"
-    },
-    "scripts": {
-        "test": "mocha",
-        "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
-        "start": "http-server ./client -p 8080"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/louiscyphre/babble.git"
-    },
-    "keywords": [
+  "name": "babble",
+  "version": "1.0.0",
+  "description": "Web Chat",
+  "main": "server/main.js",
+  "dependencies": {
+    "node-sass": "^4.5.3",
+    "nodemon": "^1.11.0",
+    "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "npm-run-all": "^4.0.2"
+  },
+  "scripts": {
+    "test": "mocha --recursive test",
+    "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
+    "file_server": "http-server ./client -p 8080",
+    "api_server": "nodemon server/main.js",
+    "start": "npm-run-all -p -r file_server api_server sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louiscyphre/babble.git"
+  },
+  "keywords": [
     "webchat"
   ],
-    "author": "louiscyphre",
-    "license": "GPL-3.0",
-    "bugs": {
-        "url": "https://github.com/louiscyphre/babble/issues"
-    },
-    "homepage": "https://github.com/louiscyphre/babble#readme"
+  "author": "louiscyphre",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/louiscyphre/babble/issues"
+  },
+  "homepage": "https://github.com/louiscyphre/babble#readme"
 }
