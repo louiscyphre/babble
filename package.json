@@ -9,6 +9,7 @@
     "normalize.css": "^7.0.0"
   },
   "devDependencies": {
+    "browserify": "^14.4.0",
     "chai": "4.1.1",
     "jsdom": "11.1.0",
     "jsdom-global": "3.0.2",
@@ -17,7 +18,10 @@
     "sinon": "^3.2.0"
   },
   "scripts": {
-    "test": "mocha -r jsdom-global/register --recursive test",
+    "transform-js": "browserify test/client/main.js -o test/client/bundle.js",
+    "mocha-test":"mocha -r jsdom-global/register --recursive test || true",
+    "test": "npm-run-all -p -r  transform-js mocha-test",
+    "test-clean": "rm -f test/client/bundle.js",
     "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
     "file_server": "http-server ./client -p 8080",
     "api_server": "nodemon server/main.js",

@@ -1,5 +1,7 @@
 'use strict';
-
+var mocha = require('mocha');
+var describe = mocha.describe;
+var it = mocha.it;
 let assert = require('chai').assert;
 let sinon = require('sinon');
 let Babble = window.Babble;
