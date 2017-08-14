@@ -5,37 +5,21 @@ console.log('hello from client');
 
 var Babble = {
 
+    apiUrl: 'http://localhost:9000',
+
     request: function request(options) {
         /* jshint -W098 */
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
-            xhr.open(options.method, options.action);
+            xhr.open(options.method, Babble.apiUrl + options.action);
             xhr.addEventListener('load', function (e) {
                 resolve(e.target.responseText);
             });
-            xhr.send(options.data);
+            xhr.send(JSON.stringify(options.data));
         });
     },
+
     run: function (document) {
-
-        /*var formCallback = function formCallback(e) {
-            e.preventDefault();
-            Babble.request({
-                method: e.target.method,
-                action: e.target.action,
-                data: serialize(e.target)
-            }).then(function (result) {
-                console.log(result);
-            });
-        }
-
-        var newMessageForm = document.querySelector('.Chat-sendMessageForm');
-
-        newMessageForm.addEventListener('submit', formCallback);
-
-        var registerForm = document.querySelector('.Modal');
-
-        registerForm.addEventListener('submit', formCallback);*/
 
         var newMessageForm = document.querySelector('.Chat-sendMessageForm');
 
@@ -55,23 +39,17 @@ var Babble = {
         registerForm.addEventListener('submit', function (e) {
             e.preventDefault();
             var userInfo = {
-                fullname: registerForm.elements[0].value,
+                currentMessage: "",
+                name: registerForm.elements[0].value,
                 email: registerForm.elements[1].value
             };
+            localStorage.setItem("babble", JSON.stringify(userInfo));
             Babble.register(serialize(registerForm))
                 .then(function (result) {
                     console.log(result);
                     //var userInfo = new FormData(registerForm);
-                    localStorage.setItem("babble", JSON.stringify(userInfo));
                 });
         });
-        //var modal = document.querySelector('.Modal');
-
-        //var close = document.querySelector('.Modal--close');
-
-        //close.onclick = function () {
-        //    modal.style.display = "none";
-        //};
 
         function serialize(form) {
             var data = '';
@@ -95,7 +73,6 @@ var Babble = {
             return new FormData(form);
         }*/
 
-
         makeGrowable(document.querySelector('.js-growable'));
 
         function makeGrowable(container) {
@@ -110,7 +87,7 @@ var Babble = {
     register: function register(props) {
         return Babble.request({
             method: "POST",
-            action: "http://localhost:8000/login",
+            action: "/register",
             data: props
         });
     },
@@ -121,3 +98,29 @@ var Babble = {
 };
 
 Babble.run(document);
+
+/*var formCallback = function formCallback(e) {
+    e.preventDefault();
+    Babble.request({
+        method: e.target.method,
+        action: e.target.action,
+        data: serialize(e.target)
+    }).then(function (result) {
+        console.log(result);
+    });
+}
+
+var newMessageForm = document.querySelector('.Chat-sendMessageForm');
+
+newMessageForm.addEventListener('submit', formCallback);
+
+var registerForm = document.querySelector('.Modal');
+
+registerForm.addEventListener('submit', formCallback);*/
+/*localStorage.setItem("babble", JSON.stringify({
+    currentMessage: "",
+    userInfo: {
+        name: "",
+        email: ""
+    }
+}));*/
