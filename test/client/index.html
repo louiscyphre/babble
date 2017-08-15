@@ -30,7 +30,7 @@
         <section class="Chat dbg">
             <header class="Chat-header dbg">Vegans</header>
             <section class="Chat-messages dbg">
-            <div id="mocha"></div>
+                <div id="mocha"></div>
             </section>
             <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="application/x-www-form-urlencoded">
                 <div class="Chat-sendMessageFormText Growable js-growable">
@@ -44,6 +44,7 @@
 
     <script src="../../node_modules/mocha/mocha.js"></script>
     <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/sinon/pkg/sinon.js"></script>
     <script>
         mocha.setup('bdd');
 
