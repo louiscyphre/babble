@@ -1,10 +1,10 @@
-(function (document) {
+(function (window, document, console) {
 
     'use strict';
-    /* global require, console, document, XMLHttpRequest, FormData, Promise,localStorage */
+    /* global XMLHttpRequest, Promise,localStorage */
     console.log('hello from client');
 
-    var Babble = {
+    window.Babble = {
 
         apiUrl: 'http://localhost:9000',
         storage: localStorage,
@@ -20,7 +20,7 @@
                 if (options.method == 'GET') {
                     xhr.send();
                 } else {
-                    xhr.open(options.method, Babble.apiUrl + options.action);
+                    xhr.open(options.method, window.Babble.apiUrl + options.action);
                     xhr.setRequestHeader('Content-Type', 'text/plain');
                     xhr.send(JSON.stringify(options.data));
                 }
@@ -29,13 +29,19 @@
 
         run: function (document) {
 
-            Babble.storage.setItem('babble', JSON.stringify(Babble.storage));
+            window.Babble.storage.setItem('babble', JSON.stringify({
+                currentMessage: '',
+                userInfo: {
+                    name: '',
+                    email: ''
+                }
+            }));
 
             var newMessageForm = document.querySelector('.Chat-sendMessageForm');
 
             newMessageForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                Babble.request({
+                window.Babble.request({
                     method: newMessageForm.method,
                     action: newMessageForm.action,
                     data: serialize(newMessageForm)
@@ -49,14 +55,13 @@
             registerForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                Babble.register(registerForm.elements)
+                window.Babble.register(registerForm.elements)
                     .then(function (result) {
                         console.log(result);
                         //var userInfo = new FormData(registerForm);
                     });
             });
 
-            makeGrowable(document.querySelector('.js-growable'));
 
             function makeGrowable(container) {
                 var area = container.querySelector('textarea');
@@ -65,6 +70,8 @@
                     clone.textContent = area.value;
                 });
             }
+
+            makeGrowable(document.querySelector('.js-growable'));
         },
 
         register: function register(formElements) {
@@ -72,27 +79,27 @@
                 name: formElements[0].value,
                 email: formElements[1].value
             };
-            Babble.storage.setItem('babble', JSON.stringify(Babble.storage.userInfo));
-            return Babble.request({
+            window.Babble.storage.setItem('userInfo', JSON.stringify(userInfo));
+            return window.Babble.request({
                 method: 'POST',
                 action: '/register',
-                data: Babble.storage.userInfo
+                data: window.Babble.storage.userInfo
             });
         },
 
         postMessage: function postMessage(message, callback) {
-            Babble.storage.setItem('babble', Babble.storage.currentMessage);
-            return Babble.request({
+            window.Babble.storage.setItem('babble', window.Babble.storage.currentMessage);
+            return window.Babble.request({
                 method: 'POST',
                 action: '/message',
-                data: Babble.storage.currentMessage
+                data: window.Babble.storage.currentMessage
             });
         }
     };
 
-    Babble.run(document);
+    window.Babble.run(document);
 
-})(document);
+})(this.window, this.document, this.console);
 /*var formCallback = function formCallback(e) {
     e.preventDefault();
     Babble.request({
