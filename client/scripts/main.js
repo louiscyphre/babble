@@ -1,7 +1,7 @@
-(function (window, document, console) {
+(function (window, document, console, localStorage, XMLHttpRequest, Promise) {
 
     'use strict';
-    /* global XMLHttpRequest, Promise,localStorage */
+
     console.log('hello from client');
 
     window.Babble = {
@@ -9,7 +9,6 @@
         apiUrl: 'http://localhost:9000',
         storage: localStorage,
         request: function request(options) {
-            /* jshint -W098 */
             return new Promise(function (resolve, reject) {
                 var xhr = new XMLHttpRequest();
 
@@ -27,7 +26,7 @@
             });
         },
 
-        run: function (document) {
+        run: function (document, window, console) {
 
             window.Babble.storage.setItem('babble', JSON.stringify({
                 currentMessage: '',
@@ -55,13 +54,14 @@
             registerForm.addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                window.Babble.register(registerForm.elements)
-                    .then(function (result) {
-                        console.log(result);
-                        //var userInfo = new FormData(registerForm);
-                    });
+                window.Babble.register({
+                    name: registerForm.elements[0].value,
+                    email: registerForm.elements[1].value
+                }).then(function (result) {
+                    console.log(result);
+                    //var userInfo = new FormData(registerForm);
+                });
             });
-
 
             function makeGrowable(container) {
                 var area = container.querySelector('textarea');
@@ -74,16 +74,15 @@
             makeGrowable(document.querySelector('.js-growable'));
         },
 
-        register: function register(formElements) {
-            var userInfo = {
-                name: formElements[0].value,
-                email: formElements[1].value
-            };
-            window.Babble.storage.setItem('userInfo', JSON.stringify(userInfo));
+        register: function register(userInfo) {
+            window.Babble.storage.setItem('babble', JSON.stringify({
+                currentMessage: '',
+                userInfo: userInfo
+            }));
             return window.Babble.request({
                 method: 'POST',
                 action: '/register',
-                data: window.Babble.storage.userInfo
+                data: userInfo
             });
         },
 
@@ -97,9 +96,9 @@
         }
     };
 
-    window.Babble.run(document);
+    window.Babble.run(document, window, console);
 
-})(this.window, this.document, this.console);
+})(this.window, this.document, this.console, this.localStorage, this.XMLHttpRequest, this.Promise);
 /*var formCallback = function formCallback(e) {
     e.preventDefault();
     Babble.request({
