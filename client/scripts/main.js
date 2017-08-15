@@ -1,103 +1,98 @@
-/* jshint -W097 */
-'use strict';
-/* global require, console, document, XMLHttpRequest, FormData, Promise,localStorage */
-console.log('hello from client');
+(function (document) {
 
-var Babble = {
+    'use strict';
+    /* global require, console, document, XMLHttpRequest, FormData, Promise,localStorage */
+    console.log('hello from client');
 
-    apiUrl: 'http://localhost:9000',
-    storage: {
-        currentMessage: '',
+    var Babble = {
 
-        userInfo: {
-            name: '',
-            email: ''
-        }
-    },
-    request: function request(options) {
-        /* jshint -W098 */
-        return new Promise(function (resolve, reject) {
-            var xhr = new XMLHttpRequest();
+        apiUrl: 'http://localhost:9000',
+        storage: localStorage,
+        request: function request(options) {
+            /* jshint -W098 */
+            return new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
 
-            xhr.addEventListener('load', function (e) {
-                resolve(e.target.responseText);
-            });
-
-            if (options.method == 'GET') {
-                xhr.send();
-            } else {
-                xhr.open(options.method, Babble.apiUrl + options.action);
-                xhr.setRequestHeader('Content-Type', 'text/plain');
-                xhr.send(JSON.stringify(options.data));
-            }
-        });
-    },
-
-    run: function (document) {
-
-        localStorage.setItem('babble', JSON.stringify(Babble.storage));
-
-        var newMessageForm = document.querySelector('.Chat-sendMessageForm');
-
-        newMessageForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            Babble.request({
-                method: newMessageForm.method,
-                action: newMessageForm.action,
-                data: serialize(newMessageForm)
-            }).then(function (result) {
-                console.log(result);
-            });
-        });
-
-        var registerForm = document.querySelector('.Modal');
-
-        registerForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            Babble.register(registerForm.elements)
-                .then(function (result) {
-                    console.log(result);
-                    //var userInfo = new FormData(registerForm);
+                xhr.addEventListener('load', function (e) {
+                    resolve(e.target.responseText);
                 });
-        });
 
-        makeGrowable(document.querySelector('.js-growable'));
+                if (options.method == 'GET') {
+                    xhr.send();
+                } else {
+                    xhr.open(options.method, Babble.apiUrl + options.action);
+                    xhr.setRequestHeader('Content-Type', 'text/plain');
+                    xhr.send(JSON.stringify(options.data));
+                }
+            });
+        },
 
-        function makeGrowable(container) {
-            var area = container.querySelector('textarea');
-            var clone = container.querySelector('span');
-            area.addEventListener('input', function (e) {
-                clone.textContent = area.value;
+        run: function (document) {
+
+            Babble.storage.setItem('babble', JSON.stringify(Babble.storage));
+
+            var newMessageForm = document.querySelector('.Chat-sendMessageForm');
+
+            newMessageForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                Babble.request({
+                    method: newMessageForm.method,
+                    action: newMessageForm.action,
+                    data: serialize(newMessageForm)
+                }).then(function (result) {
+                    console.log(result);
+                });
+            });
+
+            var registerForm = document.querySelector('.Modal');
+
+            registerForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                Babble.register(registerForm.elements)
+                    .then(function (result) {
+                        console.log(result);
+                        //var userInfo = new FormData(registerForm);
+                    });
+            });
+
+            makeGrowable(document.querySelector('.js-growable'));
+
+            function makeGrowable(container) {
+                var area = container.querySelector('textarea');
+                var clone = container.querySelector('span');
+                area.addEventListener('input', function (e) {
+                    clone.textContent = area.value;
+                });
+            }
+        },
+
+        register: function register(formElements) {
+            var userInfo = {
+                name: formElements[0].value,
+                email: formElements[1].value
+            };
+            Babble.storage.setItem('babble', JSON.stringify(Babble.storage.userInfo));
+            return Babble.request({
+                method: 'POST',
+                action: '/register',
+                data: Babble.storage.userInfo
+            });
+        },
+
+        postMessage: function postMessage(message, callback) {
+            Babble.storage.setItem('babble', Babble.storage.currentMessage);
+            return Babble.request({
+                method: 'POST',
+                action: '/message',
+                data: Babble.storage.currentMessage
             });
         }
-    },
+    };
 
-    register: function register(formElements) {
-        Babble.storage.userInfo.name = formElements[0].value;
-        Babble.storage.userInfo.email = formElements[1].value;
-        localStorage.setItem('babble', JSON.stringify(Babble.storage));
-        return Babble.request({
-            method: 'POST',
-            action: '/register',
-            data: Babble.storage.userInfo
-        });
-    },
+    Babble.run(document);
 
-    postMessage: function postMessage(message, callback) {
-        Babble.storage.currentMessage = message;
-        Babble.storage.userInfo.email = formElements[1].value;
-        localStorage.setItem('babble', JSON.stringify(Babble.storage));
-        return Babble.request({
-            method: 'POST',
-            action: '/message',
-            data: Babble.storage.currentMessage
-        });
-    }
-};
-
-Babble.run(document);
-
+})(document);
 /*var formCallback = function formCallback(e) {
     e.preventDefault();
     Babble.request({
