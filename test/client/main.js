@@ -1,10 +1,7 @@
 'use strict';
-var mocha = require('mocha');
-var describe = mocha.describe;
-var it = mocha.it;
-let assert = require('chai').assert;
-let sinon = require('sinon');
-let Babble = window.Babble;
+
+let assert = window.chai.assert;
+let sinon = window.sinon;
 
 describe('LocalStorage', function () {
     it('should have one key named babble in json format', function () {

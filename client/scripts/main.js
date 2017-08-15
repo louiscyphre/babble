@@ -6,20 +6,36 @@ console.log('hello from client');
 var Babble = {
 
     apiUrl: 'http://localhost:9000',
+    storage: {
+        currentMessage: '',
 
+        userInfo: {
+            name: '',
+            email: ''
+        }
+    },
     request: function request(options) {
         /* jshint -W098 */
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
-            xhr.open(options.method, Babble.apiUrl + options.action);
+
             xhr.addEventListener('load', function (e) {
                 resolve(e.target.responseText);
             });
-            xhr.send(JSON.stringify(options.data));
+
+            if (options.method == 'GET') {
+                xhr.send();
+            } else {
+                xhr.open(options.method, Babble.apiUrl + options.action);
+                xhr.setRequestHeader('Content-Type', 'text/plain');
+                xhr.send(JSON.stringify(options.data));
+            }
         });
     },
 
     run: function (document) {
+
+        localStorage.setItem('babble', JSON.stringify(Babble.storage));
 
         var newMessageForm = document.querySelector('.Chat-sendMessageForm');
 
@@ -38,40 +54,13 @@ var Babble = {
 
         registerForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            var userInfo = {
-                currentMessage: "",
-                name: registerForm.elements[0].value,
-                email: registerForm.elements[1].value
-            };
-            localStorage.setItem("babble", JSON.stringify(userInfo));
-            Babble.register(serialize(registerForm))
+
+            Babble.register(registerForm.elements)
                 .then(function (result) {
                     console.log(result);
                     //var userInfo = new FormData(registerForm);
                 });
         });
-
-        function serialize(form) {
-            var data = '';
-            //console.log('enter serialize: ');
-
-            for (var i = 0; i < form.elements.length; i++) {
-                var element = form.elements[i];
-                //console.log("form.elements[i]:", JSON.stringify(JSON.parse(form.elements[i])));
-                if (element.name) {
-                    data += element.name + '=' + encodeURIComponent(element.value) + '&';
-
-                    //console.log('serialize: ', element.name);
-                }
-            }
-            console.log('encoded data: ', data);
-            return data;
-        }
-
-        /*function serialize(form) {
-            console.log(new FormData(form));
-            return new FormData(form);
-        }*/
 
         makeGrowable(document.querySelector('.js-growable'));
 
@@ -84,16 +73,26 @@ var Babble = {
         }
     },
 
-    register: function register(props) {
+    register: function register(formElements) {
+        Babble.storage.userInfo.name = formElements[0].value;
+        Babble.storage.userInfo.email = formElements[1].value;
+        localStorage.setItem('babble', JSON.stringify(Babble.storage));
         return Babble.request({
-            method: "POST",
-            action: "/register",
-            data: props
+            method: 'POST',
+            action: '/register',
+            data: Babble.storage.userInfo
         });
     },
 
     postMessage: function postMessage(message, callback) {
-        return Babble.request(message);
+        Babble.storage.currentMessage = message;
+        Babble.storage.userInfo.email = formElements[1].value;
+        localStorage.setItem('babble', JSON.stringify(Babble.storage));
+        return Babble.request({
+            method: 'POST',
+            action: '/message',
+            data: Babble.storage.currentMessage
+        });
     }
 };
 
@@ -124,3 +123,26 @@ registerForm.addEventListener('submit', formCallback);*/
         email: ""
     }
 }));*/
+
+/*
+        function serialize(form) {
+            var data = '';
+            //console.log('enter serialize: ');
+
+            for (var i = 0; i < form.elements.length; i++) {
+                var element = form.elements[i];
+                //console.log("form.elements[i]:", JSON.stringify(JSON.parse(form.elements[i])));
+                if (element.name) {
+                    data += element.name + '=' + encodeURIComponent(element.value) + '&';
+
+                    //console.log('serialize: ', element.name);
+                }
+            }
+            console.log('encoded data: ', data);
+            return data;
+        }
+*/
+/*function serialize(form) {
+    console.log(new FormData(form));
+    return new FormData(form);
+}*/

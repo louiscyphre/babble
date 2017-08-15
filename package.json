@@ -1,43 +1,43 @@
 {
-  "name": "babble",
-  "version": "1.0.0",
-  "description": "Web Chat",
-  "main": "server/main.js",
-  "dependencies": {
-    "node-sass": "^4.5.3",
-    "nodemon": "^1.11.0",
-    "normalize.css": "^7.0.0"
-  },
-  "devDependencies": {
-    "browserify": "^14.4.0",
-    "chai": "4.1.1",
-    "jsdom": "11.1.0",
-    "jsdom-global": "3.0.2",
-    "mocha": "^3.5.0",
-    "npm-run-all": "^4.0.2",
-    "sinon": "^3.2.0"
-  },
-  "scripts": {
-    "transform-js": "browserify test/client/main.js -o test/client/bundle.js",
-    "mocha-test":"mocha -r jsdom-global/register --recursive test || true",
-    "test": "npm-run-all -p -r  transform-js mocha-test",
-    "test-clean": "rm -f test/client/bundle.js",
-    "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
-    "file_server": "http-server ./client -p 8080",
-    "api_server": "nodemon server/main.js",
-    "start": "npm-run-all -p -r file_server api_server sass"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/louiscyphre/babble.git"
-  },
-  "keywords": [
+    "name": "babble",
+    "version": "1.0.0",
+    "description": "Web Chat",
+    "main": "server/main.js",
+    "dependencies": {
+        "node-sass": "^4.5.3",
+        "nodemon": "^1.11.0",
+        "normalize.css": "^7.0.0"
+    },
+    "devDependencies": {
+        "browserify": "^14.4.0",
+        "chai": "^4.1.1",
+        "jsdom": "^11.1.0",
+        "jsdom-global": "^3.0.2",
+        "mocha": "^3.5.0",
+        "mock-local-storage": "^1.0.4",
+        "npm-run-all": "^4.0.2",
+        "sinon": "^3.2.0"
+    },
+    "scripts": {
+        "mocha-test": "mocha -r mock-local-storage -r jsdom-global/register --recursive test || true",
+        "test": "npm-run-all -p mocha-test",
+        "test-in-browser": "http-server -p 8081",
+        "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
+        "file_server": "http-server ./client -p 8080",
+        "api_server": "nodemon server/main.js",
+        "start": "npm-run-all -p -r file_server api_server sass"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/louiscyphre/babble.git"
+    },
+    "keywords": [
     "webchat"
   ],
-  "author": "louiscyphre",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/louiscyphre/babble/issues"
-  },
-  "homepage": "https://github.com/louiscyphre/babble#readme"
+    "author": "louiscyphre",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/louiscyphre/babble/issues"
+    },
+    "homepage": "https://github.com/louiscyphre/babble#readme"
 }

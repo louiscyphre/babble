@@ -2,14 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <title>Mocha</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <link href="../../node_modules/mocha/mocha.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../client/styles/main.css">
 </head>
 
 <body>
+    <header class="MainHeader dbg">
+        <!--img src="styles/logo.svg" style="background: black" /-->
+    </header>
+    <section class="ChatContainer">
+
+        <form class="Modal" action="http://localhost:9000/register" method="POST" enctype="text/plain">
+            <label for="text">Full name</label>
+            <input type="text" name="userName" />
+            <label for="email">Email</label>
+            <input type="email" name="userEmail" />
+
+            <button class="Modal--anonymous">Stay Anonymous</button>
+            <button type="submit" class="Modal--login">Login</button>
+        </form>
+
+        <nav class="ChatSideBar dbg">
+        </nav>
+        <section class="Chat dbg">
+            <header class="Chat-header dbg">Vegans</header>
+            <section class="Chat-messages dbg">
+            <div id="mocha"></div>
+            </section>
+            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="application/x-www-form-urlencoded">
+                <div class="Chat-sendMessageFormText Growable js-growable">
+                    <pre><span></span><br></pre>
+                    <textarea name="message"></textarea>
+                </div>
+                <button type="submit " class="Chat-sendMessageFormButton " aria-label="Send message to chat "></button>
+            </form>
+        </section>
+    </section>
+
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script>
+        mocha.setup('bdd');
+
+    </script>
+    <!-- thing to test -->
+    <script src="../../client/scripts/main.js"></script>
+    <!-- your test files -->
+    <script src="main.js"></script>
+    <script>
+        mocha.run();
+
+    </script>
 </body>
-<script src="bundle.js"></script>
 
 </html>
