@@ -28,13 +28,7 @@
 
         run: function (document, window, console) {
 
-            window.Babble.storage.setItem('babble', JSON.stringify({
-                currentMessage: '',
-                userInfo: {
-                    name: '',
-                    email: ''
-                }
-            }));
+            window.Babble.updateKey('all', '');
 
             var newMessageForm = document.querySelector('.Chat-sendMessageForm');
 
@@ -63,22 +57,18 @@
                 });
             });
 
-            function makeGrowable(container) {
+            (function makeGrowable(container) {
                 var area = container.querySelector('textarea');
                 var clone = container.querySelector('span');
                 area.addEventListener('input', function (e) {
                     clone.textContent = area.value;
                 });
-            }
+            }(document.querySelector('.js-growable')));
 
-            makeGrowable(document.querySelector('.js-growable'));
         },
 
         register: function register(userInfo) {
-            window.Babble.storage.setItem('babble', JSON.stringify({
-                currentMessage: '',
-                userInfo: userInfo
-            }));
+            window.Babble.updateKey('userInfo', userInfo);
             return window.Babble.request({
                 method: 'POST',
                 action: '/register',
@@ -87,12 +77,39 @@
         },
 
         postMessage: function postMessage(message, callback) {
-            window.Babble.storage.setItem('babble', window.Babble.storage.currentMessage);
+            window.Babble.updateKey('currentMessage', message.message);
             return window.Babble.request({
                 method: 'POST',
                 action: '/message',
-                data: window.Babble.storage.currentMessage
+                data: message
             });
+        },
+
+        updateKey: function updateKey(keyName, value) {
+            if (keyName === 'all') {
+                window.Babble.storage.setItem('babble', JSON.stringify({
+                    currentMessage: value,
+                    userInfo: {
+                        name: value,
+                        email: value
+                    }
+                }));
+                return;
+            }
+            var data = JSON.parse(window.Babble.storage.getItem('babble'));
+            if (keyName === 'userInfo') {
+                data.userInfo.name = value.name;
+                data.userInfo.email = value.email;
+                window.Babble.storage.setItem('babble', JSON.stringify(data));
+                return;
+            } else if (keyName === 'currentMessage') {
+                data.currentMessage = value;
+                window.Babble.storage.setItem('babble', JSON.stringify(data));
+                return;
+            } else throw new window.Babble.exception('wrong use of updateKey()');
+        },
+        exception: function exception(what) {
+            console.error("[CRITICAL ERROR] Exception thrown: ", what);
         }
     };
 
