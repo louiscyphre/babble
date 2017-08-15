@@ -154,7 +154,8 @@ body,
   background-image: -ms-linear-gradient(90deg, #47a272 0%, #7dd84e 100%);
   color: #fefefe; }
 
-.Modal-buttons ::-webkit-scrollbar {
+/* -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
   width: auto; }
 
 ::-webkit-scrollbar-track {

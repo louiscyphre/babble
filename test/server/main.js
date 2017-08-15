@@ -26,4 +26,3 @@ describe('Message', function() {
     assert.equal(null, messages.getMessages(0).find(m => m.id === id));
   });
 });
-
