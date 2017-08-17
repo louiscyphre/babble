@@ -53,7 +53,7 @@
                     email: registerForm.elements[1].value
                 }).then(function (result) {
                     console.log(result);
-                    //var userInfo = new FormData(registerForm);
+                    registerForm.style.display = 'none';
                 });
             });
 

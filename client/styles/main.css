@@ -139,20 +139,26 @@ body,
   overflow: visible; }
 
 .Modal {
-  display: none;
+  border: 1px solid black;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 80%;
   max-width: 600px;
   max-height: 300px;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
   box-shadow: 0 0 10px 0 black;
-  border-radius: 2px;
+  border-radius: 2px; }
+
+.Modal--login {
   background-image: -moz-linear-gradient(90deg, #47a272 0%, #7dd84e 100%);
   background-image: -webkit-linear-gradient(90deg, #47a272 0%, #7dd84e 100%);
   background-image: -ms-linear-gradient(90deg, #47a272 0%, #7dd84e 100%);
-  color: #fefefe; }
+  background-image: -ms-linear-gradient(90deg, #47a272 0%, #7dd84e 100%); }
 
 /* -------------------------------------------------------------------------- */
 ::-webkit-scrollbar {

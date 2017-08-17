@@ -193,25 +193,27 @@ body,
 }
 
 .Modal {
-    //border: 1px solid black;
-    display: none;
+    border: 1px solid black;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    //width: 80%;
+    width: 80%;
     max-width: 600px;
     max-height: 300px;
-    //margin: auto;
-    //background-color: white;
-    //padding: 20px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
     box-shadow: 0 0 10px 0 black;
     border-radius: 2px;
+}
+
+.Modal--login {
     background-image: -moz-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
     background-image: -webkit-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
     background-image: -ms-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
-    color: rgb(254, 254, 254);
+    background-image: -ms-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
 }
 
 

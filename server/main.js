@@ -1,10 +1,12 @@
 (function (global) {
-
     'use strict';
     /* global require, console */
     var http = require('http');
     var urlUtil = require('url');
     var queryUtil = require('querystring');
+
+    var messages = require('./messages-util').messages;
+
     var server = http.createServer(function (request, response) {
 
         response.setHeader('Access-Control-Allow-Origin', '*');
@@ -42,6 +44,7 @@
     });
     server.listen(9000);
     console.log("Server is on");
+    console.log("messages.serialize(): ", messages.index());
 
 
 }(this.window));
