@@ -1,9 +1,23 @@
-(function (module) {
+(function (global, module, factory) {
     'use strict';
     /* global module */
-    module.exports.messages = {
+    if (typeof module === 'object' && module.exports) {
+        module.exports.messages = factory();
+    } else {
+        global.utils = factory();
+    }
+}(this, module, function () {
+    var exception = function exception(what) {
+        this.console.error("[CRITICAL ERROR] Exception thrown: ", what);
+    };
+
+
+    return {
         index: function () {
+            return 'Hello world';
+        },
+        addMessage: function addMessage(message) {
             return 'Hello world';
         }
     };
-})(module);
+}));

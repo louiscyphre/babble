@@ -4,13 +4,13 @@
   "description": "Web Chat",
   "main": "server/main.js",
   "dependencies": {
-    "exports": "0.0.1",
+    "md5": "^2.2.1",
     "node-sass": "^4.5.3",
-    "nodemon": "^1.11.0",
-    "require": "^2.4.20"
+    "nodemon": "^1.11.0"
   },
   "devDependencies": {
     "chai": "^4.1.1",
+    "http-server": "^0.10.0",
     "mocha": "^3.5.0",
     "npm-run-all": "^4.0.2",
     "sinon": "^3.2.0"
@@ -18,10 +18,13 @@
   "scripts": {
     "test": "mocha --recursive test/server || true",
     "test-in-browser": "http-server -p 8081",
+    "test-all": "npm-run-all -p test test-in-browser",
     "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
-    "file_server": "http-server ./client -p 8080",
-    "api_server": "nodemon server/main.js",
-    "start": "npm-run-all -p -r file_server api_server sass"
+    "file-server": "http-server ./client -p 8080",
+    "api-server": "node server/main.js",
+    "api-server-dev": "nodemon server/main.js",
+    "start": "npm-run-all -p -r file-server api-server",
+    "dev": "npm-run-all -p -r file-server api-server-dev sass"
   },
   "repository": {
     "type": "git",

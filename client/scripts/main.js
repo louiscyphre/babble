@@ -7,6 +7,7 @@
     window.Babble = {
 
         apiUrl: 'http://localhost:9000',
+        counter: 0,
         storage: localStorage,
         request: function request(options) {
             return new Promise(function (resolve, reject) {
@@ -65,6 +66,29 @@
                 });
             }(document.querySelector('.js-growable')));
 
+            /*(function poll() {
+                $.ajax({
+                    url: "server-url",
+                    success: function (data, status, jqXHR) {
+                        // do something with the data
+                        setTimeout(poll, 10);
+                    },
+                    error: function (jqXHR, status, errorThrown) {
+                        if (status == 'timeout') {
+                            console.log('request timed out.');
+                            setTimeout(poll, 10);
+                        } else {
+                            console.log(status);
+                            setTimeout(poll, 60000);
+                        }
+                    },
+                    dataType: "json",
+                    timeout: 60000
+                });
+            })();*/
+
+
+
         },
 
         register: function register(userInfo) {
@@ -84,7 +108,6 @@
                 data: message
             });
         },
-
         updateKey: function updateKey(keyName, value) {
             if (keyName === 'all') {
                 window.Babble.storage.setItem('babble', JSON.stringify({
