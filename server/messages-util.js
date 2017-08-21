@@ -11,12 +11,16 @@
         this.console.error("[CRITICAL ERROR] Exception thrown: ", what);
     };
 
+    var allMessages = 0;
+    var deletedMessages = 0;
+    var messages = [];
 
     return {
         index: function () {
             return 'Hello world';
         },
         addMessage: function addMessage(message) {
+
             return 'Hello world';
         }
     };

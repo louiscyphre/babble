@@ -1,7 +1,6 @@
 (function (window, document, console, localStorage, XMLHttpRequest, Promise) {
 
     'use strict';
-
     console.log('hello from client');
 
     window.Babble = {
@@ -13,17 +12,39 @@
             return new Promise(function (resolve, reject) {
                 var xhr = new XMLHttpRequest();
 
-                xhr.addEventListener('load', function (e) {
-                    resolve(e.target.responseText);
-                });
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 400) {
+                        // Success!
+                        resolve(xhr.responseText);
+                    } else {
+                        // We reached our target server, but it returned an error
+
+                    }
+                };
+
+                xhr.onerror = function () {
+                    // There was a connection error of some sort
+                };
 
                 if (options.method == 'GET') {
+                    xhr.open('GET', options.action, true);
                     xhr.send();
                 } else {
                     xhr.open(options.method, window.Babble.apiUrl + options.action);
                     xhr.setRequestHeader('Content-Type', 'text/plain');
                     xhr.send(JSON.stringify(options.data));
                 }
+            });
+        },
+
+        poll: function poll() {
+            window.Babble.request({
+                method: 'GET',
+                action: window.Babble.apiUrl + '/messages',
+                data: 'counter=' + window.Babble.counter.toString()
+            }).then(function (result) {
+                console.log(result);
+                window.setTimeout(poll, 5000);
             });
         },
 
@@ -55,6 +76,9 @@
                 }).then(function (result) {
                     console.log(result);
                     registerForm.style.display = 'none';
+                    registerForm.style.visibility = 'hidden';
+                    registerForm.setAttribute("aria-hidden", "true");
+                    window.Babble.poll();
                 });
             });
 
@@ -65,30 +89,6 @@
                     clone.textContent = area.value;
                 });
             }(document.querySelector('.js-growable')));
-
-            /*(function poll() {
-                $.ajax({
-                    url: "server-url",
-                    success: function (data, status, jqXHR) {
-                        // do something with the data
-                        setTimeout(poll, 10);
-                    },
-                    error: function (jqXHR, status, errorThrown) {
-                        if (status == 'timeout') {
-                            console.log('request timed out.');
-                            setTimeout(poll, 10);
-                        } else {
-                            console.log(status);
-                            setTimeout(poll, 60000);
-                        }
-                    },
-                    dataType: "json",
-                    timeout: 60000
-                });
-            })();*/
-
-
-
         },
 
         register: function register(userInfo) {
@@ -104,7 +104,7 @@
             window.Babble.updateKey('currentMessage', message.message);
             return window.Babble.request({
                 method: 'POST',
-                action: '/message',
+                action: '/messages',
                 data: message
             });
         },
