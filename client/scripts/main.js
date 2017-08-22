@@ -15,23 +15,28 @@
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 400) {
                         // Success!
+                        console.log(xhr.responseText);
                         resolve(xhr.responseText);
                     } else {
                         // We reached our target server, but it returned an error
-
+                        console.log(xhr.responseText);
+                        reject(xhr.responseText);
                     }
                 };
 
                 xhr.onerror = function () {
                     // There was a connection error of some sort
+                    console.log("Error");
                 };
 
+
                 if (options.method == 'GET') {
-                    xhr.open('GET', options.action, true);
+                    xhr.open(options.method, window.Babble.apiUrl + options.action + '?' + options.data, true);
+                    console.log("URL:", window.Babble.apiUrl + options.action + '?' + options.data);
                     xhr.send();
                 } else {
-                    xhr.open(options.method, window.Babble.apiUrl + options.action);
-                    xhr.setRequestHeader('Content-Type', 'text/plain');
+                    xhr.open(options.method, window.Babble.apiUrl + options.action, true);
+                    xhr.setRequestHeader('Content-Type', 'text/json');
                     xhr.send(JSON.stringify(options.data));
                 }
             });
@@ -40,11 +45,13 @@
         poll: function poll() {
             window.Babble.request({
                 method: 'GET',
-                action: window.Babble.apiUrl + '/messages',
+                action: '/messages',
                 data: 'counter=' + window.Babble.counter.toString()
             }).then(function (result) {
                 console.log(result);
-                window.setTimeout(poll, 5000);
+                window.setTimeout(poll, 6000);
+            }).catch(function (error) {
+                console.log(error);
             });
         },
 
@@ -56,13 +63,8 @@
 
             newMessageForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                window.Babble.request({
-                    method: newMessageForm.method,
-                    action: newMessageForm.action,
-                    data: serialize(newMessageForm)
-                }).then(function (result) {
-                    console.log(result);
-                });
+                var message = document.querySelector('.Chat-message').value;
+                window.Babble.postMessage(message, function () {});
             });
 
             var registerForm = document.querySelector('.Modal');
@@ -73,13 +75,11 @@
                 window.Babble.register({
                     name: registerForm.elements[0].value,
                     email: registerForm.elements[1].value
-                }).then(function (result) {
-                    console.log(result);
-                    registerForm.style.display = 'none';
-                    registerForm.style.visibility = 'hidden';
-                    registerForm.setAttribute("aria-hidden", "true");
-                    window.Babble.poll();
                 });
+                registerForm.style.display = 'none';
+                registerForm.style.visibility = 'hidden';
+                registerForm.setAttribute("aria-hidden", "true");
+                window.Babble.getMessages(window.Babble.counter, window.Babble.updateCounter);
             });
 
             (function makeGrowable(container) {
@@ -93,20 +93,36 @@
 
         register: function register(userInfo) {
             window.Babble.updateKey('userInfo', userInfo);
-            return window.Babble.request({
-                method: 'POST',
-                action: '/register',
-                data: userInfo
-            });
         },
 
         postMessage: function postMessage(message, callback) {
             window.Babble.updateKey('currentMessage', message.message);
             return window.Babble.request({
-                method: 'POST',
+                    method: 'POST',
+                    action: '/messages',
+                    data: message
+                }).then(callback())
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        getMessages: function getMessages(counter, callback) {
+            callback();
+            window.Babble.request({
+                method: 'GET',
                 action: '/messages',
-                data: message
+                data: 'counter=' + counter.toString()
+            }).then(function (result) {
+                console.log(result);
+                window.setTimeout(function () {
+                    getMessages(counter, callback);
+                }, 6000);
+            }).catch(function (error) {
+                console.log(error);
             });
+        },
+        updateCounter: function (amount) {
+            window.Babble.counter -= amount;
         },
         updateKey: function updateKey(keyName, value) {
             if (keyName === 'all') {
@@ -155,35 +171,4 @@ var newMessageForm = document.querySelector('.Chat-sendMessageForm');
 newMessageForm.addEventListener('submit', formCallback);
 
 var registerForm = document.querySelector('.Modal');
-
-registerForm.addEventListener('submit', formCallback);*/
-/*localStorage.setItem("babble", JSON.stringify({
-    currentMessage: "",
-    userInfo: {
-        name: "",
-        email: ""
-    }
-}));*/
-
-/*
-        function serialize(form) {
-            var data = '';
-            //console.log('enter serialize: ');
-
-            for (var i = 0; i < form.elements.length; i++) {
-                var element = form.elements[i];
-                //console.log("form.elements[i]:", JSON.stringify(JSON.parse(form.elements[i])));
-                if (element.name) {
-                    data += element.name + '=' + encodeURIComponent(element.value) + '&';
-
-                    //console.log('serialize: ', element.name);
-                }
-            }
-            console.log('encoded data: ', data);
-            return data;
-        }
 */
-/*function serialize(form) {
-    console.log(new FormData(form));
-    return new FormData(form);
-}*/

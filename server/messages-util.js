@@ -22,6 +22,10 @@
         addMessage: function addMessage(message) {
 
             return 'Hello world';
+        },
+        getMessages: function getMessages(counter) {
+
+            return messages;
         }
     };
 }));

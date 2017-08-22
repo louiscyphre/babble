@@ -17,7 +17,7 @@
     </header>
     <section class="ChatContainer">
 
-        <form class="Modal" action="http://localhost:9000/register" method="POST" enctype="text/plain">
+        <form class="Modal" action="/register" method="POST" enctype="text/plain">
             <label for="text">Full name</label>
             <input type="text" name="userName" />
             <label for="email">Email</label>
@@ -112,10 +112,10 @@
                     </li>
                 </ol>
             </section>
-            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="application/x-www-form-urlencoded">
+            <form class="Chat-sendMessageForm dbg" method="POST" action="/messages" enctype="text/plain">
                 <div class="Chat-sendMessageFormText Growable js-growable">
                     <pre><span></span><br></pre>
-                    <textarea name="message"></textarea>
+                    <textarea class="Chat-message"></textarea>
                 </div>
                 <button type="submit " class="Chat-sendMessageFormButton " aria-label="Send message to chat "></button>
             </form>
