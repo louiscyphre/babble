@@ -89,29 +89,59 @@
         },
 
         postMessage: function postMessage(message, callback) {
-            window.Babble.updateKey('currentMessage', message.message);
-            return window.Babble.request({
+            /*window.Babble.updateKey('currentMessage', message.message);
+            var res = [];
+            Promise.all(window.Babble.request({
                 method: 'POST',
                 action: '/messages',
                 data: message
             }).then(function (result) {
                 console.log(result);
-                return Promise.all(callback(JSON.parse(result))).then();
+                res = JSON.parse(result);
+            }).catch(function (error) {
+                console.log(error);
+            }), callback(res));*/
+
+            window.Babble.updateKey('currentMessage', message.message);
+            window.Babble.request({
+                method: 'POST',
+                action: '/messages',
+                data: message
+            }).then(function (result) {
+                console.log(result);
+                callback(JSON.parse(result));
             }).catch(function (error) {
                 console.log(error);
             });
         },
         getMessages: function getMessages(counter, callback) {
+            /*var res = [];
+            Promise.all(
+                    window.Babble.request({
+                        method: 'GET',
+                        action: '/messages',
+                        data: 'counter=' + counter.toString()
+                    }).then(function (result) {
+                        console.log(result);
+                        res = JSON.parse(result);
+                    }).catch(function (error) {
+                        console.log(error);
+                    }), callback(res))
+                .then(window.setTimeout(function () {
+                    window.Babble.getMessages(window.Babble.counter, callback);
+                }, 1000));*/
+
             window.Babble.request({
                 method: 'GET',
                 action: '/messages',
                 data: 'counter=' + counter.toString()
             }).then(function (result) {
                 console.log(result);
-                return Promise.all(callback(JSON.parse(result))).then(
-                    window.setTimeout(function () {
-                        getMessages(window.Babble.counter, callback);
-                    }, 1000));
+                var res = JSON.parse(result);
+                callback(res);
+                window.setTimeout(function () {
+                    window.Babble.getMessages(window.Babble.counter, callback);
+                }, 1000);
             }).catch(function (error) {
                 console.log(error);
             });
