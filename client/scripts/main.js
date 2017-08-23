@@ -7,6 +7,7 @@
 
         apiUrl: 'http://localhost:9000',
         counter: 0,
+        messages: [],
         storage: localStorage,
         request: function request(options) {
             return new Promise(function (resolve, reject) {
@@ -23,15 +24,12 @@
                         reject(xhr.responseText);
                     }
                 };
-
-                xhr.onerror = function () {
-                    // There was a connection error of some sort
+                xhr.onerror = function () { // There was a connection error of some sort
                     console.log("Error");
                 };
-
-
                 if (options.method == 'GET') {
                     xhr.open(options.method, window.Babble.apiUrl + options.action + '?' + options.data, true);
+                    xhr.setRequestHeader('Content-Type', 'text/json');
                     console.log("URL:", window.Babble.apiUrl + options.action + '?' + options.data);
                     xhr.send();
                 } else {
@@ -39,19 +37,6 @@
                     xhr.setRequestHeader('Content-Type', 'text/json');
                     xhr.send(JSON.stringify(options.data));
                 }
-            });
-        },
-
-        poll: function poll() {
-            window.Babble.request({
-                method: 'GET',
-                action: '/messages',
-                data: 'counter=' + window.Babble.counter.toString()
-            }).then(function (result) {
-                console.log(result);
-                window.setTimeout(poll, 6000);
-            }).catch(function (error) {
-                console.log(error);
             });
         },
 
@@ -63,7 +48,14 @@
 
             newMessageForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                var message = document.querySelector('.Chat-message').value;
+
+                var data = JSON.parse(window.Babble.storage.getItem('babble'));
+                var message = {
+                    name: data.userInfo.name,
+                    email: data.userInfo.email,
+                    message: document.querySelector('.Chat-message').value,
+                    timestamp: window.Date.now()
+                };
                 window.Babble.postMessage(message, function () {});
             });
 
@@ -79,7 +71,6 @@
                 registerForm.style.display = 'none';
                 registerForm.style.visibility = 'hidden';
                 registerForm.setAttribute("aria-hidden", "true");
-                window.Babble.getMessages(window.Babble.counter, window.Babble.updateCounter);
             });
 
             (function makeGrowable(container) {
@@ -89,6 +80,8 @@
                     clone.textContent = area.value;
                 });
             }(document.querySelector('.js-growable')));
+
+            window.Babble.getMessages(window.Babble.counter, window.Babble.storeMessages);
         },
 
         register: function register(userInfo) {
@@ -98,31 +91,41 @@
         postMessage: function postMessage(message, callback) {
             window.Babble.updateKey('currentMessage', message.message);
             return window.Babble.request({
-                    method: 'POST',
-                    action: '/messages',
-                    data: message
-                }).then(callback())
-                .catch(function (error) {
-                    console.log(error);
-                });
+                method: 'POST',
+                action: '/messages',
+                data: message
+            }).then(function (result) {
+                console.log(result);
+                return Promise.all(callback(JSON.parse(result))).then();
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         getMessages: function getMessages(counter, callback) {
-            callback();
             window.Babble.request({
                 method: 'GET',
                 action: '/messages',
                 data: 'counter=' + counter.toString()
             }).then(function (result) {
                 console.log(result);
-                window.setTimeout(function () {
-                    getMessages(counter, callback);
-                }, 6000);
+                return Promise.all(callback(JSON.parse(result))).then(
+                    window.setTimeout(function () {
+                        getMessages(window.Babble.counter, callback);
+                    }, 1000));
             }).catch(function (error) {
                 console.log(error);
             });
         },
-        updateCounter: function (amount) {
-            window.Babble.counter -= amount;
+        storeMessages: function (array) {
+            return new Promise(function (resolve, reject) {
+                console.log('storeMessages(): All client messages before:', JSON.stringify(window.Babble.messages));
+                console.log('storeMessages(): Counter before:', window.Babble.counter);
+                window.Babble.messages = window.Babble.messages.concat(array);
+                window.Babble.counter = window.Babble.messages.length;
+                console.log('storeMessages(): All client messages after:', JSON.stringify(window.Babble.messages));
+                console.log('storeMessages(): Counter after:', window.Babble.counter);
+                resolve();
+            });
         },
         updateKey: function updateKey(keyName, value) {
             if (keyName === 'all') {

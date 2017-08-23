@@ -1,6 +1,6 @@
 (function (global, module, factory) {
     'use strict';
-    /* global module */
+    /* global module, console */
     if (typeof module === 'object' && module.exports) {
         module.exports.messages = factory();
     } else {
@@ -8,24 +8,25 @@
     }
 }(this, module, function () {
     var exception = function exception(what) {
-        this.console.error("[CRITICAL ERROR] Exception thrown: ", what);
+        console.error("[CRITICAL ERROR] Exception thrown: ", what);
     };
 
     var allMessages = 0;
     var deletedMessages = 0;
-    var messages = [];
+    var messagesArray = [];
 
     return {
-        index: function () {
-            return 'Hello world';
-        },
         addMessage: function addMessage(message) {
-
-            return 'Hello world';
+            console.log('addMessage(message): Adding message:', message);
+            messagesArray.push(message);
+            allMessages++;
+            return allMessages - deletedMessages;
         },
         getMessages: function getMessages(counter) {
+            var arr = messagesArray.slice(counter);
 
-            return messages;
+            console.log('getMessages(counter): Returning array:', arr);
+            return arr;
         }
     };
 }));

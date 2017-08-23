@@ -32,10 +32,10 @@
             <section class="Chat-messages dbg">
                 <div id="mocha"></div>
             </section>
-            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="application/x-www-form-urlencoded" hidden="true">
+            <form class="Chat-sendMessageForm dbg" method="POST" action="/messages" enctype="text/json">
                 <div class="Chat-sendMessageFormText Growable js-growable">
                     <pre><span></span><br></pre>
-                    <textarea name="message"></textarea>
+                    <textarea class="Chat-message"></textarea>
                 </div>
                 <button type="submit " class="Chat-sendMessageFormButton " aria-label="Send message to chat "></button>
             </form>
