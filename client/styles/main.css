@@ -41,8 +41,7 @@ body,
   display: flex; }
 
 .ChatContainer {
-  flex: 7;
-  overflow: auto; }
+  flex: 7; }
 
 /* -------------------------------------------------------------------------- */
 .ChatSideBar {
@@ -71,6 +70,7 @@ body,
 
 .Chat-messages {
   flex: 12;
+  flex-shrink: 10;
   overflow-y: auto; }
 
 .Chat-messages ol {
@@ -96,7 +96,9 @@ body,
 /* -------------------------------------------------------------------------- */
 .Chat-sendMessageForm {
   flex: 2;
-  min-height: 1em; }
+  flex-grow: 4;
+  min-height: 1em;
+  max-height: 300px; }
 
 .Chat-sendMessageFormText {
   flex: 8;
@@ -117,8 +119,7 @@ body,
   overflow: hidden;
   -webkit-scrollbar: red; }
 
-.Growable textarea,
-.Growable pre {
+.Growable textarea {
   margin: 0;
   padding: 0;
   box-sizing: border-box;

@@ -2,7 +2,7 @@
     'use strict';
     /* global module, console */
     if (typeof module === 'object' && module.exports) {
-        module.exports.messages = factory();
+        module.exports = factory();
     } else {
         global.utils = factory();
     }
@@ -27,6 +27,16 @@
 
             console.log('getMessages(counter): Returning array:', arr);
             return arr;
+        },
+        deleteMessage: function deleteMessage(id) {
+
+            var index = parseInt(id);
+            if (isNaN(index) || (allMessages - deletedMessages) <= 0) {
+                return;
+            }
+            messagesArray.splice(index, 1);
+            deletedMessages++;
         }
+
     };
 }));

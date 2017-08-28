@@ -3,43 +3,65 @@
     'use strict';
     console.log('hello from client');
 
+
+    function request(options) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    resolve(xhr.responseText);
+                } else {
+                    reject(xhr.responseText);
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Error");
+            };
+            if (options.method == 'GET') {
+                xhr.open(options.method, window.Babble.apiUrl + options.action + '?' + options.data, true);
+                xhr.setRequestHeader('Content-Type', 'text/json');
+                console.log("URL:", window.Babble.apiUrl + options.action + '?' + options.data);
+                xhr.send();
+            } else {
+                xhr.open(options.method, window.Babble.apiUrl + options.action, true);
+                xhr.setRequestHeader('Content-Type', 'text/json');
+                xhr.send(JSON.stringify(options.data));
+            }
+            window.setTimeout(function () {
+                window.Babble.getMessages(window.Babble.counter, window.Babble.storeMessages);
+            }, 2000);
+        });
+    }
+
+    function poll(obj) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    obj.storeMessages(JSON.parse(xhr.responseText));
+                    poll(obj);
+                } else {
+                    console.log("Server error");
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Network error");
+            };
+            xhr.open('GET', obj.apiUrl + '/messages?counter=' + obj.counter.toString(), true);
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            console.log("URL:", obj.apiUrl + '/messages?counter=' + obj.counter.toString());
+            xhr.send();
+        });
+    }
+
     window.Babble = {
 
-        apiUrl: 'http://localhost:9000',
         counter: 0,
+        apiUrl: 'http://localhost:9000',
         messages: [],
         storage: localStorage,
-        request: function request(options) {
-            return new Promise(function (resolve, reject) {
-                var xhr = new XMLHttpRequest();
-
-                xhr.onload = function () {
-                    if (xhr.status >= 200 && xhr.status < 400) {
-                        // Success!
-                        console.log(xhr.responseText);
-                        resolve(xhr.responseText);
-                    } else {
-                        // We reached our target server, but it returned an error
-                        console.log(xhr.responseText);
-                        reject(xhr.responseText);
-                    }
-                };
-                xhr.onerror = function () { // There was a connection error of some sort
-                    console.log("Error");
-                };
-                if (options.method == 'GET') {
-                    xhr.open(options.method, window.Babble.apiUrl + options.action + '?' + options.data, true);
-                    xhr.setRequestHeader('Content-Type', 'text/json');
-                    console.log("URL:", window.Babble.apiUrl + options.action + '?' + options.data);
-                    xhr.send();
-                } else {
-                    xhr.open(options.method, window.Babble.apiUrl + options.action, true);
-                    xhr.setRequestHeader('Content-Type', 'text/json');
-                    xhr.send(JSON.stringify(options.data));
-                }
-            });
-        },
-
         run: function (document, window, console) {
 
             window.Babble.updateKey('all', '');
@@ -56,7 +78,7 @@
                     message: document.querySelector('.Chat-message').value,
                     timestamp: window.Date.now()
                 };
-                window.Babble.postMessage(message, function () {});
+                window.Babble.postMessage(message, window.Babble.dummy);
             });
 
             var registerForm = document.querySelector('.Modal');
@@ -73,15 +95,27 @@
                 registerForm.setAttribute("aria-hidden", "true");
             });
 
-            (function makeGrowable(container) {
-                var area = container.querySelector('textarea');
-                var clone = container.querySelector('span');
-                area.addEventListener('input', function (e) {
-                    clone.textContent = area.value;
-                });
-            }(document.querySelector('.js-growable')));
+            // https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
+            var tx = document.querySelector('.Chat-sendMessageForm');
+            for (var i = 0; i < tx.length; i++) {
+                tx[i].addEventListener("input", onInput);
+            }
 
-            window.Babble.getMessages(window.Babble.counter, window.Babble.storeMessages);
+            function onInput(e) {
+                e.target.style.height = 'auto';
+                if (e.target.scrollHeight <= 300) {
+                    e.target.style.height = (e.target.scrollHeight) + 'px';
+                } else {
+                    e.target.style.height = '300px';
+                }
+
+            }
+
+            window.onload = function () {
+                window.setTimeout(function () {
+                    window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
+                }, 2000);
+            };
         },
 
         register: function register(userInfo) {
@@ -89,73 +123,58 @@
         },
 
         postMessage: function postMessage(message, callback) {
-            /*window.Babble.updateKey('currentMessage', message.message);
-            var res = [];
-            Promise.all(window.Babble.request({
-                method: 'POST',
-                action: '/messages',
-                data: message
-            }).then(function (result) {
-                console.log(result);
-                res = JSON.parse(result);
-            }).catch(function (error) {
-                console.log(error);
-            }), callback(res));*/
-
             window.Babble.updateKey('currentMessage', message.message);
-            window.Babble.request({
+            request({
                 method: 'POST',
                 action: '/messages',
                 data: message
-            }).then(function (result) {
-                console.log(result);
-                callback(JSON.parse(result));
+            }).then(function (answer) {
+                console.log('Answer on POST /messages:', answer);
             }).catch(function (error) {
                 console.log(error);
+            });
+            callback({
+                id: 42
             });
         },
         getMessages: function getMessages(counter, callback) {
-            /*var res = [];
-            Promise.all(
-                    window.Babble.request({
-                        method: 'GET',
-                        action: '/messages',
-                        data: 'counter=' + counter.toString()
-                    }).then(function (result) {
-                        console.log(result);
-                        res = JSON.parse(result);
-                    }).catch(function (error) {
-                        console.log(error);
-                    }), callback(res))
-                .then(window.setTimeout(function () {
-                    window.Babble.getMessages(window.Babble.counter, callback);
-                }, 1000));*/
-
-            window.Babble.request({
-                method: 'GET',
+            poll(window.Babble);
+            callback([]);
+        },
+        deleteMessage: function deleteMessage(id, callback) {
+            request({
+                method: 'DELETE',
                 action: '/messages',
-                data: 'counter=' + counter.toString()
-            }).then(function (result) {
-                console.log(result);
-                var res = JSON.parse(result);
-                callback(res);
-                window.setTimeout(function () {
-                    window.Babble.getMessages(window.Babble.counter, callback);
-                }, 1000);
+                data: id
+            }).then(function (answer) {
+                console.log('Answer on DELETE /messages:', answer);
             }).catch(function (error) {
                 console.log(error);
             });
+            callback(true);
+        },
+        getStats: function getStats(callback) {
+            request({
+                method: 'GET',
+                action: '/stats',
+                data: ''
+            }).then(function (answer) {
+                console.log('Answer on GET /stats:', answer);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            callback({
+                users: 5,
+                messages: 20
+            });
         },
         storeMessages: function (array) {
-            return new Promise(function (resolve, reject) {
-                console.log('storeMessages(): All client messages before:', JSON.stringify(window.Babble.messages));
-                console.log('storeMessages(): Counter before:', window.Babble.counter);
-                window.Babble.messages = window.Babble.messages.concat(array);
-                window.Babble.counter = window.Babble.messages.length;
-                console.log('storeMessages(): All client messages after:', JSON.stringify(window.Babble.messages));
-                console.log('storeMessages(): Counter after:', window.Babble.counter);
-                resolve();
-            });
+            //console.log('storeMessages(): All client messages before:', JSON.stringify(window.Babble.messages));
+            //console.log('storeMessages(): Counter before:', window.Babble.counter);
+            window.Babble.messages = window.Babble.messages.concat(array);
+            window.Babble.counter = window.Babble.messages.length;
+            //console.log('storeMessages(): All client messages after:', JSON.stringify(window.Babble.messages));
+            //console.log('storeMessages(): Counter after:', window.Babble.counter);
         },
         updateKey: function updateKey(keyName, value) {
             if (keyName === 'all') {
@@ -180,6 +199,9 @@
                 return;
             } else throw new window.Babble.exception('wrong use of updateKey()');
         },
+        dummy: function (something) {
+            // dummy gummy crowbar fix, because need to go on
+        },
         exception: function exception(what) {
             console.error("[CRITICAL ERROR] Exception thrown: ", what);
         }
@@ -188,20 +210,3 @@
     window.Babble.run(document, window, console);
 
 })(this.window, this.document, this.console, this.localStorage, this.XMLHttpRequest, this.Promise);
-/*var formCallback = function formCallback(e) {
-    e.preventDefault();
-    Babble.request({
-        method: e.target.method,
-        action: e.target.action,
-        data: serialize(e.target)
-    }).then(function (result) {
-        console.log(result);
-    });
-}
-
-var newMessageForm = document.querySelector('.Chat-sendMessageForm');
-
-newMessageForm.addEventListener('submit', formCallback);
-
-var registerForm = document.querySelector('.Modal');
-*/

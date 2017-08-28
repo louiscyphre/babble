@@ -68,7 +68,6 @@ body,
 
 .ChatContainer {
     flex: 7;
-    overflow: auto;
 }
 
 
@@ -106,6 +105,7 @@ body,
 
 .Chat-messages {
     flex: 12;
+    flex-shrink: 10;
     overflow-y: auto;
 }
 
@@ -142,7 +142,9 @@ body,
 
 .Chat-sendMessageForm {
     flex: 2;
+    flex-grow: 4;
     min-height: 1em;
+    max-height: 300px;
 }
 
 .Chat-sendMessageFormText {
@@ -169,8 +171,7 @@ body,
     -webkit-scrollbar: red;
 }
 
-.Growable textarea,
-.Growable pre {
+.Growable textarea {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
