@@ -27,7 +27,7 @@
         "api-server": "node server/main.js",
         "api-server-dev": "nodemon server/main.js",
         "start": "npm-run-all -p -r file-server api-server",
-        "dev": "npm-run-all -p -r file-server api-server-dev sass"
+        "dev": "npm-run-all -p -r api-server-dev sass"
     },
     "repository": {
         "type": "git",

@@ -1,21 +1,25 @@
 /* -------------------------------------------------------------------------- */
-@media (min-width: 0px) and (max-width: 638px) {
-  .ChatSideBar {
-    display: none; } }
+/* -------------------------------------------------------------------------- 
 
-/* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- */
+
 .dbg {
-  border: 1px solid black; }
+    border: 1px solid black;
+}
 
 /* -------------------------------------------------------------------------- */
 .Chat-msg-text {
   padding: 0.5em;
   border-radius: 10px;
-  border: 2px solid #DBDBDB; }
+  border: 2px solid #DBDBDB;
+  max-width: 600px; }
 
 .Chat-msg-avatar {
   border-radius: 50%; }
+
+@media (min-width: 0px) and (max-width: 638px) {
+  .ChatSideBar {
+    display: none;
+    visibility: hidden; } }
 
 /* -------------------------------------------------------------------------- */
 html {
