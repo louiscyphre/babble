@@ -17,12 +17,14 @@ $c-sidebar: #61D290;
 $c-chatArea: #F6F6F6;
 $c-border:#DBDBDB;
 
-/* -------------------------------------------------------------------------- 
+/* -------------------------------------------------------------------------- */
 
 .dbg {
-  border: 1px solid black;
+    border: 1px solid black;
 }
-@mixin displayflex($thisDisplayFlex, $thisFlexSize:"", $flexDirection:"", ) {}
+
+//@mixin displayflex($thisDisplayFlex, $thisFlexSize:"", $flexDirection:"", ) {}
+
 /* -------------------------------------------------------------------------- */
 
 @mixin dimensions($width, $height) {
@@ -105,7 +107,7 @@ body,
 
 .Chat-messages {
     flex: 12;
-    flex-shrink: 10;
+    //flex: 12 3 auto;
     overflow-y: auto;
 }
 
@@ -141,15 +143,17 @@ body,
 /* -------------------------------------------------------------------------- */
 
 .Chat-sendMessageForm {
+    //flex: 3 1 auto;
     flex: 2;
-    flex-grow: 4;
     min-height: 1em;
     max-height: 300px;
+    overflow: hidden;
 }
 
 .Chat-sendMessageFormText {
     flex: 8;
     resize: none;
+    outline: none;
 }
 
 .Chat-sendMessageFormButton {

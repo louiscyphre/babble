@@ -28,9 +28,6 @@
                 xhr.setRequestHeader('Content-Type', 'text/json');
                 xhr.send(JSON.stringify(options.data));
             }
-            window.setTimeout(function () {
-                window.Babble.getMessages(window.Babble.counter, window.Babble.storeMessages);
-            }, 2000);
         });
     }
 
@@ -72,10 +69,11 @@
                 e.preventDefault();
 
                 var data = JSON.parse(window.Babble.storage.getItem('babble'));
+                var textarea = document.querySelector('.Chat-sendMessageFormText');
                 var message = {
                     name: data.userInfo.name,
                     email: data.userInfo.email,
-                    message: document.querySelector('.Chat-message').value,
+                    message: textarea.value,
                     timestamp: window.Date.now()
                 };
                 window.Babble.postMessage(message, window.Babble.dummy);
@@ -96,10 +94,8 @@
             });
 
             // https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
-            var tx = document.querySelector('.Chat-sendMessageForm');
-            for (var i = 0; i < tx.length; i++) {
-                tx[i].addEventListener("input", onInput);
-            }
+            var tx = document.querySelector('.Chat-sendMessageFormText');
+            //tx.addEventListener("input", onInput);
 
             function onInput(e) {
                 e.target.style.height = 'auto';
@@ -108,7 +104,6 @@
                 } else {
                     e.target.style.height = '300px';
                 }
-
             }
 
             window.onload = function () {

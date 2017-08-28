@@ -4,12 +4,10 @@
     display: none; } }
 
 /* -------------------------------------------------------------------------- */
-/* -------------------------------------------------------------------------- 
-
+/* -------------------------------------------------------------------------- */
 .dbg {
-  border: 1px solid black;
-}
-@mixin displayflex($thisDisplayFlex, $thisFlexSize:"", $flexDirection:"", ) {}
+  border: 1px solid black; }
+
 /* -------------------------------------------------------------------------- */
 .Chat-msg-text {
   padding: 0.5em;
@@ -70,7 +68,6 @@ body,
 
 .Chat-messages {
   flex: 12;
-  flex-shrink: 10;
   overflow-y: auto; }
 
 .Chat-messages ol {
@@ -96,13 +93,14 @@ body,
 /* -------------------------------------------------------------------------- */
 .Chat-sendMessageForm {
   flex: 2;
-  flex-grow: 4;
   min-height: 1em;
-  max-height: 300px; }
+  max-height: 300px;
+  overflow: hidden; }
 
 .Chat-sendMessageFormText {
   flex: 8;
-  resize: none; }
+  resize: none;
+  outline: none; }
 
 .Chat-sendMessageFormButton {
   background-image: url("send-button.png");
