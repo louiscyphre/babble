@@ -3,9 +3,9 @@
     /* global require, console */
     var http = require('http');
     var urlUtil = require('url');
-    var md5 = require('md5');
     var queryUtil = require('querystring');
     var messages = require('./messages-util');
+    var md5 = require('./crypto-util').md5hash;
 
     // TODO
     // FIXME divide, neat
