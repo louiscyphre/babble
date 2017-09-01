@@ -1,0 +1,97 @@
+.time {
+
+
+font-family: Nunito;
+color:#999999;
+    font-size: 1.5em;/* Approximation due to font substitution */
+    font-weight: 400;
+    text-align: left;
+
+
+}
+
+.name{
+font-family: Nunito;
+color:#202729;
+    font-size: 1.875em;/* Approximation due to font substitution */
+    font-weight: 700;
+    text-align: right;
+}
+
+.vegans-title{
+
+font-family: Nunito;
+color:
+
+    #292929;
+    font-size: 2.813em;/* Approximation due to font substitution */
+    font-weight: 400;
+    text-align: left;
+
+
+}
+
+
+.users-msgs-counts {
+font-family: Nunito;
+color:#353744;
+    font-size: 1.875em;/* Approximation due to font substitution */
+    font-weight: 700;
+    text-align: right;
+}
+
+.msg-text {
+
+font-family: Nunito;
+color: #616161;
+    font-size: 1.875em;/* Approximation due to font substitution */
+    font-weight: 400;
+    line-height: 1.333;/* Approximation due to font substitution */
+    text-align: left;
+
+
+}
+
+
+.msg {
+
+border-radius:18px;
+border-style: solid;
+border-width: 1px;
+border-color:#d7d7d7;
+background-color: #ffffff;
+    width: 1004px;
+    height: 142px;
+
+}
+.selected-msg {
+
+border-radius: 18px;
+border-style: solid;
+border-width: 1px;
+border-color:
+#d7d7d7;
+background-color:
+
+    #ebedec;
+    width: 951px;
+    height: 96px;
+
+
+}
+
+.scroll {
+
+border-style: solid;
+border-width: 1px;
+border-color:
+#d7d7d7;
+background-color:
+
+    #ebedec;
+    width: 15px;
+    height: 269px;
+
+
+}
+

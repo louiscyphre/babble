@@ -6,6 +6,7 @@
     var queryUtil = require('querystring');
     var messages = require('./messages-util');
     var md5 = require('./crypto-util').md5hash;
+    var users = require('./users');
 
     // TODO
     // FIXME divide, neat
@@ -40,18 +41,19 @@
 
         } else if (request.method === 'POST') {
 
+            var requestBody = '';
+            var user;
             if (url.pathname.substr(0, 9) == '/messages') {
-                var requestBody = '';
                 var id = 0;
                 request.on('data', function (chunk) {
                     requestBody += chunk;
                 });
                 request.on('end', function () {
-                    data = JSON.parse(requestBody);
-                    id = messages.addMessage(data);
+                    var msg = JSON.parse(requestBody);
+                    id = messages.addMessage(msg);
                     while (requests.length > 0) {
                         var client = requests.pop();
-                        client.end(JSON.stringify(data));
+                        client.end(JSON.stringify(msg));
                     }
                 });
 
@@ -60,6 +62,24 @@
                 response.end(JSON.stringify({
                     id: id.toString()
                 }));
+            } else if (url.pathname.substr(0, 6) == '/login') {
+                requestBody = '';
+                request.on('data', function (chunk) {
+                    requestBody += chunk;
+                });
+                request.on('end', function () {
+                    user = JSON.parse(requestBody);
+                    users.login(user);
+                });
+            } else if (url.pathname.substr(0, 7) == '/logout') {
+                requestBody = '';
+                request.on('data', function (chunk) {
+                    requestBody += chunk;
+                });
+                request.on('end', function () {
+                    user = JSON.parse(requestBody);
+                    users.logout(user);
+                });
             }
         } else if (request.method === 'DELETE') {
 

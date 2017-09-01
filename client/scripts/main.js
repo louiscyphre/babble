@@ -106,15 +106,40 @@
                 }
             }
 
-            window.onload = function () {
-                window.setTimeout(function () {
-                    window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
-                }, 2000);
+            //window.onload = function () {
+            //    window.setTimeout(function () {
+            //        window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
+            //    }, 2000);
+            //};
+
+            window.onbeforeunload = function () {
+                request({
+                    method: 'POST',
+                    action: '/logout',
+                    data: (JSON.parse(window.Babble.storage.getItem('babble'))).userInfo
+                }).then(function (answer) {
+                    console.log('Answer on POST /logout:', answer);
+                    window.Babble.updateKey('all', '');
+                }).catch(function (error) {
+                    console.log(error);
+                });
             };
         },
 
         register: function register(userInfo) {
             window.Babble.updateKey('userInfo', userInfo);
+            request({
+                method: 'POST',
+                action: '/login',
+                data: userInfo
+            }).then(function (answer) {
+                console.log('Answer on POST /login:', answer);
+                window.setTimeout(function () {
+                    window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
+                }, 500);
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
 
         postMessage: function postMessage(message, callback) {
@@ -196,6 +221,7 @@
         },
         dummy: function (something) {
             // dummy gummy crowbar fix, because need to go on
+            return something;
         },
         exception: function exception(what) {
             console.error("[CRITICAL ERROR] Exception thrown: ", what);
