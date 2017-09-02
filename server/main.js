@@ -8,6 +8,7 @@
 
     var messages = require('./messages-util');
     var users = require('./users');
+    var util = require('./utilities');
 
     // TODO
     // FIXME divide, neat
@@ -23,7 +24,7 @@
 
             var data = queryUtil.parse(url.query);
             console.log(url.query);
-            if (!data.counter) {
+            if (!data.counter || !Number.isInteger(data.counter)) {
                 console.log("bad request is here");
                 response.writeHead(400);
             }
@@ -40,10 +41,8 @@
             }
             if (url.pathname.substr(0, 6) == '/stats') {
                 console.log('GET /stats received');
-                console.log('GET /stats answering: ', messages.getMessages(data.counter).len);
-                response.end(JSON.stringify(messages.getMessages(data.counter)));
-                requests.push(response);
-
+                console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
+                response.end(JSON.stringify(util.getStats()));
             }
             //console.log('And here');
 

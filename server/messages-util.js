@@ -36,7 +36,9 @@
             }
             messagesArray.splice(index, 1);
             deletedMessages++;
+        },
+        count: function count() {
+            return messagesArray.length;
         }
-
     };
 }));

@@ -1,0 +1,8 @@
+{
+    "short_name": "Babble",
+    "name": "Web chat",
+    "icons": [],
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF"
+}

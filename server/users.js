@@ -25,6 +25,9 @@
             }
             console.log('logout(user): logged out:', JSON.stringify(user));
             console.log('logout(user): all users:', JSON.stringify(users));
+        },
+        count: function count() {
+            return users.length;
         }
     };
 }));
