@@ -2,26 +2,28 @@
 <html lang="en">
 
 <head>
+    <link rel="manifest" href="/manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#FFFFFF" />
     <title>Vegans - Babble</title>
 
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
-    <!--link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito:300,400,700"-->
+    <link rel="stylesheet" type="text/css" href="styles/main.css" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700" rel="stylesheet">
 </head>
 
 <body class="dbg">
     <header class="MainHeader">
-        <img class="Logo" src="images/logo2.svg">
+        <img class="Logo" src="images/logo2.svg" alt="">
     </header>
     <section class="ChatContainer">
 
         <form class="Modal" action="/register" method="POST" enctype="text/plain">
-            <label for="text">Full name</label>
-            <input type="text" name="userName" />
-            <label for="email">Email</label>
-            <input type="email" name="userEmail" />
+            <label for="userName">Full name</label>
+            <input type="text" name="userName" placeholder="Type your name" autocomplete="userName" autofocus aria-label="Type your name here" />
+            <label for="userEmail">Email</label>
+            <input type="email" name="userEmail" placeholder="Type your email" autocomplete="userEmail" aria-label="Type your email here" />
 
             <button class="Modal--anonymous" aria-label="Continue as anonymous">Stay Anonymous</button>
             <button type="submit" class="Modal--login" aria-label="Continue as registered user">Login</button>
@@ -32,82 +34,82 @@
             <header class="Chat-header dbg">Vegans</header>
             <section class="Chat-messages dbg">
                 <ol class="dbg">
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">messageLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" />
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.png" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>
                 </ol>

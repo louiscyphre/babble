@@ -1,4 +1,4 @@
-(function (window, document, console, localStorage, XMLHttpRequest, Promise) {
+(function (window, document, console, localStorage, XMLHttpRequest, Promise, navigator) {
 
     'use strict';
     console.log('hello from client');
@@ -92,7 +92,16 @@
                 registerForm.style.visibility = 'hidden';
                 registerForm.setAttribute("aria-hidden", "true");
             });
+            if ('serviceWorker' in navigator) {
+                try {
+                    navigator.serviceWorker.register('./scripts/service-worker.js').then(function () {
+                        console.log("Service Worker Registered");
+                    }).catch(function () {});
+                } catch (e) {
 
+                }
+
+            }
             // https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
             var tx = document.querySelector('.Chat-sendMessageFormText');
             //tx.addEventListener("input", onInput);
@@ -230,4 +239,4 @@
 
     window.Babble.run(document, window, console);
 
-})(this.window, this.document, this.console, this.localStorage, this.XMLHttpRequest, this.Promise);
+})(this.window, this.document, this.console, this.localStorage, this.XMLHttpRequest, this.Promise, this.navigator);
