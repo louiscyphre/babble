@@ -24,13 +24,11 @@
 
             var data = queryUtil.parse(url.query);
             console.log(url.query);
-            if (!data.counter || !Number.isInteger(data.counter)) {
-                console.log("bad request is here");
-                response.writeHead(400);
-            }
-            //console.log('We are here');
-            //console.log(url.pathname);
             if (url.pathname.substr(0, 9) == '/messages') {
+                if (!data.counter || !Number.isInteger(data.counter)) {
+                    console.log("bad request is here");
+                    response.writeHead(400);
+                }
                 console.log('GET /messages received', data.counter);
                 if (messages.getMessages(0).length > data.counter) {
                     console.log('GET /messages answering: ', messages.getMessages(data.counter));
@@ -44,8 +42,6 @@
                 console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
                 response.end(JSON.stringify(util.getStats()));
             }
-            //console.log('And here');
-
         } else if (request.method === 'POST') {
 
             var requestBody = '';
@@ -91,7 +87,9 @@
                 });
             }
         } else if (request.method === 'DELETE') {
+            if (url.pathname.substr(0, 9) == '/messages') {
 
+            }
         } else if (request.method === 'OPTIONS') {
 
             response.writeHead(204, {

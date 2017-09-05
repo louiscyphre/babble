@@ -65,6 +65,13 @@ $c-border:#DBDBDB;
     .MainHeader {
         padding: 2rem 2rem 2rem 1rem;
     }
+    .Modal {
+        width: 20%;
+    }
+    .Logo {
+        max-width: 30%;
+        min-width: 20%;
+    }
 }
 
 html {
@@ -117,7 +124,6 @@ body,
 }
 
 .Logo {
-    max-width: 37.5%;
     float: left;
 }
 
@@ -169,25 +175,43 @@ body,
 }
 
 .Modal {
-    border: 1px solid black;
+    border: 1px solid $c-border;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 70%;
-    //max-width: 600px;
     margin: auto;
     max-height: 10rem;
+    max-width: 30%;
     background-color: white;
-    padding: 1rem;
+    padding: 2rem;
+    padding-top: 1rem;
     box-shadow: 0 0 1rem 0 black;
     border-radius: 0.1rem;
+    display: inline-table;
+    //flex-flow: column nowrap;
 }
 
 .Modal input {
-    @extend rounded-rectangle;
+    padding: 0.3em;
+    border-radius: $borderRadius;
+    border: 2px solid $c-border;
     font-weight: 700;
+    font-size: 1rem;
+    outline-style: none;
+    width: 80%;
+    font-family: inherit;
+}
+
+.Modal label {
+    font-family: inherit;
+    width: 20%;
+    //text-align: left;
+    clear: both;
+    float: left;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 $degree: 90deg;
@@ -208,17 +232,22 @@ $c-upper) {
     @include gradient($degree,
     $c-anon-gradient-lower,
     $c-anon-gradient-upper);
-    border: 0;
-    border-radius: 1px;
 }
 
 .Modal--login {
+    @include gradient($degree,
+    $c-login-gradient-lower,
+    $c-login-gradient-upper);
+    color: white;
+}
+
+.Modal--anonymous,
+.Modal--login {
     border: 0;
     border-radius: 1px;
-    background-image: -moz-linear-gradient( 90deg, #47A272 0%, #7DD84E 100%);
-    background-image: -webkit-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
-    background-image: -ms-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
-    background-image: -o-linear-gradient( 90deg, rgb(71, 162, 114) 0%, rgb(125, 216, 78) 100%);
+    font-size: 1rem;
+    font-family: inherit;
+    display: inline-block;
 }
 
  ::-webkit-scrollbar {

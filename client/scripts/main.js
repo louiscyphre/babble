@@ -18,14 +18,12 @@
             xhr.onerror = function () {
                 console.log("Error");
             };
+            xhr.open(options.method, window.Babble.apiUrl + options.action, true);
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            console.log("URL:", window.Babble.apiUrl + options.action);
             if (options.method == 'GET') {
-                xhr.open(options.method, window.Babble.apiUrl + options.action + '?' + options.data, true);
-                xhr.setRequestHeader('Content-Type', 'text/json');
-                console.log("URL:", window.Babble.apiUrl + options.action + '?' + options.data);
                 xhr.send();
             } else {
-                xhr.open(options.method, window.Babble.apiUrl + options.action, true);
-                xhr.setRequestHeader('Content-Type', 'text/json');
                 xhr.send(JSON.stringify(options.data));
             }
         });
@@ -96,7 +94,9 @@
                 try {
                     navigator.serviceWorker.register('./scripts/service-worker.js').then(function () {
                         console.log("Service Worker Registered");
-                    }).catch(function () {});
+                    }).catch(function () {
+                        console.log("Service worker cannot be registered");
+                    });
                 } catch (e) {
 
                 }
@@ -145,6 +145,7 @@
                 console.log('Answer on POST /login:', answer);
                 window.setTimeout(function () {
                     window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
+                    window.Babble.getStats(window.Babble.dummy);
                 }, 500);
             }).catch(function (error) {
                 console.log(error);
