@@ -130,32 +130,34 @@ body,
   right: 0;
   bottom: 0;
   margin: auto;
-  max-height: 10rem;
-  max-width: 30%;
   background-color: white;
-  padding: 2rem;
-  padding-top: 1rem;
+  padding: 1rem;
   box-shadow: 0 0 1rem 0 black;
   border-radius: 0.1rem;
-  display: inline-table; }
+  display: table; }
 
-.Modal input {
+.Modal p {
+  width: 100%;
+  display: inline-flex;
+  font-family: inherit; }
+
+.Modal h2 {
+  display: table-row;
+  font-family: inherit; }
+
+.Modal p label {
+  flex: 1;
+  font-family: inherit; }
+
+.Modal p input {
+  flex: 3;
   padding: 0.3em;
   border-radius: 10px;
   border: 2px solid #DBDBDB;
   font-weight: 700;
   font-size: 1rem;
   outline-style: none;
-  width: 80%;
   font-family: inherit; }
-
-.Modal label {
-  font-family: inherit;
-  width: 20%;
-  clear: both;
-  float: left;
-  display: inline-block;
-  vertical-align: middle; }
 
 .Modal--anonymous {
   background-image: -moz-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
