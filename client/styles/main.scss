@@ -1,11 +1,30 @@
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Nunito Regular'), local('Nunito-Regular'), url('/fonts/Nunito-Regular.woff2') format('woff2'), url('/fonts/Nunito-Regular.ttf') format('truetype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: bold;
+    font-weight: 700;
+    src: local('Nunito Bold'), local('Nunito-Bold'), url('/fonts/Nunito-Bold.woff2') format('woff2'), url('/fonts/Nunito-Bold.ttf') format('truetype');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
 $avatarSize: 3em;
 $sidebarSize: 18%;
-$borderRadius: 10px;
+$borderRadius: 1rem;
 $c-header: #353744;
 $c-sidebar: #61D290;
 $c-chatArea: #F6F6F6;
+$c-msgText:#616161;
+$c-modalBackground:#F9F9F9;
 $c-border:#DBDBDB;
-@mixin dimensions($width, $height) {
+@mixin dimensions($width,
+$height) {
     width: $width;
     height: $height;
 }
@@ -18,7 +37,7 @@ $c-border:#DBDBDB;
 %rounded-rectangle {
     padding: 0.5em;
     border-radius: $borderRadius;
-    border: 2px solid $c-border;
+    border: 0.1rem solid $c-border;
     max-width: 600px;
 }
 
@@ -35,10 +54,7 @@ $c-border:#DBDBDB;
         visibility: hidden;
     }
     .Logo {
-        max-width: 60%;
-    }
-    .MainHeader {
-        padding: 1rem;
+        width: 40%;
     }
 }
 
@@ -51,10 +67,7 @@ $c-border:#DBDBDB;
         visibility: hidden;
     }
     .Logo {
-        max-width: 60%;
-    }
-    .MainHeader {
-        padding: 1rem;
+        width: 40%;
     }
 }
 
@@ -62,15 +75,11 @@ $c-border:#DBDBDB;
     html {
         font-size: 100%;
     }
-    .MainHeader {
-        padding: 2rem 2rem 2rem 1rem;
-    }
     .Modal {
-        width: 20%;
+        width: 30%;
     }
     .Logo {
-        max-width: 30%;
-        min-width: 20%;
+        width: 15%;
     }
 }
 
@@ -111,7 +120,6 @@ body,
     background-color: $c-chatArea;
 }
 
-.MainHeader,
 .Chat-header {
     flex: 1;
 }
@@ -120,7 +128,7 @@ body,
     background-color: $c-header;
     display: flex;
     align-items: center;
-    padding: 2rem 2rem 2rem 1rem;
+    padding: 1rem;
 }
 
 .Logo {
@@ -130,6 +138,7 @@ body,
 .Chat-messages {
     flex: 12;
     overflow-y: auto;
+    border-bottom: 0.1rem solid $c-border;
 }
 
 .Chat-messages ol {
@@ -144,7 +153,8 @@ body,
 
 .Chat-msg-avatar {
     @extend %circle;
-    @include dimensions($avatarSize, $avatarSize);
+    @include dimensions($avatarSize,
+    $avatarSize);
     float: left;
     margin-right: 1rem;
 }
@@ -158,11 +168,17 @@ body,
 
 .Chat-sendMessageForm {
     flex: 2;
+    border-radius: 4px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    position: relative;
 }
 
 .Chat-sendMessageFormText {
     flex: 8;
     resize: none;
+    border: none;
     outline: none;
 }
 
@@ -171,7 +187,25 @@ body,
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    flex: 2;
+    background-color: white;
+    //outline: none;
+    border: none;
+    flex: 1;
+}
+
+
+/*.Chat-sendMessageFormButton::hover {
+    background-color: $c-sidebar;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}*/
+
+.Chat-sendMessageFormButton:active {
+    outline: inherit;
+}
+
+.Chat-sendMessageFormButton:active:after {
+    outline: none;
 }
 
 .Modal {
@@ -182,8 +216,8 @@ body,
     right: 0;
     bottom: 0;
     margin: auto;
-    background-color: white;
-    padding: 1rem;
+    background-color: $c-modalBackground;
+    padding: 3rem;
     box-shadow: 0 0 1rem 0 black;
     border-radius: 0.1rem;
     display: table;
@@ -192,28 +226,37 @@ body,
 .Modal p {
     width: 100%;
     display: inline-flex;
-    font-family: inherit;
+    align-items: center;
+    margin-top: 0;
 }
 
 .Modal h2 {
-    display: table-row;
-    font-family: inherit;
+    font-weight: 400;
+    font-size: 1.875rem;
+    margin-top: 0;
 }
 
 .Modal p label {
     flex: 1;
+    color: $c-msgText;
+}
+
+.Modal p>* {
+    font-size: 1.2rem;
     font-family: inherit;
+}
+
+.Modal p label,
+input {
+    font-weight: 700;
 }
 
 .Modal p input {
     flex: 3;
-    padding: 0.3em;
+    padding: 0.4em;
     border-radius: $borderRadius;
     border: 2px solid $c-border;
-    font-weight: 700;
-    font-size: 1rem;
     outline-style: none;
-    font-family: inherit;
 }
 
 $degree: 90deg;
@@ -230,10 +273,15 @@ $c-upper) {
     background-image: -o-linear-gradient($deg, $c-lower 0%, $c-upper 100%);
 }
 
+.Modal-buttons {
+    flex-direction: row-reverse;
+}
+
 .Modal--anonymous {
     @include gradient($degree,
     $c-anon-gradient-lower,
     $c-anon-gradient-upper);
+    min-width: 30%;
 }
 
 .Modal--login {
@@ -241,15 +289,15 @@ $c-upper) {
     $c-login-gradient-lower,
     $c-login-gradient-upper);
     color: white;
+    min-width: 20%;
 }
 
 .Modal--anonymous,
 .Modal--login {
     border: 0;
-    border-radius: 1px;
-    font-size: 1rem;
-    font-family: inherit;
-    display: inline-block;
+    border-radius: 0.1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
 }
 
  ::-webkit-scrollbar {

@@ -90,36 +90,22 @@
                 registerForm.style.visibility = 'hidden';
                 registerForm.setAttribute("aria-hidden", "true");
             });
+
             if ('serviceWorker' in navigator) {
                 try {
-                    navigator.serviceWorker.register('./scripts/service-worker.js').then(function () {
-                        console.log("Service Worker Registered");
-                    }).catch(function () {
-                        console.log("Service worker cannot be registered");
+                    window.addEventListener('load', function () {
+                        navigator.serviceWorker.register('./scripts/service-worker.js').then(function (registration) {
+                            // Registration was successful
+                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        }, function (err) {
+                            // registration failed :(
+                            console.log('ServiceWorker registration failed: ', err);
+                        });
                     });
                 } catch (e) {
 
                 }
-
             }
-            // https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize
-            var tx = document.querySelector('.Chat-sendMessageFormText');
-            //tx.addEventListener("input", onInput);
-
-            function onInput(e) {
-                e.target.style.height = 'auto';
-                if (e.target.scrollHeight <= 300) {
-                    e.target.style.height = (e.target.scrollHeight) + 'px';
-                } else {
-                    e.target.style.height = '300px';
-                }
-            }
-
-            //window.onload = function () {
-            //    window.setTimeout(function () {
-            //        window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
-            //    }, 2000);
-            //};
 
             window.onbeforeunload = function () {
                 request({
@@ -199,12 +185,8 @@
             });
         },
         storeMessages: function (array) {
-            //console.log('storeMessages(): All client messages before:', JSON.stringify(window.Babble.messages));
-            //console.log('storeMessages(): Counter before:', window.Babble.counter);
             window.Babble.messages = window.Babble.messages.concat(array);
             window.Babble.counter = window.Babble.messages.length;
-            //console.log('storeMessages(): All client messages after:', JSON.stringify(window.Babble.messages));
-            //console.log('storeMessages(): Counter after:', window.Babble.counter);
         },
         updateKey: function updateKey(keyName, value) {
             if (keyName === 'all') {
@@ -230,7 +212,6 @@
             } else throw new window.Babble.exception('wrong use of updateKey()');
         },
         dummy: function (something) {
-            // dummy gummy crowbar fix, because need to go on
             return something;
         },
         exception: function exception(what) {
