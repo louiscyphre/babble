@@ -27,14 +27,14 @@
         });
     }
 
-    function poll(obj) {
+    function poll(obj, callback) {
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
 
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 400) {
-                    obj.storeMessages(JSON.parse(xhr.responseText));
-                    poll(obj);
+                    callback(JSON.parse(xhr.responseText));
+                    poll(obj, callback);
                 } else {
                     console.log("Server error");
                 }
@@ -127,7 +127,7 @@
                 data: userInfo
             }).then(function (answer) {
                 console.log('Answer on POST /login:', answer);
-                window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
+                window.Babble.getMessages(window.Babble.counter, window.Babble.storeMessages);
                 window.Babble.getStats(window.Babble.dummy);
                 window.setInterval(function () {
                     window.Babble.getStats(window.Babble.dummy);
@@ -153,8 +153,8 @@
             });
         },
         getMessages: function getMessages(counter, callback) {
-            poll(window.Babble);
-            callback([]);
+            poll(window.Babble, callback);
+            //callback([]);
         },
         deleteMessage: function deleteMessage(id, callback) {
             request({

@@ -1,41 +1,22 @@
-/*(function (global, module, factory) {
-    'use strict';
-    if (typeof module === 'object' && module.exports) {
-        module.exports = factory();
-    } else {
-        global.utils = factory();
-    }
-}(this, module, function () {
-
-    require('serviceworker-cache-polyfill.js');
-
-    // TODO 
-    this.addEventListener('install', function (event) {
-        event.waitUntil(
-            caches.open('demo-cache').then(function (cache) {
-                return cache.addAll(['/', '/index.html', '/styles/main.css', '/scripts/main.js']);
-            })
-        );
-    });
-
-    this.addEventListener('fetch', function (event) {
-        event.respondWith(
-            caches.match(event.request).then(function (response) {
-                return response || new Response("Nothing in the cache for this request");
-            })
-        );
-    });
-}));*/
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
   '/',
   '/styles/main.css',
   '/scripts/main.js',
   '/index.html',
-  '/images/send-button.webp',
   '/images/1.webp',
+  '/images/send_bg.webp',
+  '/images/send_bg_medium.svg',
+  '/images/send_bg_small.svg',
   '/images/logo.svg',
-  '/images/1.webp',
+  '/images/logo_small.svg',
+  '/images/del_msg.svg',
+  '/images/del_msg_small.svg',
+  '/images/msgs.svg',
+  '/images/msgs_small.svg',
+  '/images/anon.svg',
+  '/images/users.svg',
+  '/images/users_small.svg',
   '/manifest.json'
 
 

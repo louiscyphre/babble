@@ -25,6 +25,14 @@
 .Chat-msg-avatar {
   border-radius: 50%; }
 
+@media (min-width: 0px) and (max-width: 320px) {
+  .Chat-sendMessageFormButton {
+    background-image: url("../images/send_bg_small.svg"); } }
+
+@media (min-width: 321px) and (max-width: 638px) {
+  .Chat-sendMessageFormButton {
+    background-image: url("../images/send_bg_medium.svg"); } }
+
 @media (max-width: 638px) {
   html {
     font-size: 62.5%; }
@@ -46,7 +54,9 @@
   .Modal {
     width: 30%; }
   .Modal p > * {
-    font-size: 1.2rem; } }
+    font-size: 1.2rem; }
+  .Chat-sendMessageFormButton {
+    background-image: url("../images/send_bg.webp"); } }
 
 html,
 h1 {
@@ -159,7 +169,6 @@ dd > * {
   outline: none; }
 
 .Chat-sendMessageFormButton {
-  background-image: url("../images/send-button.webp");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
