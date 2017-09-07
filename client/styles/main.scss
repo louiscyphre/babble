@@ -45,18 +45,6 @@ $height) {
     border-radius: 50%;
 }
 
-@media (min-width:0px) and (max-width:320px) {
-    .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg_small.svg");
-    }
-}
-
-@media (min-width:321px) and (max-width:638px) {
-    .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg_medium.svg");
-    }
-}
-
 @media (max-width:638px) {
     html {
         font-size: 62.5%;
@@ -73,6 +61,18 @@ $height) {
     }
     .Modal p>* {
         font-size: 1.5rem;
+    }
+}
+
+@media (min-width:0px) and (max-width:320px) {
+    .Chat-sendMessageFormButton {
+        background-image: url("../images/send_bg_small.webp");
+    }
+}
+
+@media (min-width:321px) and (max-width:638px) {
+    .Chat-sendMessageFormButton {
+        background-image: url("../images/send_bg_medium.webp");
     }
 }
 
