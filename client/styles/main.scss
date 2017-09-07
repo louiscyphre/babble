@@ -29,7 +29,7 @@ $height) {
     height: $height;
 }
 
-%aria-hidden {
+.aria-hidden {
     display: none;
     visibility: hidden;
 }
@@ -45,20 +45,11 @@ $height) {
     border-radius: 50%;
 }
 
-@media (min-width:0px) and (max-width:320px) {
-    html {
-        font-size: 62.5%;
-    }
-    .ChatSideBar {
-        display: none;
-        visibility: hidden;
-    }
-    .Logo {
-        width: 40%;
-    }
-}
+@media (min-width:0px) and (max-width:320px) {}
 
-@media (min-width:321px) and (max-width:638px) {
+@media (min-width:321px) and (max-width:638px) {}
+
+@media (max-width:638px) {
     html {
         font-size: 62.5%;
     }
@@ -66,8 +57,14 @@ $height) {
         display: none;
         visibility: hidden;
     }
+    .Chat-msg-text {
+        font-size: 1.5rem;
+    }
     .Logo {
         width: 40%;
+    }
+    .Modal p>* {
+        font-size: 1.5rem;
     }
 }
 
@@ -75,17 +72,21 @@ $height) {
     html {
         font-size: 100%;
     }
-    .Modal {
-        width: 30%;
-    }
     .Logo {
         width: 15%;
     }
+    .Modal {
+        width: 30%;
+    }
+    .Modal p>* {
+        font-size: 1.2rem;
+    }
 }
 
-html {
+html,
+h1 {
     font-family: 'Nunito', sans-serif;
-    font-weight: 400;
+    font-weight: normal;
 }
 
 body,
@@ -94,6 +95,11 @@ html {
     flex-flow: column nowrap;
     width: 100%;
     height: 100%;
+}
+
+h1 {
+    font-size: 1.875rem;
+    margin-top: 0;
 }
 
 html,
@@ -114,16 +120,6 @@ body,
     background-color: $c-sidebar;
 }
 
-.Chat {
-    flex: 9;
-    flex-direction: column;
-    background-color: $c-chatArea;
-}
-
-.Chat-header {
-    flex: 1;
-}
-
 .MainHeader {
     background-color: $c-header;
     display: flex;
@@ -135,10 +131,50 @@ body,
     float: left;
 }
 
+.Chat {
+    flex: 9;
+    flex-direction: column;
+    background-color: $c-chatArea;
+}
+
+.Chat-header {
+    flex: 1;
+    display: flex;
+    padding: 0.9rem;
+}
+
+.Chat-header-title {
+    margin: 0;
+    align-self: center;
+    width: 100%;
+}
+
+.Chat-header-stats {
+    align-self: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.Chat-header-stats,
+dd {
+    margin: 0;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+dd {
+    margin-left: 0.5rem;
+}
+
+dd>* {
+    margin: 0.2rem;
+}
+
 .Chat-messages {
     flex: 12;
     overflow-y: auto;
     border-bottom: 0.1rem solid $c-border;
+    overflow-x: hidden;
 }
 
 .Chat-messages ol {
@@ -172,7 +208,6 @@ body,
     background-color: white;
     padding: 20px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    position: relative;
 }
 
 .Chat-sendMessageFormText {
@@ -188,17 +223,10 @@ body,
     background-position: center;
     background-size: contain;
     background-color: white;
-    //outline: none;
+    outline: none;
     border: none;
     flex: 1;
 }
-
-
-/*.Chat-sendMessageFormButton::hover {
-    background-color: $c-sidebar;
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-}*/
 
 .Chat-sendMessageFormButton:active {
     outline: inherit;
@@ -230,19 +258,12 @@ body,
     margin-top: 0;
 }
 
-.Modal h2 {
-    font-weight: 400;
-    font-size: 1.875rem;
-    margin-top: 0;
-}
-
 .Modal p label {
     flex: 1;
     color: $c-msgText;
 }
 
 .Modal p>* {
-    font-size: 1.2rem;
     font-family: inherit;
 }
 

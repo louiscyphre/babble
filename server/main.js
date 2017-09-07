@@ -23,8 +23,8 @@
         if (request.method === 'GET') {
 
             var data = queryUtil.parse(url.query);
-            console.log(url.query);
             if (url.pathname.substr(0, 9) == '/messages') {
+                console.log("query was:", url.query);
                 if (!data.counter || !Number.isInteger(data.counter)) {
                     console.log("bad request is here");
                     response.writeHead(400);
@@ -62,9 +62,7 @@
                         id: id.toString()
                     }));
                 });
-
                 console.log('POST /messages received', id);
-
             } else if (url.pathname.substr(0, 6) == '/login') {
                 requestBody = '';
                 request.on('data', function (chunk) {
@@ -88,7 +86,7 @@
             }
         } else if (request.method === 'DELETE') {
             if (url.pathname.substr(0, 9) == '/messages') {
-
+                response.end();
             }
         } else if (request.method === 'OPTIONS') {
 
@@ -103,5 +101,4 @@
         }
     });
     server.listen(9000);
-    console.log("Server is on");
 }(this.window));

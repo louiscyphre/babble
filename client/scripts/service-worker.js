@@ -34,7 +34,8 @@ var urlsToCache = [
   '/index.html',
   '/images/send-button.webp',
   '/images/1.webp',
-  '/images/logo2.svg',
+  '/images/logo.svg',
+  '/images/1.webp',
   '/manifest.json'
 
 

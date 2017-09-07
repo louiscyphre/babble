@@ -12,6 +12,10 @@
   src: local("Nunito Bold"), local("Nunito-Bold"), url("/fonts/Nunito-Bold.woff2") format("woff2"), url("/fonts/Nunito-Bold.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
 
+.aria-hidden {
+  display: none;
+  visibility: hidden; }
+
 .Chat-msg-text {
   padding: 0.5em;
   border-radius: 1rem;
@@ -21,35 +25,33 @@
 .Chat-msg-avatar {
   border-radius: 50%; }
 
-@media (min-width: 0px) and (max-width: 320px) {
+@media (max-width: 638px) {
   html {
     font-size: 62.5%; }
   .ChatSideBar {
     display: none;
     visibility: hidden; }
+  .Chat-msg-text {
+    font-size: 1.5rem; }
   .Logo {
-    width: 40%; } }
-
-@media (min-width: 321px) and (max-width: 638px) {
-  html {
-    font-size: 62.5%; }
-  .ChatSideBar {
-    display: none;
-    visibility: hidden; }
-  .Logo {
-    width: 40%; } }
+    width: 40%; }
+  .Modal p > * {
+    font-size: 1.5rem; } }
 
 @media (min-width: 639px) {
   html {
     font-size: 100%; }
+  .Logo {
+    width: 15%; }
   .Modal {
     width: 30%; }
-  .Logo {
-    width: 15%; } }
+  .Modal p > * {
+    font-size: 1.2rem; } }
 
-html {
+html,
+h1 {
   font-family: 'Nunito', sans-serif;
-  font-weight: 400; }
+  font-weight: normal; }
 
 body,
 html {
@@ -57,6 +59,10 @@ html {
   flex-flow: column nowrap;
   width: 100%;
   height: 100%; }
+
+h1 {
+  font-size: 1.875rem;
+  margin-top: 0; }
 
 html,
 body,
@@ -73,14 +79,6 @@ body,
   flex: 2;
   background-color: #61D290; }
 
-.Chat {
-  flex: 9;
-  flex-direction: column;
-  background-color: #F6F6F6; }
-
-.Chat-header {
-  flex: 1; }
-
 .MainHeader {
   background-color: #353744;
   display: flex;
@@ -90,10 +88,43 @@ body,
 .Logo {
   float: left; }
 
+.Chat {
+  flex: 9;
+  flex-direction: column;
+  background-color: #F6F6F6; }
+
+.Chat-header {
+  flex: 1;
+  display: flex;
+  padding: 0.9rem; }
+
+.Chat-header-title {
+  margin: 0;
+  align-self: center;
+  width: 100%; }
+
+.Chat-header-stats {
+  align-self: center;
+  font-size: 1.1rem;
+  font-weight: bold; }
+
+.Chat-header-stats,
+dd {
+  margin: 0;
+  display: flex;
+  flex-flow: row nowrap; }
+
+dd {
+  margin-left: 0.5rem; }
+
+dd > * {
+  margin: 0.2rem; }
+
 .Chat-messages {
   flex: 12;
   overflow-y: auto;
-  border-bottom: 0.1rem solid #DBDBDB; }
+  border-bottom: 0.1rem solid #DBDBDB;
+  overflow-x: hidden; }
 
 .Chat-messages ol {
   list-style: none;
@@ -119,8 +150,7 @@ body,
   border-radius: 4px;
   background-color: white;
   padding: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  position: relative; }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
 .Chat-sendMessageFormText {
   flex: 8;
@@ -134,14 +164,10 @@ body,
   background-position: center;
   background-size: contain;
   background-color: white;
+  outline: none;
   border: none;
   flex: 1; }
 
-/*.Chat-sendMessageFormButton::hover {
-    background-color: $c-sidebar;
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-}*/
 .Chat-sendMessageFormButton:active {
   outline: inherit; }
 
@@ -168,17 +194,11 @@ body,
   align-items: center;
   margin-top: 0; }
 
-.Modal h2 {
-  font-weight: 400;
-  font-size: 1.875rem;
-  margin-top: 0; }
-
 .Modal p label {
   flex: 1;
   color: #616161; }
 
 .Modal p > * {
-  font-size: 1.2rem;
   font-family: inherit; }
 
 .Modal p label,

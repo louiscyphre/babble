@@ -1,8 +1,6 @@
 (function (window, document, console, localStorage, XMLHttpRequest, Promise, navigator) {
 
     'use strict';
-    console.log('hello from client');
-
 
     function request(options) {
         return new Promise(function (resolve, reject) {
@@ -92,8 +90,8 @@
             });
 
             if ('serviceWorker' in navigator) {
-                try {
-                    window.addEventListener('load', function () {
+                window.addEventListener('load', function () {
+                    try {
                         navigator.serviceWorker.register('./scripts/service-worker.js').then(function (registration) {
                             // Registration was successful
                             console.log('ServiceWorker registration successful with scope: ', registration.scope);
@@ -101,10 +99,10 @@
                             // registration failed :(
                             console.log('ServiceWorker registration failed: ', err);
                         });
-                    });
-                } catch (e) {
+                    } catch (e) {
 
-                }
+                    }
+                });
             }
 
             window.onbeforeunload = function () {
@@ -129,10 +127,11 @@
                 data: userInfo
             }).then(function (answer) {
                 console.log('Answer on POST /login:', answer);
-                window.setTimeout(function () {
-                    window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
+                window.Babble.getMessages(window.Babble.counter, window.Babble.dummy);
+                window.Babble.getStats(window.Babble.dummy);
+                window.setInterval(function () {
                     window.Babble.getStats(window.Babble.dummy);
-                }, 500);
+                }, 6000);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -164,6 +163,7 @@
                 data: id
             }).then(function (answer) {
                 console.log('Answer on DELETE /messages:', answer);
+                callback(true);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -187,6 +187,9 @@
         storeMessages: function (array) {
             window.Babble.messages = window.Babble.messages.concat(array);
             window.Babble.counter = window.Babble.messages.length;
+        },
+        showStats: function (stats) {
+
         },
         updateKey: function updateKey(keyName, value) {
             if (keyName === 'all') {
