@@ -22,28 +22,34 @@
         var url = urlUtil.parse(request.url);
         if (request.method === 'GET') {
 
+            console.log("Request url was:", url.query);
             var data = queryUtil.parse(url.query);
             if (url.pathname.substr(0, 9) == '/messages') {
-                console.log("query was:", url.query);
-                if (!data.counter || !Number.isInteger(data.counter)) {
+                console.log("Query was:", url.query);
+                if (!data.counter || isNaN(parseInt(data.counter))) {
+                    if (!Number.isInteger(data.counter)) {
+                        console.log("counter is not integer:", data.counter);
+                    }
                     console.log("bad request is here");
                     response.writeHead(400);
                 }
                 console.log('GET /messages received', data.counter);
-                if (messages.getMessages(0).length > data.counter) {
+                if (messages.count() > data.counter) { // || parseInt(data.counter) === 0) {
                     console.log('GET /messages answering: ', messages.getMessages(data.counter));
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
+                    console.log('Pushed on request to queue');
                     requests.push(response);
                 }
-            }
-            if (url.pathname.substr(0, 6) == '/stats') {
+            } else if (url.pathname.substr(0, 6) == '/stats') {
                 console.log('GET /stats received');
                 console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
                 response.end(JSON.stringify(util.getStats()));
+            } else {
+                response.writeHead(400);
             }
         } else if (request.method === 'POST') {
-
+            console.log('request: ', request);
             var requestBody = '';
             var user;
             if (url.pathname.substr(0, 9) == '/messages') {

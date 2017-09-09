@@ -27,14 +27,43 @@
         });
     }
 
-    function poll(obj, callback) {
+    function poll(obj) {
+
+        //console.log("Poll called with args:", obj, callback);
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
 
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 400) {
-                    callback(JSON.parse(xhr.responseText));
                     console.log("Poll response from server:", xhr.responseText);
+                    resolve(JSON.parse(xhr.responseText));
+                    //callback(JSON.parse(xhr.responseText));
+                    //poll(obj, callback);
+                } else {
+                    console.log("Server error");
+                    reject(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Network error");
+            };
+            xhr.open('GET', obj.apiUrl + '/messages?counter=' + obj.counter.toString(), true);
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            console.log("URL:", obj.apiUrl + '/messages?counter=' + obj.counter.toString());
+            xhr.send();
+        });
+    }
+
+    /*function poll(obj, callback) {
+
+        //console.log("Poll called with args:", obj, callback);
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    console.log("Poll response from server:", xhr.responseText);
+                    callback(JSON.parse(xhr.responseText));
                     poll(obj, callback);
                 } else {
                     console.log("Server error");
@@ -48,8 +77,7 @@
             console.log("URL:", obj.apiUrl + '/messages?counter=' + obj.counter.toString());
             xhr.send();
         });
-    }
-
+    }*/
     window.Babble = {
 
         counter: 0,
@@ -130,9 +158,9 @@
                 console.log('Answer on POST /login:', answer);
                 window.Babble.getMessages(window.Babble.counter, window.Babble.storeMessages);
                 window.Babble.getStats(window.Babble.dummy);
-                window.setInterval(function () {
-                    window.Babble.getStats(window.Babble.dummy);
-                }, 6000);
+                //window.setInterval(function () {
+                //    window.Babble.getStats(window.Babble.dummy);
+                //}, 6000);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -154,8 +182,21 @@
             });
         },
         getMessages: function getMessages(counter, callback) {
-            poll(window.Babble, callback);
+
             callback([]);
+            var err = function (error) {
+                console.log(error);
+            };
+
+            var ok = function (msgs) {
+                console.log("Messages from server:", msgs);
+                callback(msgs);
+                poll(window.Babble);
+            };
+
+            poll(window.Babble).then(ok).catch(err);
+
+            //poll(window.Babble, callback);
         },
         deleteMessage: function deleteMessage(id, callback) {
             request({
