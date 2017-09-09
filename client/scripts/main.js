@@ -34,6 +34,7 @@
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 400) {
                     callback(JSON.parse(xhr.responseText));
+                    console.log("Poll response from server:", xhr.responseText);
                     poll(obj, callback);
                 } else {
                     console.log("Server error");
@@ -154,7 +155,7 @@
         },
         getMessages: function getMessages(counter, callback) {
             poll(window.Babble, callback);
-            //callback([]);
+            callback([]);
         },
         deleteMessage: function deleteMessage(id, callback) {
             request({
@@ -187,6 +188,7 @@
         storeMessages: function (array) {
             window.Babble.messages = window.Babble.messages.concat(array);
             window.Babble.counter = window.Babble.messages.length;
+            console.log("Messages on client:", window.Babble.messages);
         },
         showStats: function (stats) {
 
