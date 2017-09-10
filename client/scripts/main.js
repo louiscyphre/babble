@@ -27,7 +27,7 @@
         });
     }
 
-    function poll(obj) {
+    /*function poll(obj) {
 
         //console.log("Poll called with args:", obj, callback);
         return new Promise(function (resolve, reject) {
@@ -52,7 +52,8 @@
             console.log("URL:", obj.apiUrl + '/messages?counter=' + obj.counter.toString());
             xhr.send();
         });
-    }
+    }*/
+
 
     /*function poll(obj, callback) {
 
@@ -148,6 +149,26 @@
             };
         },
 
+        poll: function poll(counter, callback) {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    console.log("Poll response from server:", xhr.responseText);
+                    callback(JSON.parse(xhr.responseText));
+                    poll(counter, callback);
+                } else {
+                    console.log("Server error");
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Network error");
+            };
+            xhr.open('GET', window.Babble.apiUrl + '/messages?counter=' + window.Babble.counter.toString(), true);
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            console.log("URL:", window.Babble.apiUrl + '/messages?counter=' + window.Babble.counter.toString());
+            xhr.send();
+        },
         register: function register(userInfo) {
             window.Babble.updateKey('userInfo', userInfo);
             request({
@@ -181,7 +202,7 @@
                 id: 42
             });
         },
-        getMessages: function getMessages(counter, callback) {
+        /*getMessages: function getMessages(counter, callback) {
 
             callback([]);
             var err = function (error) {
@@ -197,6 +218,9 @@
             poll(window.Babble).then(ok).catch(err);
 
             //poll(window.Babble, callback);
+        },*/
+        getMessages: function getMessages(counter, callback) {
+            window.Babble.poll(counter, callback);
         },
         deleteMessage: function deleteMessage(id, callback) {
             request({

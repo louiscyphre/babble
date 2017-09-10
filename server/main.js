@@ -10,18 +10,16 @@
     var users = require('./users');
     var util = require('./utilities');
 
+    var requests = [];
     // TODO
     // FIXME divide, neat
 
     var server = http.createServer(function (request, response) {
-
-        var requests = [];
         response.setHeader('Access-Control-Allow-Origin', '*');
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
         var url = urlUtil.parse(request.url);
         if (request.method === 'GET') {
-
             console.log("Request url was:", url.query);
             var data = queryUtil.parse(url.query);
             if (url.pathname.substr(0, 9) == '/messages') {
@@ -38,7 +36,7 @@
                     console.log('GET /messages answering: ', messages.getMessages(data.counter));
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
-                    console.log('Pushed on request to queue');
+                    console.log('Pushed request to queue');
                     requests.push(response);
                 }
             } else if (url.pathname.substr(0, 6) == '/stats') {
@@ -49,7 +47,7 @@
                 response.writeHead(400);
             }
         } else if (request.method === 'POST') {
-            console.log('request: ', request);
+            ///console.log('request: ', request);
             var requestBody = '';
             var user;
             if (url.pathname.substr(0, 9) == '/messages') {
