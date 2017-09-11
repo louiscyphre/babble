@@ -27,62 +27,11 @@
         });
     }
 
-    /*function poll(obj) {
 
-        //console.log("Poll called with args:", obj, callback);
-        return new Promise(function (resolve, reject) {
-            var xhr = new XMLHttpRequest();
-
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 400) {
-                    console.log("Poll response from server:", xhr.responseText);
-                    resolve(JSON.parse(xhr.responseText));
-                    //callback(JSON.parse(xhr.responseText));
-                    //poll(obj, callback);
-                } else {
-                    console.log("Server error");
-                    reject(JSON.parse(xhr.responseText));
-                }
-            };
-            xhr.onerror = function () {
-                console.log("Network error");
-            };
-            xhr.open('GET', obj.apiUrl + '/messages?counter=' + obj.counter.toString(), true);
-            xhr.setRequestHeader('Content-Type', 'text/json');
-            console.log("URL:", obj.apiUrl + '/messages?counter=' + obj.counter.toString());
-            xhr.send();
-        });
-    }*/
-
-
-    /*function poll(obj, callback) {
-
-        //console.log("Poll called with args:", obj, callback);
-        return new Promise(function (resolve, reject) {
-            var xhr = new XMLHttpRequest();
-
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 400) {
-                    console.log("Poll response from server:", xhr.responseText);
-                    callback(JSON.parse(xhr.responseText));
-                    poll(obj, callback);
-                } else {
-                    console.log("Server error");
-                }
-            };
-            xhr.onerror = function () {
-                console.log("Network error");
-            };
-            xhr.open('GET', obj.apiUrl + '/messages?counter=' + obj.counter.toString(), true);
-            xhr.setRequestHeader('Content-Type', 'text/json');
-            console.log("URL:", obj.apiUrl + '/messages?counter=' + obj.counter.toString());
-            xhr.send();
-        });
-    }*/
     window.Babble = {
 
         counter: 0,
-        apiUrl: 'http://localhost:9000',
+        apiUrl: 'http://localhost:9000/',
         messages: [],
         storage: localStorage,
         run: function (document, window, console) {
@@ -138,7 +87,7 @@
             window.onbeforeunload = function () {
                 request({
                     method: 'POST',
-                    action: '/logout',
+                    action: 'logout',
                     data: (JSON.parse(window.Babble.storage.getItem('babble'))).userInfo
                 }).then(function (answer) {
                     console.log('Answer on POST /logout:', answer);
@@ -164,16 +113,16 @@
             xhr.onerror = function () {
                 console.log("Network error");
             };
-            xhr.open('GET', window.Babble.apiUrl + '/messages?counter=' + window.Babble.counter.toString(), true);
+            xhr.open('GET', window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString(), true);
             xhr.setRequestHeader('Content-Type', 'text/json');
-            console.log("URL:", window.Babble.apiUrl + '/messages?counter=' + window.Babble.counter.toString());
+            console.log("URL:", window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString());
             xhr.send();
         },
         register: function register(userInfo) {
             window.Babble.updateKey('userInfo', userInfo);
             request({
                 method: 'POST',
-                action: '/login',
+                action: 'login',
                 data: userInfo
             }).then(function (answer) {
                 console.log('Answer on POST /login:', answer);
@@ -191,7 +140,7 @@
             window.Babble.updateKey('currentMessage', message.message);
             request({
                 method: 'POST',
-                action: '/messages',
+                action: 'messages',
                 data: message
             }).then(function (answer) {
                 console.log('Answer on POST /messages:', answer);
@@ -220,21 +169,42 @@
             //poll(window.Babble, callback);
         },*/
         getMessages: function getMessages(counter, callback) {
-            callback([]);
-            window.Babble.poll(counter, callback);
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    console.log("Response on getMessages from server:", xhr.responseText);
+                    callback(JSON.parse(xhr.responseText));
+                } else {
+                    console.log("Server error");
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Network error");
+            };
+            xhr.open('GET', window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString(), true);
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            console.log("getMessages: URL:", window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString());
+            xhr.send();
         },
         deleteMessage: function deleteMessage(id, callback) {
-            request({
-                method: 'DELETE',
-                action: '/messages',
-                data: id
-            }).then(function (answer) {
-                console.log('Answer on DELETE /messages:', answer);
-                callback(true);
-            }).catch(function (error) {
-                console.log(error);
-            });
-            callback(true);
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    console.log("Response on deleteMessage from server:", xhr.responseText);
+                    callback(JSON.parse(xhr.responseText));
+                } else {
+                    console.log("Server error");
+                }
+            };
+            xhr.onerror = function () {
+                console.log("Network error");
+            };
+            xhr.open('DELETE', window.Babble.apiUrl + 'messages/' + id.toString(), true);
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            console.log("deleteMessages: URL:", window.Babble.apiUrl + 'messages/' + id.toString());
+            xhr.send();
         },
         getStats: function getStats(callback) {
             request({
