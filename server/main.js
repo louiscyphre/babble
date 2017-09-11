@@ -13,7 +13,6 @@
     var requests = [];
     // TODO
     // FIXME divide, neat
-
     var server = http.createServer(function (request, response) {
         response.setHeader('Access-Control-Allow-Origin', '*');
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
@@ -32,7 +31,7 @@
                     response.writeHead(400);
                 }
                 console.log('GET /messages received', data.counter);
-                if (messages.count() > data.counter) { // || parseInt(data.counter) === 0) {
+                if (messages.count() > data.counter) {
                     console.log('GET /messages answering: ', messages.getMessages(data.counter));
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
@@ -47,7 +46,6 @@
                 response.writeHead(400);
             }
         } else if (request.method === 'POST') {
-            ///console.log('request: ', request);
             var requestBody = '';
             var user;
             if (url.pathname.substr(0, 9) == '/messages') {
@@ -58,6 +56,7 @@
                 request.on('end', function () {
                     var msg = JSON.parse(requestBody);
                     id = messages.addMessage(msg);
+                    console.log('POST /messages received', id);
                     while (requests.length > 0) {
                         var client = requests.pop();
                         client.end(JSON.stringify(msg));
@@ -66,7 +65,6 @@
                         id: id.toString()
                     }));
                 });
-                console.log('POST /messages received', id);
             } else if (url.pathname.substr(0, 6) == '/login') {
                 requestBody = '';
                 request.on('data', function (chunk) {

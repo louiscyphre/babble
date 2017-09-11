@@ -23,7 +23,7 @@
         "test": "mocha --recursive test/server || true",
         "test-in-browser": "http-server -p 8081",
         "test-all": "npm-run-all -p test test-in-browser",
-        "sass": "node-sass --watch client/styles/main.scss -o client/styles/",
+        "sass": "node-sass --watch client/styles/main.scss -o client/styles",
         "file-server": "http-server ./client -p 8080",
         "api-server": "node server/main.js",
         "api-server-dev": "nodemon server/main.js",

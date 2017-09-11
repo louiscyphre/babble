@@ -1,99 +1,8 @@
-@font-face {
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Nunito Regular'), local('Nunito-Regular'), url('/fonts/Nunito-Regular.woff2') format('woff2'), url('/fonts/Nunito-Regular.ttf') format('truetype');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
-
-@font-face {
-    font-family: 'Nunito';
-    font-style: bold;
-    font-weight: 700;
-    src: local('Nunito Bold'), local('Nunito-Bold'), url('/fonts/Nunito-Bold.woff2') format('woff2'), url('/fonts/Nunito-Bold.ttf') format('truetype');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
-
-$avatarSize: 3em;
-$sidebarSize: 18%;
-$borderRadius: 1rem;
-$c-header: #353744;
-$c-sidebar: #61D290;
-$c-chatArea: #F6F6F6;
-$c-msgText:#616161;
-$c-modalBackground:#F9F9F9;
-$c-border:#DBDBDB;
-@mixin dimensions($width,
-$height) {
-    width: $width;
-    height: $height;
-}
-
-.aria-hidden {
-    display: none;
-    visibility: hidden;
-}
-
-%rounded-rectangle {
-    padding: 0.5em;
-    border-radius: $borderRadius;
-    border: 0.1rem solid $c-border;
-    max-width: 600px;
-}
-
-%circle {
-    border-radius: 50%;
-}
-
-@media (max-width:638px) {
-    html {
-        font-size: 62.5%;
-    }
-    .ChatSideBar {
-        display: none;
-        visibility: hidden;
-    }
-    .Chat-msg-text {
-        font-size: 1.5rem;
-    }
-    .Logo {
-        width: 40%;
-    }
-    .Modal p>* {
-        font-size: 1.5rem;
-    }
-}
-
-@media (min-width:0px) and (max-width:320px) {
-    .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg_small.webp");
-    }
-}
-
-@media (min-width:321px) and (max-width:638px) {
-    .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg_medium.webp");
-    }
-}
-
-@media (min-width:639px) {
-    html {
-        font-size: 100%;
-    }
-    .Logo {
-        width: 15%;
-    }
-    .Modal {
-        width: 30%;
-    }
-    .Modal p>* {
-        font-size: 1.2rem;
-    }
-    .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg.webp");
-    }
-}
-
+@import 'fonts.scss';
+@import 'screen.scss';
+@import 'variables.scss';
+@import 'utils.scss';
+@import 'functions.scss';
 html,
 h1 {
     font-family: 'Nunito', sans-serif;
@@ -199,15 +108,14 @@ dd>* {
 }
 
 .Chat-msg-avatar {
-    @extend %circle;
-    @include dimensions($avatarSize,
-    $avatarSize);
+    @extend %u-circle;
+    @include dimensions($avatarSize, $avatarSize);
     float: left;
     margin-right: 1rem;
 }
 
 .Chat-msg-text {
-    @extend %rounded-rectangle;
+    @extend %u-rounded-rectangle;
     background-color: white;
     display: inline-block;
     margin-top: 0;
@@ -290,35 +198,17 @@ input {
     outline-style: none;
 }
 
-$degree: 90deg;
-$c-anon-gradient-lower: #B4B4B4;
-$c-anon-gradient-upper: #CFCFCF;
-$c-login-gradient-lower: #47A272;
-$c-login-gradient-upper: #7DD84E;
-@mixin gradient($deg,
-$c-lower,
-$c-upper) {
-    background-image: -moz-linear-gradient($deg, $c-lower 0%, $c-upper 100%);
-    background-image: -webkit-linear-gradient($deg, $c-lower 0%, $c-upper 100%);
-    background-image: -ms-linear-gradient($deg, $c-lower 0%, $c-upper 100%);
-    background-image: -o-linear-gradient($deg, $c-lower 0%, $c-upper 100%);
-}
-
 .Modal-buttons {
     flex-direction: row-reverse;
 }
 
 .Modal--anonymous {
-    @include gradient($degree,
-    $c-anon-gradient-lower,
-    $c-anon-gradient-upper);
+    @include gradient($degree, $c-anon-gradient-lower, $c-anon-gradient-upper);
     min-width: 30%;
 }
 
 .Modal--login {
-    @include gradient($degree,
-    $c-login-gradient-lower,
-    $c-login-gradient-upper);
+    @include gradient($degree, $c-login-gradient-lower, $c-login-gradient-upper);
     color: white;
     min-width: 20%;
 }
@@ -329,24 +219,4 @@ $c-upper) {
     border-radius: 0.1rem;
     margin-left: 1rem;
     margin-top: 1rem;
-}
-
- ::-webkit-scrollbar {
-    width: auto;
-}
-
- ::-webkit-scrollbar-track {
-    background: white;
-    border-radius: $borderRadius;
-    -webkit-border-radius: $borderRadius;
-    border: 2px solid $c-border;
-    -webkit-border: 2px solid $c-border;
-}
-
- ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: $borderRadius;
-    border-radius: $borderRadius;
-    background: $c-border + #101211;
-    border: 2px solid $c-border;
-    -webkit-border: 2px solid $c-border;
 }

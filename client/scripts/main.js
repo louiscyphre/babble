@@ -220,6 +220,7 @@
             //poll(window.Babble, callback);
         },*/
         getMessages: function getMessages(counter, callback) {
+            callback([]);
             window.Babble.poll(counter, callback);
         },
         deleteMessage: function deleteMessage(id, callback) {

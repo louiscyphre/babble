@@ -12,19 +12,6 @@
   src: local("Nunito Bold"), local("Nunito-Bold"), url("/fonts/Nunito-Bold.woff2") format("woff2"), url("/fonts/Nunito-Bold.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
 
-.aria-hidden {
-  display: none;
-  visibility: hidden; }
-
-.Chat-msg-text {
-  padding: 0.5em;
-  border-radius: 1rem;
-  border: 0.1rem solid #DBDBDB;
-  max-width: 600px; }
-
-.Chat-msg-avatar {
-  border-radius: 50%; }
-
 @media (max-width: 638px) {
   html {
     font-size: 62.5%; }
@@ -57,6 +44,32 @@
     font-size: 1.2rem; }
   .Chat-sendMessageFormButton {
     background-image: url("../images/send_bg.webp"); } }
+
+.Chat-msg-text {
+  padding: 0.5em;
+  border-radius: 1rem;
+  border: 0.1rem solid #DBDBDB;
+  max-width: 600px; }
+
+.Chat-msg-avatar {
+  border-radius: 50%; }
+
+::-webkit-scrollbar {
+  width: auto; }
+
+::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  border: 2px solid #DBDBDB;
+  -webkit-border: 2px solid #DBDBDB; }
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 1rem;
+  border-radius: 1rem;
+  background: #ebedec;
+  border: 2px solid #DBDBDB;
+  -webkit-border: 2px solid #DBDBDB; }
 
 html,
 h1 {
@@ -245,20 +258,3 @@ input {
   border-radius: 0.1rem;
   margin-left: 1rem;
   margin-top: 1rem; }
-
-::-webkit-scrollbar {
-  width: auto; }
-
-::-webkit-scrollbar-track {
-  background: white;
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  border: 2px solid #DBDBDB;
-  -webkit-border: 2px solid #DBDBDB; }
-
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 1rem;
-  border-radius: 1rem;
-  background: #ebedec;
-  border: 2px solid #DBDBDB;
-  -webkit-border: 2px solid #DBDBDB; }
