@@ -11,6 +11,11 @@
     var util = require('./utilities');
 
     var requests = [];
+    var statsRequests = [];
+    var stats = {
+        current: {},
+        previous: {}
+    };
     // TODO
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
@@ -18,6 +23,7 @@
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
         var url = urlUtil.parse(request.url);
+        var requestBody = '';
         if (request.method === 'GET') {
             console.log("Request url was:", url.query);
             var data = queryUtil.parse(url.query);
@@ -35,21 +41,21 @@
                     console.log('GET /messages answering: ', messages.getMessages(data.counter));
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
-                    console.log('Pushed request to queue');
+                    console.log('Pushed messages request to queue');
                     requests.push(response);
                 }
             } else if (url.pathname.substr(0, 6) == '/stats') {
                 console.log('GET /stats received');
-                console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
-                response.end(JSON.stringify(util.getStats()));
+                console.log('Pushed stats request to queue');
+                statsRequests.push(response);
             } else {
                 response.writeHead(400);
             }
         } else if (request.method === 'POST') {
-            var requestBody = '';
             var user;
             if (url.pathname.substr(0, 9) == '/messages') {
                 var id = 0;
+                requestBody = '';
                 request.on('data', function (chunk) {
                     requestBody += chunk;
                 });
@@ -60,6 +66,11 @@
                     while (requests.length > 0) {
                         var client = requests.pop();
                         client.end(JSON.stringify(msg));
+                    }
+                    while (statsRequests.length > 0) {
+                        var statsreq = statsRequests.pop();
+                        console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
+                        statsreq.end(JSON.stringify(util.getStats()));
                     }
                     response.end(JSON.stringify({
                         id: id.toString()
@@ -73,6 +84,11 @@
                 request.on('end', function () {
                     user = JSON.parse(requestBody);
                     users.login(user);
+                    while (statsRequests.length > 0) {
+                        var statsreq = statsRequests.pop();
+                        console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
+                        statsreq.end(JSON.stringify(util.getStats()));
+                    }
                     response.end(JSON.stringify(user));
                 });
             } else if (url.pathname.substr(0, 7) == '/logout') {
@@ -83,12 +99,24 @@
                 request.on('end', function () {
                     user = JSON.parse(requestBody);
                     users.logout(user);
+                    while (statsRequests.length > 0) {
+                        var statsreq = statsRequests.pop();
+                        console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
+                        statsreq.end(JSON.stringify(util.getStats()));
+                    }
                     response.end(JSON.stringify(user));
                 });
             }
         } else if (request.method === 'DELETE') {
             if (url.pathname.substr(0, 9) == '/messages') {
-                response.end();
+                var strid = url.pathname.replace('/messages/', '');
+                messages.deleteMessage(parseInt(strid));
+                while (statsRequests.length > 0) {
+                    var statsreq = statsRequests.pop();
+                    console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
+                    statsreq.end(JSON.stringify(util.getStats()));
+                }
+                response.end(JSON.stringify(true));
             }
         } else if (request.method === 'OPTIONS') {
 

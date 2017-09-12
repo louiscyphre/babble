@@ -9,12 +9,18 @@
 }(this, module, function () {
     var users = require('./users');
     var messages = require('./messages-util');
+    var stats = {
+        curr: {},
+        prev: {}
+    };
     return {
         getStats: function getStats() {
-            return {
+            stats.prev = stats.curr;
+            stats.curr = {
                 users: users.count(),
                 messages: messages.count(),
             };
+            return stats.curr;
         }
     };
 }));

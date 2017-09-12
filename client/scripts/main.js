@@ -1,42 +1,22 @@
 (function (window, document, console, localStorage, XMLHttpRequest, Promise, navigator) {
 
     'use strict';
-
-    function request(options) {
-        return new Promise(function (resolve, reject) {
-            var xhr = new XMLHttpRequest();
-
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 400) {
-                    resolve(xhr.responseText);
-                } else {
-                    reject(xhr.responseText);
-                }
-            };
-            xhr.onerror = function () {
-                console.log("Error");
-            };
-            xhr.open(options.method, window.Babble.apiUrl + options.action, true);
-            xhr.setRequestHeader('Content-Type', 'text/json');
-            console.log("URL:", window.Babble.apiUrl + options.action);
-            if (options.method == 'GET') {
-                xhr.send();
-            } else {
-                xhr.send(JSON.stringify(options.data));
-            }
-        });
-    }
-
-
     window.Babble = {
 
         counter: 0,
+        deletedCounter: 0,
         apiUrl: 'http://localhost:9000/',
         messages: [],
+        myMessagesIds: [],
+        stats: {
+            users: 0,
+            messages: 0
+        },
         storage: localStorage,
         run: function (document, window, console) {
 
             window.Babble.updateKey('all', '');
+            window.Babble.getStats(window.Babble.updateStats);
 
             var newMessageForm = document.querySelector('.Chat-sendMessageForm');
 
@@ -51,7 +31,7 @@
                     message: textarea.value,
                     timestamp: window.Date.now()
                 };
-                window.Babble.postMessage(message, window.Babble.dummy);
+                window.Babble.postMessage(message, window.Babble.storeId);
             });
 
             var registerForm = document.querySelector('.Modal');
@@ -68,28 +48,9 @@
                 registerForm.setAttribute("aria-hidden", "true");
             });
 
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function () {
-                    try {
-                        navigator.serviceWorker.register('./scripts/service-worker.js').then(function (registration) {
-                            // Registration was successful
-                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                        }, function (err) {
-                            // registration failed :(
-                            console.log('ServiceWorker registration failed: ', err);
-                        });
-                    } catch (e) {
-
-                    }
-                });
-            }
-
             window.onbeforeunload = function () {
-                request({
-                    method: 'POST',
-                    action: 'logout',
-                    data: (JSON.parse(window.Babble.storage.getItem('babble'))).userInfo
-                }).then(function (answer) {
+                var data = (JSON.parse(window.Babble.storage.getItem('babble'))).userInfo;
+                window.Babble.request('POST', 'logout', data).then(function (answer) {
                     console.log('Answer on POST /logout:', answer);
                     window.Babble.updateKey('all', '');
                 }).catch(function (error) {
@@ -98,14 +59,13 @@
             };
         },
 
-        poll: function poll(counter, callback) {
+        poll: function poll(url, callback) {
             var xhr = new XMLHttpRequest();
-
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 400) {
                     console.log("Poll response from server:", xhr.responseText);
                     callback(JSON.parse(xhr.responseText));
-                    poll(counter, callback);
+                    poll(url, callback);
                 } else {
                     console.log("Server error");
                 }
@@ -113,112 +73,95 @@
             xhr.onerror = function () {
                 console.log("Network error");
             };
-            xhr.open('GET', window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString(), true);
+            var fullUrl;
+            if (url === 'messages?counter=') {
+                fullUrl = window.Babble.apiUrl + url + window.Babble.counter.toString();
+            } else {
+                fullUrl = window.Babble.apiUrl + url;
+            }
+            xhr.open('GET', fullUrl, true);
             xhr.setRequestHeader('Content-Type', 'text/json');
-            console.log("URL:", window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString());
+            console.log("poll URL:", fullUrl);
             xhr.send();
         },
         register: function register(userInfo) {
             window.Babble.updateKey('userInfo', userInfo);
-            request({
-                method: 'POST',
-                action: 'login',
-                data: userInfo
-            }).then(function (answer) {
-                console.log('Answer on POST /login:', answer);
+            window.Babble.request('POST', 'login', userInfo).then(function (answer) {
                 window.Babble.getMessages(window.Babble.counter, window.Babble.storeMessages);
-                window.Babble.getStats(window.Babble.dummy);
-                //window.setInterval(function () {
-                //    window.Babble.getStats(window.Babble.dummy);
-                //}, 6000);
             }).catch(function (error) {
                 console.log(error);
             });
         },
 
         postMessage: function postMessage(message, callback) {
-            window.Babble.updateKey('currentMessage', message.message);
-            request({
-                method: 'POST',
-                action: 'messages',
-                data: message
-            }).then(function (answer) {
-                console.log('Answer on POST /messages:', answer);
-            }).catch(function (error) {
-                console.log(error);
-            });
             callback({
-                id: 42
+                id: '42'
+            });
+            window.Babble.updateKey('currentMessage', message.message);
+            window.Babble.request('POST', 'messages', message).then(function (ans) {
+                callback(ans);
+            }).catch(function (err) {
+                console.log(err);
             });
         },
-        /*getMessages: function getMessages(counter, callback) {
-
-            callback([]);
-            var err = function (error) {
-                console.log(error);
-            };
-
-            var ok = function (msgs) {
-                console.log("Messages from server:", msgs);
-                callback(msgs);
-                poll(window.Babble);
-            };
-
-            poll(window.Babble).then(ok).catch(err);
-
-            //poll(window.Babble, callback);
-        },*/
         getMessages: function getMessages(counter, callback) {
-            var xhr = new XMLHttpRequest();
-
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 400) {
-                    console.log("Response on getMessages from server:", xhr.responseText);
-                    callback(JSON.parse(xhr.responseText));
-                } else {
-                    console.log("Server error");
-                }
-            };
-            xhr.onerror = function () {
-                console.log("Network error");
-            };
-            xhr.open('GET', window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString(), true);
-            xhr.setRequestHeader('Content-Type', 'text/json');
-            console.log("getMessages: URL:", window.Babble.apiUrl + 'messages?counter=' + window.Babble.counter.toString());
-            xhr.send();
+            callback([]);
+            var url = 'messages?counter=' + counter.toString();
+            window.Babble.request('GET', url).then(function (ans) {
+                callback(ans);
+                window.Babble.poll('messages?counter=', callback);
+            }).catch(function (err) {
+                console.log(err);
+            });
         },
         deleteMessage: function deleteMessage(id, callback) {
-            var xhr = new XMLHttpRequest();
-
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 400) {
-                    console.log("Response on deleteMessage from server:", xhr.responseText);
-                    callback(JSON.parse(xhr.responseText));
-                } else {
-                    console.log("Server error");
-                }
-            };
-            xhr.onerror = function () {
-                console.log("Network error");
-            };
-            xhr.open('DELETE', window.Babble.apiUrl + 'messages/' + id.toString(), true);
-            xhr.setRequestHeader('Content-Type', 'text/json');
-            console.log("deleteMessages: URL:", window.Babble.apiUrl + 'messages/' + id.toString());
-            xhr.send();
+            if (callback) {
+                callback(true);
+            }
+            var url = 'messages/' + id.toString();
+            window.Babble.request('DELETE', url).then(function (ans) {
+                callback(ans);
+            }).catch(function (err) {
+                console.log(err);
+            });
         },
         getStats: function getStats(callback) {
-            request({
-                method: 'GET',
-                action: '/stats',
-                data: ''
-            }).then(function (answer) {
-                console.log('Answer on GET /stats:', answer);
-            }).catch(function (error) {
-                console.log(error);
-            });
             callback({
                 users: 5,
                 messages: 20
+            });
+            window.Babble.request('GET', 'stats').then(function (ans) {
+                callback(ans);
+                window.Babble.poll('stats', callback);
+            }).catch(function (err) {
+                console.log(err);
+            });
+        },
+        request: function request(method, url, data) {
+            return new Promise(function (resolve, reject) {
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 400) {
+                        resolve(JSON.parse(xhr.responseText));
+                    } else {
+                        console.log("Server error");
+                        reject(JSON.parse(xhr.responseText));
+                    }
+                };
+                xhr.onerror = function () {
+                    console.log("Network error");
+                };
+                xhr.open(method, window.Babble.apiUrl + url, true);
+                xhr.setRequestHeader('Content-Type', 'text/json');
+                console.log("request: URL:", window.Babble.apiUrl + url);
+                if (method === 'POST') {
+                    console.log("POSTing: ", JSON.stringify(data));
+                    xhr.send(JSON.stringify(data));
+                } else {
+                    xhr.send();
+                }
             });
         },
         storeMessages: function (array) {
@@ -226,7 +169,16 @@
             window.Babble.counter = window.Babble.messages.length;
             console.log("Messages on client:", window.Babble.messages);
         },
-        showStats: function (stats) {
+        updateStats: function (stats) {
+
+        },
+        updateDeletedCounter: function (ans) {
+            if (ans !== true) {
+                return;
+            }
+            window.Babble.deletedCounter++;
+        },
+        storeId: function (id) {
 
         },
         updateKey: function updateKey(keyName, value) {
@@ -251,9 +203,6 @@
                 window.Babble.storage.setItem('babble', JSON.stringify(data));
                 return;
             } else throw new window.Babble.exception('wrong use of updateKey()');
-        },
-        dummy: function (something) {
-            return something;
         },
         exception: function exception(what) {
             console.error("[CRITICAL ERROR] Exception thrown: ", what);
