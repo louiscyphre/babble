@@ -1,0 +1,30 @@
+%u-rounded-rectangle {
+    padding: 0.5em;
+    border-radius: $borderRadius;
+    border: 0.1rem solid $c-border;
+    max-width: 600px;
+}
+
+%u-circle {
+    border-radius: 50%;
+}
+
+ ::-webkit-scrollbar {
+    width: auto;
+}
+
+ ::-webkit-scrollbar-track {
+    background: white;
+    border-radius: $borderRadius;
+    -webkit-border-radius: $borderRadius;
+    border: 2px solid $c-border;
+    -webkit-border: 2px solid $c-border;
+}
+
+ ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: $borderRadius;
+    border-radius: $borderRadius;
+    background: $c-border + #101211;
+    border: 2px solid $c-border;
+    -webkit-border: 2px solid $c-border;
+}
