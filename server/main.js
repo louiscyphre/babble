@@ -21,8 +21,8 @@
     var server = http.createServer(function (request, response) {
         response.setHeader('Access-Control-Allow-Origin', '*');
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");response.setHeader("Cache-Control", "max-age=86400");
-        max-age=86400	
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+        response.setHeader("Cache-Control", "max-age=86400");
         var url = urlUtil.parse(request.url);
         var requestBody = '';
         if (request.method === 'GET') {
