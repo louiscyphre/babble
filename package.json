@@ -4,25 +4,37 @@
     "description": "Web Chat",
     "main": "server/main.js",
     "dependencies": {
+        "md5": "^2.2.1",
         "node-sass": "^4.5.3",
         "nodemon": "^1.11.0",
-        "normalize.css": "^7.0.0"
+        "serviceworker-cache-polyfill": "^4.0.0"
     },
     "devDependencies": {
-        "mocha": "^3.4.2"
+        "chai": "^4.1.1",
+        "chai-http": "^3.0.0",
+        "http-server": "^0.10.0",
+        "mocha": "^3.5.0",
+        "mocha-sinon": "^2.0.0",
+        "npm-run-all": "^4.0.2",
+        "should-sinon": "0.0.5",
+        "sinon": "^3.2.1"
     },
     "scripts": {
-        "test": "mocha",
+        "test": "mocha --recursive test/server || true",
+        "test-in-browser": "http-server -p 8081",
+        "test-all": "npm-run-all -p test test-in-browser",
         "sass": "node-sass --watch styles/main.scss -o styles/",
-        "start": "http-server ./ -p 8080"
+        "file-server": "http-server ./client -p 8080",
+        "start": "npm-run-all -p -r file-server",
+        "dev": "npm-run-all -p -r sass"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/louiscyphre/babble.git"
     },
     "keywords": [
-    "webchat"
-  ],
+        "webchat"
+    ],
     "author": "louiscyphre",
     "license": "GPL-3.0",
     "bugs": {

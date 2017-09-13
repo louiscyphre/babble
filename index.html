@@ -8,6 +8,81 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="theme-color" content="#FFFFFF" />
     <title>Vegans - Babble</title>
+    <style>
+        .Modal {
+            border: 1px solid #DBDBDB;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background-color: #F9F9F9;
+            padding: 3rem;
+            box-shadow: 0 0 1rem 0 black;
+            border-radius: 0.1rem;
+            display: table;
+        }
+        
+        .Modal p {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 0;
+        }
+        
+        .Modal p label {
+            flex: 1;
+            color: #616161;
+        }
+        
+        .Modal p>* {
+            font-family: inherit;
+        }
+        
+        .Modal p label,
+        input {
+            font-weight: 700;
+        }
+        
+        .Modal p input {
+            flex: 3;
+            padding: 0.4em;
+            border-radius: 1rem;
+            border: 2px solid #DBDBDB;
+            outline-style: none;
+        }
+        
+        .Modal-buttons {
+            flex-direction: row-reverse;
+        }
+        
+        .Modal--anonymous {
+            background-image: -moz-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+            background-image: -webkit-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+            background-image: -ms-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+            background-image: -o-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+            min-width: 30%;
+        }
+        
+        .Modal--login {
+            background-image: -moz-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+            background-image: -webkit-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+            background-image: -ms-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+            background-image: -o-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+            color: white;
+            min-width: 20%;
+        }
+        
+        .Modal--anonymous,
+        .Modal--login {
+            border: 0;
+            border-radius: 0.1rem;
+            margin-left: 1rem;
+            margin-top: 1rem;
+        }
+
+    </style>
 </head>
 
 <body class="dbg">
