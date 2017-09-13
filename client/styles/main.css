@@ -45,6 +45,10 @@
   .Chat-sendMessageFormButton {
     background: url("../images/send_bg.webp"); } }
 
+@-moz-document url-prefix() {
+  .Chat-sendMessageFormButton {
+    background: url(../images/send_bg.png); } }
+
 .Chat-msg-text {
   padding: 0.5em;
   border-radius: 1rem;
