@@ -9,7 +9,6 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="theme-color" content="#FFFFFF" />
     <title>Vegans - Babble</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css" media="all" />
 </head>
 
 <body class="dbg">
@@ -134,6 +133,25 @@
         </main>
     </section>
     <script src="scripts/main.js" async defer></script>
+    <noscript id="deferred-styles">
+        <link rel="stylesheet" type="text/css" href="styles/main.css" media="all" />
+    </noscript>
+    <script>
+        var loadDeferredStyles = function() {
+            var addStylesNode = document.getElementById("deferred-styles");
+            var replacement = document.createElement("div");
+            replacement.innerHTML = addStylesNode.textContent;
+            document.body.appendChild(replacement)
+            addStylesNode.parentElement.removeChild(addStylesNode);
+        };
+        var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+            webkitRequestAnimationFrame || msRequestAnimationFrame;
+        if (raf) raf(function() {
+            window.setTimeout(loadDeferredStyles, 0);
+        });
+        else window.addEventListener('load', loadDeferredStyles);
+
+    </script>
 </body>
 
 </html>
