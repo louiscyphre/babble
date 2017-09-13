@@ -12,7 +12,7 @@ h1 {
 body,
 html {
     margin: 0;
-    flex-flow: column nowrap;
+    flex-direction: column;
     width: 100%;
     height: 100%;
 }
@@ -33,6 +33,7 @@ body,
 
 .ChatContainer {
     flex: 7;
+    overflow: auto;
 }
 
 .ChatSideBar {
@@ -93,14 +94,16 @@ dd>* {
 .Chat-messages {
     flex: 12;
     overflow-y: auto;
-    border-bottom: 0.1rem solid $c-border;
     overflow-x: hidden;
+    border-bottom: 0.1rem solid $c-border;
 }
 
 .Chat-messages ol {
     list-style: none;
     padding: 0;
 }
+
+.aa {}
 
 .Chat-msg {
     vertical-align: top;

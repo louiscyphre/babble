@@ -27,11 +27,11 @@
 
 @media (min-width: 0px) and (max-width: 320px) {
   .Chat-sendMessageFormButton {
-    background-image: url("../images/send_bg_small.webp"); } }
+    background: url("../images/send_bg_small.webp"); } }
 
 @media (min-width: 321px) and (max-width: 638px) {
   .Chat-sendMessageFormButton {
-    background-image: url("../images/send_bg_medium.webp"); } }
+    background: url("../images/send_bg_medium.webp"); } }
 
 @media (min-width: 639px) {
   html {
@@ -43,7 +43,7 @@
   .Modal p > * {
     font-size: 1.2rem; }
   .Chat-sendMessageFormButton {
-    background-image: url("../images/send_bg.webp"); } }
+    background: url("../images/send_bg.webp"); } }
 
 .Chat-msg-text {
   padding: 0.5em;
@@ -79,7 +79,7 @@ h1 {
 body,
 html {
   margin: 0;
-  flex-flow: column nowrap;
+  flex-direction: column;
   width: 100%;
   height: 100%; }
 
@@ -96,7 +96,8 @@ body,
   display: flex; }
 
 .ChatContainer {
-  flex: 7; }
+  flex: 7;
+  overflow: auto; }
 
 .ChatSideBar {
   flex: 2;
@@ -146,8 +147,8 @@ dd > * {
 .Chat-messages {
   flex: 12;
   overflow-y: auto;
-  border-bottom: 0.1rem solid #DBDBDB;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  border-bottom: 0.1rem solid #DBDBDB; }
 
 .Chat-messages ol {
   list-style: none;

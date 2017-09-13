@@ -15,8 +15,6 @@
 <body class="dbg">
     <header class="MainHeader">
         <img class="Logo" src="images/logo.svg" alt="">
-    </header>
-    <section class="ChatContainer">
         <form class="Modal" action="http://localhost:9000/login" method="POST" enctype="text/json" accept-charset="utf-8">
             <h1>Who are you?</h1>
             <p>
@@ -30,14 +28,15 @@
                 <button class="Modal--anonymous" aria-label="Continue as anonymous">Stay Anonymous</button>
             </p>
         </form>
+    </header>
+    <section class="ChatContainer">
         <nav class="ChatSideBar dbg"></nav>
         <main class="Chat dbg">
             <header class="Chat-header dbg">
                 <h1 class="Chat-header-title">Vegans</h1>
                 <dl class="Chat-header-stats">
                     <dt hidden aria-label="Number of messages in chat"></dt>
-                    <dd>
-                        <img src="images/msgs.svg" alt="">
+                    <dd><img src="images/msgs.svg" alt="">
                         <div class="msgsCount">7</div>
                     </dd>
                     <dt hidden aria-label="Number of users in chat"></dt>
@@ -47,7 +46,7 @@
                 </dl>
             </header>
             <section class="Chat-messages dbg">
-                <ol class="dbg">
+                <ol class="aa dbg">
                     <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
                         <p class="Chat-msg-text dbg">message</p>
                     </li>

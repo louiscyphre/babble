@@ -126,8 +126,7 @@
             });
         },
         getStats: function getStats(callback) {
-            window.Babble.poll('stats', callback);
-            /*callback({
+            callback({
                 users: 5,
                 messages: 20
             });
@@ -136,7 +135,7 @@
                 window.Babble.poll('stats', callback);
             }).catch(function (err) {
                 console.log(err);
-            });*/
+            });
         },
         request: function request(method, url, data) {
             return new Promise(function (resolve, reject) {

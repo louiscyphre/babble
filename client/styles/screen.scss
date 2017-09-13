@@ -19,13 +19,13 @@
 
 @media (min-width:0px) and (max-width:320px) {
     .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg_small.webp");
+        background: url("../images/send_bg_small.webp");
     }
 }
 
 @media (min-width:321px) and (max-width:638px) {
     .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg_medium.webp");
+        background: url("../images/send_bg_medium.webp");
     }
 }
 
@@ -43,6 +43,12 @@
         font-size: 1.2rem;
     }
     .Chat-sendMessageFormButton {
-        background-image: url("../images/send_bg.webp");
+        background: url("../images/send_bg.webp");
+    }
+}
+
+@-moz-document url-prefix() {
+    .Chat-sendMessageFormButton {
+        background-image: url(../images/send_bg.png);
     }
 }
