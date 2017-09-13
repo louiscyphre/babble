@@ -6,8 +6,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Cache-Control" content="public, max-age=31536000"/>
     <meta name="theme-color" content="#FFFFFF" />
     <title>Vegans - Babble</title>
     <link rel="stylesheet" type="text/css" href="styles/main.css" media="all" />
@@ -18,13 +16,13 @@
         <img class="Logo" src="images/logo.svg" alt="">
     </header>
     <section class="ChatContainer">
-        <form class="Modal" action="http://localhost:9000/login" method="POST" enctype="text/json" accept-charset="utf-8">
+        <form class="Modal" action="http://localhost:9000/login" method="POST" enctype="text/plain" accept-charset="utf-8">
             <h1>Who are you?</h1>
             <p>
-                <label for="name">Full name:</label><input type="text" name="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" />
+                <label for="aria-input-name">Full name:</label><input id="aria-input-name" type="text" name="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" />
             </p>
             <p>
-                <label for="email">Email:</label><input type="email" name="email" placeholder="Type your email" autocomplete="email" aria-label="Type your email here" />
+                <label for="aria-input-email">Email:</label><input id="aria-input-email" type="email" name="email" placeholder="Type your email" autocomplete="email" aria-label="Type your email here" />
             </p>
             <p class="Modal-buttons">
                 <button type="submit" class="Modal--login" aria-label="Continue as registered user">Save</button>
@@ -129,7 +127,7 @@
                     </li>
                 </ol>
             </section>
-            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="text/json" accept-charset="utf-8">
+            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="text/plain" accept-charset="utf-8">
                 <textarea class="Chat-sendMessageFormText dbg" aria-label="Type new message here"></textarea>
                 <button class="Chat-sendMessageFormButton dbg" type="submit" aria-label="Send message to chat"></button>
             </form>
