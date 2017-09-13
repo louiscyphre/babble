@@ -45,7 +45,7 @@
                 });
                 registerForm.style.display = 'none';
                 registerForm.style.visibility = 'hidden';
-                registerForm.setAttribute("aria-hidden", "true");
+                registerForm.setAttribute('aria-hidden', 'true');
             });
 
             window.onbeforeunload = function () {
@@ -63,15 +63,15 @@
             var xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 400) {
-                    console.log("Poll response from server:", xhr.responseText);
+                    console.log('Poll response from server:', xhr.responseText);
                     callback(JSON.parse(xhr.responseText));
                     poll(url, callback);
                 } else {
-                    console.log("Server error");
+                    console.log('Server error');
                 }
             };
             xhr.onerror = function () {
-                console.log("Network error");
+                console.log('Network error');
             };
             var fullUrl;
             if (url === 'messages?counter=') {
@@ -80,9 +80,9 @@
                 fullUrl = window.Babble.apiUrl + url;
             }
             xhr.open('GET', fullUrl, true);
-            xhr.setRequestHeader('Content-Type', 'text/json');
-            xhr.setRequestHeader("Cache-Control", "max-age=86400");
-            console.log("poll URL:", fullUrl);
+            xhr.setRequestHeader('Content-Type', 'text/plain');
+            xhr.setRequestHeader('Cache-Control', 'max-age=86400');
+            console.log('poll URL:', fullUrl);
             xhr.send();
         },
         register: function register(userInfo) {
@@ -147,18 +147,19 @@
                     if (xhr.status >= 200 && xhr.status < 400) {
                         resolve(JSON.parse(xhr.responseText));
                     } else {
-                        console.log("Server error");
+                        console.log('Server error');
                         reject(JSON.parse(xhr.responseText));
                     }
                 };
                 xhr.onerror = function () {
-                    console.log("Network error");
+                    console.log('Network error');
                 };
                 xhr.open(method, window.Babble.apiUrl + url, true);
-                xhr.setRequestHeader('Content-Type', 'text/json');
-                console.log("request: URL:", window.Babble.apiUrl + url);
+                xhr.setRequestHeader('Content-Type', 'text/plain');
+                xhr.setRequestHeader('Cache-Control', 'max-age=86400');
+                console.log('request: URL:', window.Babble.apiUrl + url);
                 if (method === 'POST') {
-                    console.log("POSTing: ", JSON.stringify(data));
+                    console.log('POSTing: ', JSON.stringify(data));
                     xhr.send(JSON.stringify(data));
                 } else {
                     xhr.send();
@@ -168,7 +169,7 @@
         storeMessages: function (array) {
             window.Babble.messages = window.Babble.messages.concat(array);
             window.Babble.counter = window.Babble.messages.length;
-            console.log("Messages on client:", window.Babble.messages);
+            console.log('Messages on client:', window.Babble.messages);
         },
         updateStats: function (stats) {
 
@@ -206,7 +207,7 @@
             } else throw new window.Babble.exception('wrong use of updateKey()');
         },
         exception: function exception(what) {
-            console.error("[CRITICAL ERROR] Exception thrown: ", what);
+            console.error('[CRITICAL ERROR] Exception thrown: ', what);
         }
     };
 

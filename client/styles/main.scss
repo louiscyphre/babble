@@ -22,6 +22,12 @@ h1 {
     margin-top: 0;
 }
 
+h2 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
 html,
 body,
 .ChatContainer,
@@ -103,8 +109,6 @@ dd>* {
     padding: 0;
 }
 
-.aa {}
-
 .Chat-msg {
     vertical-align: top;
     margin: 1rem;
@@ -124,8 +128,21 @@ dd>* {
     margin-top: 0;
 }
 
+.Chat-msg-text p {
+    font-size: 1.3rem;
+    color: $c-msgText;
+    padding: 0;
+    margin: 0;
+}
+
+.Chat-msg-text header time {
+    font-weight: bold;
+    color: $c-msgTime;
+    margin-left: 0.5rem;
+}
+
 .Chat-sendMessageForm {
-    flex: 2;
+    flex: 2; //try  flex: 2 4 2;max-height:600;
     border-radius: 4px;
     background-color: white;
     padding: 20px;
@@ -140,13 +157,13 @@ dd>* {
 }
 
 .Chat-sendMessageFormButton {
+    flex: 1;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
     background-color: white;
     outline: none;
     border: none;
-    flex: 1;
 }
 
 .Chat-sendMessageFormButton:active {

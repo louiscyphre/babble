@@ -50,7 +50,7 @@
     background: url(../images/send_bg.png); } }
 
 .Chat-msg-text {
-  padding: 0.5em;
+  padding: 0.5rem;
   border-radius: 1rem;
   border: 0.1rem solid #DBDBDB;
   max-width: 600px; }
@@ -90,6 +90,11 @@ html {
 h1 {
   font-size: 1.875rem;
   margin-top: 0; }
+
+h2 {
+  display: inline-block;
+  margin: 0;
+  padding: 0; }
 
 html,
 body,
@@ -173,6 +178,17 @@ dd > * {
   display: inline-block;
   margin-top: 0; }
 
+.Chat-msg-text p {
+  font-size: 1.3rem;
+  color: #646464;
+  padding: 0;
+  margin: 0; }
+
+.Chat-msg-text header time {
+  font-weight: bold;
+  color: #999999;
+  margin-left: 0.5rem; }
+
 .Chat-sendMessageForm {
   flex: 2;
   border-radius: 4px;
@@ -187,13 +203,13 @@ dd > * {
   outline: none; }
 
 .Chat-sendMessageFormButton {
+  flex: 1;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   background-color: white;
   outline: none;
-  border: none;
-  flex: 1; }
+  border: none; }
 
 .Chat-sendMessageFormButton:active {
   outline: inherit; }
@@ -223,7 +239,7 @@ dd > * {
 
 .Modal p label {
   flex: 1;
-  color: #616161; }
+  color: #646464; }
 
 .Modal p > * {
   font-family: inherit; }

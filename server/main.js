@@ -4,7 +4,6 @@
     var http = require('http');
     var urlUtil = require('url');
     var queryUtil = require('querystring');
-    var md5 = require('./crypto-util').md5hash;
 
     var messages = require('./messages-util');
     var users = require('./users');
@@ -20,21 +19,20 @@
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
         response.setHeader('Access-Control-Allow-Origin', '*');
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
-        response.setHeader("Cache-Control", "max-age=86400");
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Cache-Control');
+        response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
         var url = urlUtil.parse(request.url);
         var requestBody = '';
         if (request.method === 'GET') {
-            console.log("Request url was:", url.query);
+            console.log('Request url was:', url.query);
             var data = queryUtil.parse(url.query);
             if (url.pathname.substr(0, 9) == '/messages') {
-                console.log("Query was:", url.query);
+                console.log('Query was:', url.query);
                 if (!data.counter || isNaN(parseInt(data.counter))) {
                     if (!Number.isInteger(data.counter)) {
-                        console.log("counter is not integer:", data.counter);
+                        console.log('counter is not integer:', data.counter);
                     }
-                    console.log("bad request is here");
+                    console.log('bad request is here');
                     response.writeHead(400);
                 }
                 console.log('GET /messages received', data.counter);
@@ -126,7 +124,7 @@
             });
             response.end();
         } else {
-            console.log("Method not allowed: ", url.messages, url, request);
+            console.log('Method not allowed: ', url.messages, url, request);
             response.writeHead(405);
             response.end();
         }
