@@ -81,6 +81,7 @@
             }
             xhr.open('GET', fullUrl, true);
             xhr.setRequestHeader('Content-Type', 'text/json');
+            xhr.setRequestHeader("Cache-Control", "max-age=86400");
             console.log("poll URL:", fullUrl);
             xhr.send();
         },
