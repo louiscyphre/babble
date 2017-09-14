@@ -27,9 +27,9 @@
         "api-server-dev": "nodemon server/main.js",
         "start": "npm-run-all -p -r file-server api-server",
         "dev": "npm-run-all -p -r api-server-dev sass",
-        "min-js": "minify scripts/main.js",
-        "min-css": "minify styles/main.css",
-        "min": "npm-run-all -p -r min-js min-css"
+        "min-js": "minify --output client/scripts/main.min.js client/scripts/main.js",
+        "min-css": "minify --output client/styles/main.min.css client/styles/main.css",
+        "min": "npm-run-all -p -s min-js min-css"
     },
     "repository": {
         "type": "git",
