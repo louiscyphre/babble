@@ -27,7 +27,9 @@
         "sass": "node-sass --watch styles/main.scss -o styles/",
         "file-server": "http-server ./client -p 8080",
         "start": "npm-run-all -p -r file-server",
-        "dev": "npm-run-all -p -r sass"
+        "dev": "npm-run-all -p -r sass",
+        "min-css": "minify styles/main.css",
+        "min": "npm-run-all -p -r min-css"
     },
     "repository": {
         "type": "git",
