@@ -13,6 +13,7 @@
         "chai": "^4.1.1",
         "chai-http": "^3.0.0",
         "http-server": "^0.10.0",
+        "minifier": "^0.8.1",
         "mocha": "^3.5.0",
         "mocha-sinon": "^2.0.0",
         "npm-run-all": "^4.0.2",
