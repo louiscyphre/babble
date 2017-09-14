@@ -8,87 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="theme-color" content="#FFFFFF" />
     <title>Vegans - Babble</title>
-    <style>
-        .Modal {
-            border: 1px solid #DBDBDB;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-            background-color: #F9F9F9;
-            padding: 3rem;
-            box-shadow: 0 0 1rem 0 black;
-            border-radius: 0.1rem;
-            display: table;
-        }
-        
-        .Modal p {
-            width: 100%;
-            display: inline-flex;
-            align-items: center;
-            margin-top: 0;
-        }
-        
-        .Modal p label {
-            flex: 1;
-            color: #616161;
-        }
-        
-        .Modal p>* {
-            font-family: inherit;
-        }
-        
-        .Modal p label,
-        input {
-            font-weight: 700;
-        }
-        
-        .Modal p input {
-            flex: 3;
-            padding: 0.4em;
-            border-radius: 1rem;
-            border: 2px solid #DBDBDB;
-            outline-style: none;
-        }
-        
-        .Modal-buttons {
-            flex-direction: row-reverse;
-        }
-        
-        .Modal--anonymous {
-            background-image: -moz-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-            background-image: -webkit-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-            background-image: -ms-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-            background-image: -o-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-            min-width: 30%;
-        }
-        
-        .Modal--login {
-            background-image: -moz-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-            background-image: -webkit-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-            background-image: -ms-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-            background-image: -o-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-            color: white;
-            min-width: 20%;
-        }
-        
-        .Modal--anonymous,
-        .Modal--login {
-            border: 0;
-            border-radius: 0.1rem;
-            margin-left: 1rem;
-            margin-top: 1rem;
-        }
-
-    </style>
 </head>
 
 <body class="dbg">
     <header class="MainHeader">
         <img class="Logo" src="images/logo.svg" alt="">
-        <form class="Modal" action="http://localhost:9000/login" method="POST" enctype="text/json" accept-charset="utf-8">
+        <form class="Modal" method="POST" enctype="text/plain" accept-charset="utf-8">
             <h1>Who are you?</h1>
             <p>
                 <label for="name">Full name:</label><input type="text" name="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" />
@@ -110,120 +35,53 @@
                 <dl class="Chat-header-stats">
                     <dt hidden aria-label="Number of messages in chat"></dt>
                     <dd><img src="images/msgs.svg" alt="">
-                        <div class="msgsCount">7</div>
+                        <div class="msgsCount">-</div>
                     </dd>
                     <dt hidden aria-label="Number of users in chat"></dt>
                     <dd><img src="images/users.svg" alt="">
-                        <div class="usersCount">6</div>
+                        <div class="usersCount">-</div>
                     </dd>
                 </dl>
             </header>
             <section class="Chat-messages dbg">
-                <ol class="aa dbg">
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">messageLorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat. Curabitur fermentum bibendum nulla, non dictum ipsum tincidunt non. Quisque convallis pharetra tempor. Donec id pretium leo. Pellentesque luctus massa non elit viverra pellentesque. Cras vitae neque molestie, rhoncus ipsum sit amet, lobortis dui. Fusce in urna sem. Vivamus vehicula dignissim augue et scelerisque. Etiam quam nisi, molestie ac dolor in, tincidunt tincidunt arcu. Praesent sed justo finibus, fringilla velit quis, porta erat. Donec blandit metus ut arcu iaculis iaculis. Cras nec dolor fringilla justo ullamcorper auctor. Aliquam eget pretium velit. Morbi urna justo, pulvinar id lobortis in, aliquet placerat orci.</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
-                    </li>
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/1.webp" alt="" />
-                        <p class="Chat-msg-text dbg">message</p>
+                <ol class="dbg">
+                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/anon.svg" alt="" />
+                        <div class="Chat-msg-text dbg">
+                            <header>
+                                <h2>Alex Krul</h2><time datetime="1505339413229">14:22</time></header>
+                            <p>Veggies es bonu vobis, proinde vos postulo essum magis kohlrabi onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.</p>
+                        </div>
                     </li>
                 </ol>
             </section>
-            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="text/json" accept-charset="utf-8">
+            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="text/plain" accept-charset="utf-8">
                 <textarea class="Chat-sendMessageFormText dbg" aria-label="Type new message here"></textarea>
                 <button class="Chat-sendMessageFormButton dbg" type="submit" aria-label="Send message to chat"></button>
             </form>
         </main>
     </section>
     <script src="scripts/main.js" defer async></script>
-    <noscript id="deferred-styles">
+    <noscript class="deferred-styles">
         <link rel="stylesheet" type="text/css" href="styles/main.css" media="all" />
     </noscript>
-    <script defer async>
-        var loadDeferredStyles = function() {
-            var addStylesNode = document.getElementById("deferred-styles");
-            var replacement = document.createElement("div");
-            replacement.innerHTML = addStylesNode.textContent;
-            document.body.appendChild(replacement)
-            addStylesNode.parentElement.removeChild(addStylesNode);
-        };
-        var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-            webkitRequestAnimationFrame || msRequestAnimationFrame;
-        if (raf) raf(function() {
-            window.setTimeout(loadDeferredStyles, 0);
-        });
-        else window.addEventListener('load', loadDeferredStyles);
+    <script>
+        (function(window, document) {
+            'use strict';
+            var loadDeferredStyles = function() {
+                var addStylesNode = document.querySelector(".deferred-styles");
+                var replacement = document.createElement("div");
+                replacement.innerHTML = addStylesNode.textContent;
+                document.body.appendChild(replacement);
+                addStylesNode.parentElement.removeChild(addStylesNode);
+            };
+            var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+            if (raf) raf(function() {
+                window.setTimeout(loadDeferredStyles, 0);
+            });
+            else window.addEventListener('load', loadDeferredStyles);
+
+        })(this.window, this.document);
 
     </script>
 </body>

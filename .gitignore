@@ -35,3 +35,9 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+upd_gh_pages.sh
+client/styles/fonts.css
+client/styles/screen.css
+client/styles/variables.css
+
