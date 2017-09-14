@@ -10,6 +10,7 @@
     "devDependencies": {
         "chai": "^4.1.1",
         "http-server": "^0.10.0",
+        "minifier": "^0.8.1",
         "mocha": "^3.5.0",
         "node-sass": "^4.5.3",
         "nodemon": "^1.12.0",
@@ -25,7 +26,10 @@
         "api-server": "node server/main.js",
         "api-server-dev": "nodemon server/main.js",
         "start": "npm-run-all -p -r file-server api-server",
-        "dev": "npm-run-all -p -r api-server-dev sass"
+        "dev": "npm-run-all -p -r api-server-dev sass",
+        "min-js": "minify scripts/main.js",
+        "min-css": "minify styles/main.css",
+        "min": "npm-run-all -p -r min-js min-css"
     },
     "repository": {
         "type": "git",

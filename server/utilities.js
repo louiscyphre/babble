@@ -9,6 +9,7 @@
 }(this, module, function () {
     var users = require('./users');
     var messages = require('./messages-util');
+
     var stats = {
         users: 0,
         messages: 0
