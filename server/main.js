@@ -15,7 +15,7 @@
     var statsRequests = [];
 
     setInterval(function () {
-        var timeout = 10000;
+        var timeout = 180000;
         utils.close(requests, timeout);
         utils.close(statsRequests, timeout);
     }, 10000);

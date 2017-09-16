@@ -25,11 +25,13 @@
 
                 var data = JSON.parse(window.Babble.storage.getItem('babble'));
                 var textarea = document.querySelector('.Chat-sendMessageFormText');
+                var date = new Date();
+                var ts = String(date.getTime() + date.getTimezoneOffset() * 6000);
                 var message = {
                     name: data.userInfo.name,
                     email: data.userInfo.email,
                     message: textarea.value,
-                    timestamp: window.Date.now()
+                    timestamp: ts
                 };
                 window.Babble.postMessage(message, window.Babble.storeId);
             });
