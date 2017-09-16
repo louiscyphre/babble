@@ -119,7 +119,7 @@
         } else if (request.method === 'DELETE') {
             if (url.pathname.substr(0, 9) == '/messages') {
                 var strid = url.pathname.replace('/messages/', '');
-                messages.deleteMessage(parseInt(strid));
+                messages.deleteMessage(strid);
                 while (statsRequests.length > 0) {
                     var statsreq = statsRequests.pop();
                     console.log('GET /stats answering: ', JSON.stringify(stats.get()));

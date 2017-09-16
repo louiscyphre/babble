@@ -19,10 +19,19 @@
 
     return {
         addMessage: function addMessage(message) {
+            if (!message.hasOwnProperty('name') ||
+                !message.hasOwnProperty('email') ||
+                !message.hasOwnProperty('timestamp')) {
+                return;
+            }
+            var timestamp = parseInt(message.timestamp);
+            if (isNaN(timestamp)) {
+                return 0;
+            }
             message.url = getGravatar(message.email);
             console.log('addMessage(message): Adding message:', message);
             messagesArray.push(message);
-            return message.timestamp;
+            return timestamp;
         },
         getMessages: function getMessages(counter) {
             var arr = messagesArray.slice(counter);
