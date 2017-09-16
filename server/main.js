@@ -45,12 +45,18 @@
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
                     console.log('Pushed messages request to queue');
-                    requests.push(response);
+                    requests.push({
+                        response: response,
+                        timestamp: new Date().getTime()
+                    });
                 }
             } else if (url.pathname.substr(0, 6) == '/stats') {
                 console.log('GET /stats received');
                 console.log('Pushed stats request to queue');
-                statsRequests.push(response);
+                statsRequests.push({
+                    response: response,
+                    timestamp: new Date().getTime()
+                });
             } else {
                 response.writeHead(400);
             }
@@ -68,12 +74,12 @@
                     console.log('POST /messages received', id);
                     while (requests.length > 0) {
                         var client = requests.pop();
-                        client.end(JSON.stringify(msg));
+                        client.response.end(JSON.stringify(msg));
                     }
                     while (statsRequests.length > 0) {
                         var statsreq = statsRequests.pop();
                         console.log('GET /stats answering: ', JSON.stringify(stats.get()));
-                        statsreq.end(JSON.stringify(stats.get()));
+                        statsreq.response.end(JSON.stringify(stats.get()));
                     }
                     response.end(JSON.stringify({
                         id: id.toString()
@@ -90,7 +96,7 @@
                     while (statsRequests.length > 0) {
                         var statsreq = statsRequests.pop();
                         console.log('GET /stats answering: ', JSON.stringify(stats.get()));
-                        statsreq.end(JSON.stringify(stats.get()));
+                        statsreq.response.end(JSON.stringify(stats.get()));
                     }
                     response.end(JSON.stringify(user));
                 });
@@ -105,7 +111,7 @@
                     while (statsRequests.length > 0) {
                         var statsreq = statsRequests.pop();
                         console.log('GET /stats answering: ', JSON.stringify(stats.get()));
-                        statsreq.end(JSON.stringify(stats.get()));
+                        statsreq.response.end(JSON.stringify(stats.get()));
                     }
                     response.end(JSON.stringify(user));
                 });
@@ -117,7 +123,7 @@
                 while (statsRequests.length > 0) {
                     var statsreq = statsRequests.pop();
                     console.log('GET /stats answering: ', JSON.stringify(stats.get()));
-                    statsreq.end(JSON.stringify(stats.get()));
+                    statsreq.response.end(JSON.stringify(stats.get()));
                 }
                 response.end(JSON.stringify(true));
             }

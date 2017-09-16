@@ -18,9 +18,6 @@
             for (var i = requests.length - 1; i !== 0; i--) {
                 if (requests[i].timestamp !== expiration) {
                     response = requests[i].response;
-                    response.writeHead(200, {
-                        "Content-Type": "text/plain"
-                    });
                     response.end("");
                 }
             }
