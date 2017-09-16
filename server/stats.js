@@ -15,7 +15,7 @@
         messages: 0
     };
     return {
-        getStats: function getStats() {
+        get: function get() {
             return {
                 users: users.count(),
                 messages: messages.count(),

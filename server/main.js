@@ -1,20 +1,24 @@
 (function (global) {
     'use strict';
     /* global require, console */
+    /* jshint browser: true */
     var http = require('http');
     var urlUtil = require('url');
     var queryUtil = require('querystring');
 
     var messages = require('./messages-util');
+    var utils = require('./server-util');
     var users = require('./users');
-    var util = require('./utilities');
+    var stats = require('./stats');
 
     var requests = [];
     var statsRequests = [];
-    var stats = {
-        current: {},
-        previous: {}
-    };
+
+    setInterval(function () {
+        var timeout = 10000;
+        utils.close(requests, timeout);
+        utils.close(statsRequests, timeout);
+    }, 10000);
     // TODO
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
@@ -68,8 +72,8 @@
                     }
                     while (statsRequests.length > 0) {
                         var statsreq = statsRequests.pop();
-                        console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
-                        statsreq.end(JSON.stringify(util.getStats()));
+                        console.log('GET /stats answering: ', JSON.stringify(stats.get()));
+                        statsreq.end(JSON.stringify(stats.get()));
                     }
                     response.end(JSON.stringify({
                         id: id.toString()
@@ -85,8 +89,8 @@
                     users.login(user);
                     while (statsRequests.length > 0) {
                         var statsreq = statsRequests.pop();
-                        console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
-                        statsreq.end(JSON.stringify(util.getStats()));
+                        console.log('GET /stats answering: ', JSON.stringify(stats.get()));
+                        statsreq.end(JSON.stringify(stats.get()));
                     }
                     response.end(JSON.stringify(user));
                 });
@@ -100,8 +104,8 @@
                     users.logout(user);
                     while (statsRequests.length > 0) {
                         var statsreq = statsRequests.pop();
-                        console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
-                        statsreq.end(JSON.stringify(util.getStats()));
+                        console.log('GET /stats answering: ', JSON.stringify(stats.get()));
+                        statsreq.end(JSON.stringify(stats.get()));
                     }
                     response.end(JSON.stringify(user));
                 });
@@ -112,8 +116,8 @@
                 messages.deleteMessage(parseInt(strid));
                 while (statsRequests.length > 0) {
                     var statsreq = statsRequests.pop();
-                    console.log('GET /stats answering: ', JSON.stringify(util.getStats()));
-                    statsreq.end(JSON.stringify(util.getStats()));
+                    console.log('GET /stats answering: ', JSON.stringify(stats.get()));
+                    statsreq.end(JSON.stringify(stats.get()));
                 }
                 response.end(JSON.stringify(true));
             }

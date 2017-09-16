@@ -64,7 +64,9 @@
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 400) {
                     console.log('Poll response from server:', xhr.responseText);
-                    callback(JSON.parse(xhr.responseText));
+                    if (xhr.responseText !== "") {
+                        callback(JSON.parse(xhr.responseText));
+                    }
                     poll(url, callback);
                 } else {
                     console.log('Server error');
