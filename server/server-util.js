@@ -15,10 +15,12 @@
             }
             var expiration = Date.now();
             var response;
+            console.log('close(requests, timeout): timeout:', timeout, "expiration:", expiration);
             for (var i = requests.length - 1; i !== 0; i--) {
                 if (requests[i].timestamp + timeout <= expiration) {
-                    response = requests[i].response;
-                    response.end("");
+                    requests[i].response.end("");
+                    console.log('close(requests, timeout): closing request:', i);
+                    requests.splice(i, 1);
                 }
             }
         }
