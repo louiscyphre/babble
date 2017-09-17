@@ -15,10 +15,10 @@
     var statsRequests = [];
 
     setInterval(function () {
-        var timeout = 120000;
+        var timeout = 100000;
         utils.close(requests, timeout);
         utils.close(statsRequests, timeout);
-    }, 10000);
+    }, 20000);
     // TODO
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
