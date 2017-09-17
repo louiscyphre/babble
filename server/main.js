@@ -23,8 +23,9 @@
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
         response.setHeader('Access-Control-Allow-Origin', '*');
-        response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Cache-Control');
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
         response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+        response.setHeader('Cache-Control', 'public, max-age=86400');
         var url = urlUtil.parse(request.url);
         var requestBody = '';
         if (request.method === 'GET') {

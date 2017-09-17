@@ -10,10 +10,10 @@
     <title>Vegans - Babble</title>
 </head>
 
-<body class="dbg">
+<body>
     <header class="MainHeader">
         <img class="Logo" src="images/logo.svg" alt="">
-        <form class="Modal" method="POST" enctype="text/plain" accept-charset="utf-8">
+        <form class="Modal" action="#" accept-charset="utf-8">
             <h1>Who are you?</h1>
             <p>
                 <label for="name">Full name:</label><input type="text" name="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" />
@@ -28,9 +28,9 @@
         </form>
     </header>
     <section class="ChatContainer">
-        <nav class="ChatSideBar dbg"></nav>
-        <main class="Chat dbg">
-            <header class="Chat-header dbg">
+        <nav class="ChatSideBar"></nav>
+        <main class="Chat">
+            <header class="Chat-header">
                 <h1 class="Chat-header-title">Vegans</h1>
                 <dl class="Chat-header-stats">
                     <dt hidden aria-label="Number of messages in chat"></dt>
@@ -43,10 +43,10 @@
                     </dd>
                 </dl>
             </header>
-            <section class="Chat-messages dbg">
-                <ol class="dbg">
-                    <li class="Chat-msg dbg"> <img class="Chat-msg-avatar dbg" src="images/anon.svg" alt="" />
-                        <div class="Chat-msg-text dbg">
+            <section class="Chat-messages">
+                <ol>
+                    <li class="Chat-msg"> <img class="Chat-msg-avatar" src="images/anon.svg" alt="" />
+                        <div class="Chat-msg-text">
                             <header>
                                 <h2>Alex Krul</h2><time datetime="1505339413229">14:22</time></header>
                             <p>Veggies es bonu vobis, proinde vos postulo essum magis kohlrabi onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.</p>
@@ -54,13 +54,13 @@
                     </li>
                 </ol>
             </section>
-            <form class="Chat-sendMessageForm dbg" method="POST" action="http://localhost:9000/messages" enctype="text/plain" accept-charset="utf-8">
-                <textarea class="Chat-sendMessageFormText dbg" aria-label="Type new message here"></textarea>
-                <button class="Chat-sendMessageFormButton dbg" type="submit" aria-label="Send message to chat"></button>
+            <form class="Chat-sendMessageForm" action="#" accept-charset="utf-8">
+                <textarea class="Chat-sendMessageFormText" aria-label="Type new message here"></textarea>
+                <button class="Chat-sendMessageFormButton" type="submit" aria-label="Send message to chat"></button>
             </form>
         </main>
     </section>
-    <script src="scripts/main.min.js" defer async></script>
+    <script defer async src="scripts/main.min.js"></script>
     <noscript class="deferred-styles">
         <link rel="stylesheet" type="text/css" href="styles/main.min.css" media="all" />
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito?300,400,700">

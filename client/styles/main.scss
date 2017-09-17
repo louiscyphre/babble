@@ -1,12 +1,12 @@
-//@import 'fonts.scss';
+@import 'fonts.scss';
 @import 'screen.scss';
 @import 'variables.scss';
 @import 'utils.scss';
 @import 'functions.scss';
 html,
-h1 {
+h1>* {
     font-family: 'Nunito', sans-serif;
-    font-weight: normal;
+    font-weight: 400;
 }
 
 body,
@@ -79,7 +79,7 @@ body,
 .Chat-header-stats {
     align-self: center;
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .Chat-header-stats,
@@ -136,13 +136,13 @@ dd>* {
 }
 
 .Chat-msg-text header time {
-    font-weight: light;
+    font-weight: 300;
     color: $c-msgTime;
     margin-left: 0.5rem;
 }
 
 .Chat-sendMessageForm {
-    flex: 2; //try  flex: 2 4 2;max-height:600;
+    flex: 2;
     border-radius: 4px;
     background-color: white;
     padding: 20px;
@@ -199,10 +199,6 @@ dd>* {
 .Modal p label {
     flex: 1;
     color: $c-msgText;
-}
-
-.Modal p>* {
-    font-family: inherit;
 }
 
 .Modal p label,

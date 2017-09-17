@@ -2,9 +2,7 @@
 
     'use strict';
     window.Babble = {
-
         counter: 0,
-        deletedCounter: 0,
         apiUrl: 'http://localhost:9000/',
         messages: [],
         myMessagesIds: [],
@@ -13,53 +11,6 @@
             messages: 0
         },
         storage: localStorage,
-        run: function (document, window, console) {
-
-            window.Babble.updateKey('all', '');
-            window.Babble.getStats(window.Babble.updateStats);
-
-            var newMessageForm = document.querySelector('.Chat-sendMessageForm');
-
-            newMessageForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                var data = JSON.parse(window.Babble.storage.getItem('babble'));
-                var textarea = document.querySelector('.Chat-sendMessageFormText');
-                //var date = new Date();
-                //var ts = String(date.getTime() + date.getTimezoneOffset() * 6000);
-                var message = {
-                    name: data.userInfo.name,
-                    email: data.userInfo.email,
-                    message: textarea.value,
-                    timestamp: window.Date.now()
-                };
-                window.Babble.postMessage(message, window.Babble.storeId);
-            });
-
-            var registerForm = document.querySelector('.Modal');
-
-            registerForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                window.Babble.register({
-                    name: registerForm.elements[0].value,
-                    email: registerForm.elements[1].value
-                });
-                registerForm.style.display = 'none';
-                registerForm.style.visibility = 'hidden';
-                registerForm.setAttribute('aria-hidden', 'true');
-            });
-
-            window.onbeforeunload = function () {
-                var data = (JSON.parse(window.Babble.storage.getItem('babble'))).userInfo;
-                window.Babble.request('POST', 'logout', data).then(function (answer) {
-                    console.log('Answer on POST /logout:', answer);
-                    window.Babble.updateKey('all', '');
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            };
-        },
 
         poll: function poll(url, callback) {
             var xhr = new XMLHttpRequest();
@@ -85,7 +36,6 @@
             }
             xhr.open('GET', fullUrl, true);
             xhr.setRequestHeader('Content-Type', 'text/plain');
-            xhr.setRequestHeader('Cache-Control', 'max-age=86400');
             console.log('poll URL:', fullUrl);
             xhr.send();
         },
@@ -160,7 +110,6 @@
                 };
                 xhr.open(method, window.Babble.apiUrl + url, true);
                 xhr.setRequestHeader('Content-Type', 'text/plain');
-                xhr.setRequestHeader('Cache-Control', 'max-age=86400');
                 console.log('request: URL:', window.Babble.apiUrl + url);
                 if (method === 'POST') {
                     console.log('POSTing: ', JSON.stringify(data));
@@ -212,6 +161,53 @@
         },
         exception: function exception(what) {
             console.error('[CRITICAL ERROR] Exception thrown: ', what);
+        },
+        run: function (document, window, console) {
+            var app = window.Babble;
+            app.updateKey('all', '');
+            app.getStats(app.updateStats);
+
+            var newMessageForm = document.querySelector('.Chat-sendMessageForm');
+
+            newMessageForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var data = JSON.parse(app.storage.getItem('babble'));
+                var textarea = document.querySelector('.Chat-sendMessageFormText');
+                //var date = new Date();
+                //var ts = String(date.getTime() + date.getTimezoneOffset() * 6000);
+                var message = {
+                    name: data.userInfo.name,
+                    email: data.userInfo.email,
+                    message: textarea.value,
+                    timestamp: window.Date.now()
+                };
+                app.postMessage(message, app.storeId);
+            });
+
+            var registerForm = document.querySelector('.Modal');
+
+            registerForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                app.register({
+                    name: registerForm.elements[0].value,
+                    email: registerForm.elements[1].value
+                });
+                registerForm.style.display = 'none';
+                registerForm.style.visibility = 'hidden';
+                registerForm.setAttribute('aria-hidden', 'true');
+            });
+
+            window.onbeforeunload = function () {
+                var data = (JSON.parse(app.storage.getItem('babble'))).userInfo;
+                app.request('POST', 'logout', data).then(function (answer) {
+                    console.log('Answer on POST /logout:', answer);
+                    app.updateKey('all', '');
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            };
         }
     };
 
