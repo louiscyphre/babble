@@ -25,13 +25,13 @@
 
                 var data = JSON.parse(window.Babble.storage.getItem('babble'));
                 var textarea = document.querySelector('.Chat-sendMessageFormText');
-                var date = new Date();
-                var ts = String(date.getTime() + date.getTimezoneOffset() * 6000);
+                //var date = new Date();
+                //var ts = String(date.getTime() + date.getTimezoneOffset() * 6000);
                 var message = {
                     name: data.userInfo.name,
                     email: data.userInfo.email,
                     message: textarea.value,
-                    timestamp: ts
+                    timestamp: window.Date.now()
                 };
                 window.Babble.postMessage(message, window.Babble.storeId);
             });
@@ -111,13 +111,13 @@
         },
         getMessages: function getMessages(counter, callback) {
             callback([]);
-            var url = 'messages?counter=' + counter.toString();
-            window.Babble.request('GET', url).then(function (ans) {
-                callback(ans);
-                window.Babble.poll('messages?counter=', callback);
-            }).catch(function (err) {
-                console.log(err);
-            });
+            //var url = 'messages?counter=' + counter.toString();
+            //window.Babble.request('GET', url).then(function (ans) {
+            //callback(ans);
+            window.Babble.poll('messages?counter=', callback);
+            //}).catch(function (err) {
+            //    console.log(err);
+            //});
         },
         deleteMessage: function deleteMessage(id, callback) {
             if (callback) {
@@ -135,12 +135,12 @@
                 users: 5,
                 messages: 20
             });
-            window.Babble.request('GET', 'stats').then(function (ans) {
-                callback(ans);
-                window.Babble.poll('stats', callback);
-            }).catch(function (err) {
-                console.log(err);
-            });
+            //window.Babble.request('GET', 'stats').then(function (ans) {
+            //    callback(ans);
+            window.Babble.poll('stats', callback);
+            // }).catch(function (err) {
+            //    console.log(err);
+            //});
         },
         request: function request(method, url, data) {
             return new Promise(function (resolve, reject) {

@@ -34,9 +34,8 @@
             return timestamp;
         },
         getMessages: function getMessages(counter) {
-            var arr = messagesArray.slice(counter);
-            console.log('getMessages(counter): Returning array:', arr);
-            return arr;
+            //console.log('getMessages(counter): Returning array:', messagesArray.slice(counter););
+            return messagesArray.slice(counter);
         },
         deleteMessage: function deleteMessage(id) {
             var timestamp = parseInt(id);
@@ -44,7 +43,7 @@
                 return;
             }
             for (var i = messagesArray.length - 1; i >= 0; i--) {
-                if (messagesArray[i].timestamp === timestamp) {
+                if (parseInt(messagesArray[i].timestamp) === timestamp) {
                     messagesArray.splice(i, 1);
                 }
             }

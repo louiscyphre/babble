@@ -13,7 +13,7 @@
             if (requests.length === 0) {
                 return;
             }
-            var expiration = new Date().getTime();
+            var expiration = Date.now();
             var response;
             for (var i = requests.length - 1; i !== 0; i--) {
                 if (requests[i].timestamp + timeout <= expiration) {

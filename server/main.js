@@ -15,7 +15,7 @@
     var statsRequests = [];
 
     setInterval(function () {
-        var timeout = 180000;
+        var timeout = 120000;
         utils.close(requests, timeout);
         utils.close(statsRequests, timeout);
     }, 10000);
@@ -47,7 +47,7 @@
                     console.log('Pushed messages request to queue');
                     requests.push({
                         response: response,
-                        timestamp: new Date().getTime()
+                        timestamp: Date.now()
                     });
                 }
             } else if (url.pathname.substr(0, 6) == '/stats') {
@@ -55,7 +55,7 @@
                 console.log('Pushed stats request to queue');
                 statsRequests.push({
                     response: response,
-                    timestamp: new Date().getTime()
+                    timestamp: Date.now()
                 });
             } else {
                 response.writeHead(400);
