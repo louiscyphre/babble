@@ -5,11 +5,10 @@
     "main": "server/main.js",
     "dependencies": {
         "gravatar": "^1.6.0",
-        "serviceworker-cache-polyfill": "^4.0.0"
+        "http-server": "^0.10.0"
     },
     "devDependencies": {
         "chai": "^4.1.1",
-        "http-server": "^0.10.0",
         "minifier": "^0.8.1",
         "mocha": "^3.5.0",
         "node-sass": "^4.5.3",
