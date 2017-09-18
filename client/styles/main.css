@@ -21,7 +21,7 @@
 
 @media (max-width: 638px) {
   html {
-    font-size: 62.5%; }
+    font-size: 72.5%; }
   .ChatSideBar {
     display: none;
     visibility: hidden; }
@@ -30,18 +30,57 @@
   .Logo {
     width: 40%; }
   .Modal p > * {
-    font-size: 1.5rem; }
-  .Modal {
-    width: 60%;
-    height: 80%; } }
+    font-size: 1.5rem; } }
 
 @media (min-width: 0px) and (max-width: 320px) {
   .Chat-sendMessageFormButton {
-    background: url("../images/send_bg_s.webp"); } }
+    background: url("../images/send_bg_s.webp"); }
+  .Chat-msg-text,
+  .Chat-header-stats,
+  .Chat-header,
+  dl,
+  dd .Modal,
+  .Modal p,
+  .Modal p input {
+    display: block;
+    word-break: break-all;
+    min-width: 0%; }
+  .Modal,
+  .Modal p,
+  .Modal p input {
+    overflow-y: auto; }
+  .Chat-msg-avatar {
+    float: none; }
+  cite {
+    display: inherit; }
+  time {
+    margin-left: 0; }
+  .Chat-sendMessageForm {
+    flex-flow: column wrap; }
+  .Chat-sendMessageFormText {
+    flex: 1; } }
 
 @media (min-width: 321px) and (max-width: 638px) {
   .Chat-sendMessageFormButton {
-    background: url("../images/send_bg_m.webp"); } }
+    background: url("../images/send_bg_m.webp"); }
+  .Modal p {
+    display: inline-flex; }
+  .Modal {
+    display: table; }
+  .Chat-header,
+  .Chat-msg {
+    display: flex; }
+  .Chat-header-stats,
+  dd {
+    display: flex;
+    flex-flow: row nowrap; }
+  .Chat-msg-avatar {
+    float: left; }
+  .Chat-sendMessageFormText {
+    flex: 8; }
+  .Modal {
+    width: 60%;
+    height: 80%; } }
 
 @media (min-width: 639px) {
   html {
@@ -49,18 +88,32 @@
   .Logo {
     width: 15%; }
   .Modal {
-    width: 30%; }
+    width: 30%;
+    display: table; }
+  .Modal p {
+    display: inline-flex; }
   .Modal p > * {
     font-size: 1.2rem; }
+  .Chat-sendMessageFormText {
+    flex: 8; }
   .Chat-sendMessageFormButton {
-    background: url("../images/send_bg.webp"); } }
+    background: url("../images/send_bg.webp"); }
+  .Chat-header,
+  .Chat-msg {
+    display: flex; }
+  .Chat-header-stats,
+  dd {
+    display: flex;
+    flex-flow: row nowrap; }
+  .Chat-msg-avatar {
+    float: left; } }
 
 @-moz-document url-prefix() {
   .Chat-sendMessageFormButton {
     background: url(../images/send_bg.png); } }
 
 .Chat-msg-text {
-  padding: 0.5rem;
+  padding: 0.5rem 0.7rem 0.5rem 0.7rem;
   border-radius: 1rem;
   border: 0.1rem solid #DBDBDB;
   max-width: 600px; }
@@ -102,10 +155,10 @@ h1 {
   font-size: 1.875rem;
   margin-top: 0; }
 
-h2 {
-  display: inline-block;
-  margin: 0;
-  padding: 0; }
+cite {
+  font-weight: 700;
+  font-size: 1.3rem;
+  font-style: normal; }
 
 .MainHeader {
   background-color: #353744;
@@ -126,13 +179,11 @@ h2 {
   margin: auto;
   background-color: #F9F9F9;
   padding: 3rem;
-  box-shadow: 0 0 1rem 0 black;
-  border-radius: 0.1rem;
-  display: table; }
+  box-shadow: 0 0 3rem 0 black;
+  border-radius: 0.1rem; }
 
 .Modal p {
   width: 100%;
-  display: inline-flex;
   align-items: center;
   margin-top: 0; }
 
@@ -150,7 +201,8 @@ input {
   border-radius: 1rem;
   border: 2px solid #DBDBDB;
   outline-style: none;
-  font-family: inherit; }
+  font-family: inherit;
+  font-size: 1.3rem; }
 
 .Modal-buttons {
   flex-direction: row-reverse; }
@@ -180,7 +232,6 @@ input {
 
 .ChatContainer,
 .Chat,
-.Chat-msg,
 .Chat-sendMessageForm {
   display: flex; }
 
@@ -199,7 +250,6 @@ input {
 
 .Chat-header {
   flex: 1;
-  display: flex;
   padding: 0.9rem; }
 
 .Chat-header-title {
@@ -214,9 +264,7 @@ input {
 
 .Chat-header-stats,
 dd {
-  margin: 0;
-  display: flex;
-  flex-flow: row nowrap; }
+  margin: 0; }
 
 dd {
   margin-left: 0.5rem; }
@@ -241,12 +289,10 @@ dd > * {
 .Chat-msg-avatar {
   width: 3em;
   height: 3em;
-  float: left;
   margin-right: 1rem; }
 
 .Chat-msg-text {
   background-color: white;
-  display: inline-block;
   margin-top: 0; }
 
 .Chat-msg-text p {
@@ -268,7 +314,6 @@ dd > * {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
 .Chat-sendMessageFormText {
-  flex: 8;
   resize: none;
   border: none;
   outline: none; }
@@ -282,8 +327,13 @@ dd > * {
   outline: none;
   border: none; }
 
-.Chat-sendMessageFormButton:active {
-  outline: inherit; }
+.Chat-sendMessageFormButton:hover {
+  cursor: pointer; }
+
+/*.Chat-sendMessageFormButton:active {
+    outline: inherit;
+}
 
 .Chat-sendMessageFormButton:active:after {
-  outline: none; }
+    outline: none;
+}*/

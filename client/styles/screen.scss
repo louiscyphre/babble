@@ -1,6 +1,6 @@
 @media (max-width:638px) {
     html {
-        font-size: 62.5%;
+        font-size: 72.5%;
     }
     .ChatSideBar {
         display: none;
@@ -15,21 +15,73 @@
     .Modal p>* {
         font-size: 1.5rem;
     }
-    .Modal {
-        width: 60%;
-        height: 80%;
-    }
 }
 
 @media (min-width:0px) and (max-width:320px) {
     .Chat-sendMessageFormButton {
         background: url("../images/send_bg_s.webp");
     }
+    .Chat-msg-text,
+    .Chat-header-stats,
+    .Chat-header,
+    dl,
+    dd .Modal,
+    .Modal p,
+    .Modal p input {
+        display: block;
+        word-break: break-all;
+        min-width: 0%;
+    }
+    .Modal,
+    .Modal p,
+    .Modal p input {
+        overflow-y: auto;
+    }
+    .Chat-msg-avatar {
+        float: none;
+    }
+    cite {
+        display: inherit;
+    }
+    time {
+        margin-left: 0;
+    }
+    .Chat-sendMessageForm {
+        flex-flow: column wrap;
+    }
+    .Chat-sendMessageFormText {
+        flex: 1;
+    }
 }
 
 @media (min-width:321px) and (max-width:638px) {
     .Chat-sendMessageFormButton {
         background: url("../images/send_bg_m.webp");
+    }
+    .Modal p {
+        display: inline-flex;
+    }
+    .Modal {
+        display: table;
+    }
+    .Chat-header,
+    .Chat-msg {
+        display: flex;
+    }
+    .Chat-header-stats,
+    dd {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    .Chat-msg-avatar {
+        float: left;
+    }
+    .Chat-sendMessageFormText {
+        flex: 8;
+    }
+    .Modal {
+        width: 60%;
+        height: 80%;
     }
 }
 
@@ -42,12 +94,31 @@
     }
     .Modal {
         width: 30%;
+        display: table;
+    }
+    .Modal p {
+        display: inline-flex;
     }
     .Modal p>* {
         font-size: 1.2rem;
     }
+    .Chat-sendMessageFormText {
+        flex: 8;
+    }
     .Chat-sendMessageFormButton {
         background: url("../images/send_bg.webp");
+    }
+    .Chat-header,
+    .Chat-msg {
+        display: flex;
+    }
+    .Chat-header-stats,
+    dd {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    .Chat-msg-avatar {
+        float: left;
     }
 }
 
