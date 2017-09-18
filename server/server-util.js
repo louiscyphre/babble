@@ -9,14 +9,12 @@
 }(this, module, function () {
 
     return {
-        close: function close(requests, timeout) {
+        close: function close(requests, expirationTime) {
             if (requests.length === 0) {
                 return;
             }
-            var expiration = Date.now();
-            var response;
-            for (var i = requests.length - 1; i !== 0; i--) {
-                if (requests[i].timestamp + timeout <= expiration) {
+            for (var i = requests.length - 1; i >= 0; i--) {
+                if (requests[i].timestamp >= expirationTime) {
                     requests[i].response.end("");
                     console.log('close(requests, timeout): closing request:', i);
                     requests.splice(i, 1);

@@ -20,14 +20,16 @@
         "test": "mocha --recursive test/server || true",
         "test-in-browser": "http-server -p 8081",
         "test-all": "npm-run-all -p test test-in-browser",
-        "sass": "node-sass --watch client/styles/main.scss -o client/styles",
+        "sass1": "node-sass --watch client/styles/main.scss -o client/styles",
+        "sass2": "node-sass --watch client/styles/modal.scss -o client/styles",
+        "sass": "npm-run-all -p -r sass1 sass2",
         "file-server": "http-server ./client -p 8080",
         "api-server": "node server/main.js",
         "api-server-dev": "nodemon server/main.js",
         "start": "npm-run-all -p -r file-server api-server",
         "dev": "npm-run-all -p -r api-server-dev sass",
         "min-js": "minify --output client/scripts/main.min.js client/scripts/main.js",
-        "min-css": "minify --output client/styles/main.min.css client/styles/main.css",
+        "min-css": "minify client/styles/",
         "min": "npm-run-all -p -s min-js min-css"
     },
     "repository": {

@@ -15,17 +15,17 @@
     var statsRequests = [];
 
     setInterval(function () {
-        var timeout = 100000;
-        utils.close(requests, timeout);
-        utils.close(statsRequests, timeout);
-    }, 20000);
+        var expirationTime = Date.now() - 180000;
+        utils.close(requests, expirationTime);
+        utils.close(statsRequests, expirationTime);
+    }, 180000);
     // TODO
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
         response.setHeader('Access-Control-Allow-Origin', '*');
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
         response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
-        response.setHeader('Cache-Control', 'public, max-age=86400');
+        response.setHeader('Cache-Control', 'max-age=0, public');
         var url = urlUtil.parse(request.url);
         var requestBody = '';
         if (request.method === 'GET') {
@@ -45,22 +45,21 @@
                     console.log('GET /messages answering: ', messages.getMessages(data.counter));
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
-                    console.log('Pushing messages request to queue');
-                    var rq = {
+                    var res = {
                         response: response,
                         timestamp: Date.now()
                     };
-                    console.log('Pushing stats request to queue', rq);
-                    requests.push(rq);
+                    console.log('Pushing messages request to queue');
+                    requests.push(res);
                 }
             } else if (url.pathname.substr(0, 6) == '/stats') {
                 console.log('GET /stats received');
-                var req = {
+                var resp = {
                     response: response,
                     timestamp: Date.now()
                 };
-                console.log('Pushing stats request to queue', req);
-                statsRequests.push(req);
+                console.log('Pushing stats request to queue');
+                statsRequests.push(resp);
             } else {
                 response.writeHead(400);
             }
@@ -134,7 +133,7 @@
         } else if (request.method === 'OPTIONS') {
 
             response.writeHead(204, {
-                'Content-Type': 'text/json'
+                'Content-Type': 'text/plain'
             });
             response.end();
         } else {

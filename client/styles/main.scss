@@ -15,6 +15,7 @@ html {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    display: flex;
 }
 
 h1 {
@@ -28,8 +29,80 @@ h2 {
     padding: 0;
 }
 
-html,
-body,
+.MainHeader {
+    background-color: #353744;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.Logo {
+    float: left;
+}
+
+.Modal {
+    border: 1px solid $c-border;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: $c-modalBackground;
+    padding: 3rem;
+    box-shadow: 0 0 1rem 0 black;
+    border-radius: 0.1rem;
+    display: table;
+}
+
+.Modal p {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0;
+}
+
+.Modal p label {
+    flex: 1;
+    color: $c-msgText;
+}
+
+.Modal p label,
+input {
+    font-weight: 700;
+}
+
+.Modal p input {
+    flex: 3;
+    padding: 0.4em;
+    border-radius: $borderRadius;
+    border: 2px solid $c-border;
+    outline-style: none;
+}
+
+.Modal-buttons {
+    flex-direction: row-reverse;
+}
+
+.Modal--anonymous {
+    @include gradient($degree, $c-anon-gradient-lower, $c-anon-gradient-upper);
+    min-width: 30%;
+}
+
+.Modal--login {
+    @include gradient($degree, $c-login-gradient-lower, $c-login-gradient-upper);
+    color: white;
+    min-width: 20%;
+}
+
+.Modal--anonymous,
+.Modal--login {
+    border: 0;
+    border-radius: 0.1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
 .ChatContainer,
 .Chat,
 .Chat-msg,
@@ -45,17 +118,6 @@ body,
 .ChatSideBar {
     flex: 2;
     background-color: $c-sidebar;
-}
-
-.MainHeader {
-    background-color: $c-header;
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-}
-
-.Logo {
-    float: left;
 }
 
 .Chat {
@@ -172,67 +234,4 @@ dd>* {
 
 .Chat-sendMessageFormButton:active:after {
     outline: none;
-}
-
-.Modal {
-    border: 1px solid $c-border;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background-color: $c-modalBackground;
-    padding: 3rem;
-    box-shadow: 0 0 1rem 0 black;
-    border-radius: 0.1rem;
-    display: table;
-}
-
-.Modal p {
-    width: 100%;
-    display: inline-flex;
-    align-items: center;
-    margin-top: 0;
-}
-
-.Modal p label {
-    flex: 1;
-    color: $c-msgText;
-}
-
-.Modal p label,
-input {
-    font-weight: 700;
-}
-
-.Modal p input {
-    flex: 3;
-    padding: 0.4em;
-    border-radius: $borderRadius;
-    border: 2px solid $c-border;
-    outline-style: none;
-}
-
-.Modal-buttons {
-    flex-direction: row-reverse;
-}
-
-.Modal--anonymous {
-    @include gradient($degree, $c-anon-gradient-lower, $c-anon-gradient-upper);
-    min-width: 30%;
-}
-
-.Modal--login {
-    @include gradient($degree, $c-login-gradient-lower, $c-login-gradient-upper);
-    color: white;
-    min-width: 20%;
-}
-
-.Modal--anonymous,
-.Modal--login {
-    border: 0;
-    border-radius: 0.1rem;
-    margin-left: 1rem;
-    margin-top: 1rem;
 }
