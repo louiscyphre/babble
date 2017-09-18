@@ -30,7 +30,10 @@
   .Logo {
     width: 40%; }
   .Modal p > * {
-    font-size: 1.5rem; } }
+    font-size: 1.5rem; }
+  .Modal {
+    width: 60%;
+    height: 80%; } }
 
 @media (min-width: 0px) and (max-width: 320px) {
   .Chat-sendMessageFormButton {
@@ -82,8 +85,8 @@
   border: 2px solid #DBDBDB;
   -webkit-border: 2px solid #DBDBDB; }
 
-html,
-h1 > * {
+html > *,
+h1 {
   font-family: 'Nunito', sans-serif;
   font-weight: 400; }
 
@@ -146,7 +149,8 @@ input {
   padding: 0.4em;
   border-radius: 1rem;
   border: 2px solid #DBDBDB;
-  outline-style: none; }
+  outline-style: none;
+  font-family: inherit; }
 
 .Modal-buttons {
   flex-direction: row-reverse; }
@@ -156,7 +160,7 @@ input {
   background-image: -webkit-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
   background-image: -ms-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
   background-image: -o-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-  min-width: 30%; }
+  padding: 0.4rem; }
 
 .Modal--login {
   background-image: -moz-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
@@ -164,14 +168,15 @@ input {
   background-image: -ms-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
   background-image: -o-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
   color: white;
-  min-width: 20%; }
+  padding: 0.3rem 2.3rem 0.3rem 2.3rem; }
 
 .Modal--anonymous,
 .Modal--login {
   border: 0;
   border-radius: 0.1rem;
   margin-left: 1rem;
-  margin-top: 1rem; }
+  margin-top: 1rem;
+  font-family: inherit; }
 
 .ChatContainer,
 .Chat,

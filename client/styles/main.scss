@@ -3,8 +3,8 @@
 @import 'variables.scss';
 @import 'utils.scss';
 @import 'functions.scss';
-html,
-h1>* {
+html>*,
+h1 {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
 }
@@ -78,6 +78,7 @@ input {
     border-radius: $borderRadius;
     border: 2px solid $c-border;
     outline-style: none;
+    font-family: inherit;
 }
 
 .Modal-buttons {
@@ -86,13 +87,13 @@ input {
 
 .Modal--anonymous {
     @include gradient($degree, $c-anon-gradient-lower, $c-anon-gradient-upper);
-    min-width: 30%;
+    padding: 0.4rem;
 }
 
 .Modal--login {
     @include gradient($degree, $c-login-gradient-lower, $c-login-gradient-upper);
     color: white;
-    min-width: 20%;
+    padding: 0.3rem 2.3rem 0.3rem 2.3rem;
 }
 
 .Modal--anonymous,
@@ -101,6 +102,7 @@ input {
     border-radius: 0.1rem;
     margin-left: 1rem;
     margin-top: 1rem;
+    font-family: inherit;
 }
 
 .ChatContainer,
