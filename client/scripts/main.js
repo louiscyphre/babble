@@ -127,12 +127,6 @@
         updateStats: function (stats) {
 
         },
-        updateDeletedCounter: function (ans) {
-            if (ans !== true) {
-                return;
-            }
-            window.Babble.deletedCounter++;
-        },
         storeId: function (id) {
 
         },

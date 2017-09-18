@@ -15,7 +15,6 @@
             }
             var expiration = Date.now();
             var response;
-            console.log('close(requests, timeout): timeout:', timeout, "expiration:", expiration);
             for (var i = requests.length - 1; i !== 0; i--) {
                 if (requests[i].timestamp + timeout <= expiration) {
                     requests[i].response.end("");

@@ -45,19 +45,22 @@
                     console.log('GET /messages answering: ', messages.getMessages(data.counter));
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
-                    console.log('Pushed messages request to queue');
-                    requests.push({
+                    console.log('Pushing messages request to queue');
+                    var rq = {
                         response: response,
                         timestamp: Date.now()
-                    });
+                    };
+                    console.log('Pushing stats request to queue', rq);
+                    requests.push(rq);
                 }
             } else if (url.pathname.substr(0, 6) == '/stats') {
                 console.log('GET /stats received');
-                console.log('Pushed stats request to queue');
-                statsRequests.push({
+                var req = {
                     response: response,
                     timestamp: Date.now()
-                });
+                };
+                console.log('Pushing stats request to queue', req);
+                statsRequests.push(req);
             } else {
                 response.writeHead(400);
             }
