@@ -29,7 +29,8 @@
                 return 0;
             }
             message.url = getGravatar(message.email);
-            console.log('addMessage(message): Adding message:', message);
+            delete message.email;
+            console.log('addMessage(message): Adding message (email removed, gravatar added instead):', message);
             messagesArray.push(message);
             return timestamp;
         },

@@ -11,7 +11,6 @@
             messages: 0
         },
         storage: localStorage,
-
         run: function (document, window, console) {
 
             window.Babble.updateKey('all', '');
@@ -44,8 +43,7 @@
                     name: modal.elements[0].value,
                     email: modal.elements[1].value
                 });
-                modal.style.display = 'none';
-                modal.style.visibility = 'hidden';
+                modal.classList.add('hidden');
                 modal.setAttribute('aria-hidden', 'true');
             });
 
@@ -159,14 +157,32 @@
             window.Babble.messages = window.Babble.messages.concat(array);
             window.Babble.counter = window.Babble.messages.length;
             console.log('Messages on client:', window.Babble.messages);
+
+            console.log('storeMessages(): arr is:', [].concat(array));
+            console.log('storeMessages(): arr.length is:', [].concat(array).length);
+            window.Babble.updateMsgListView([].concat(array));
         },
-        createHTMLPost: function (chatMsgNode, msg) {
-            var node = chatMsgNode.cloneNode(true);
+        createHTMLnode: function (msg) {
+            var node = document.createElement('li', {
+                class: 'Chat-msg'
+            });
+            console.log('node is:', node);
+            var img = document.createElement('img', {
+                class: 'Chat-msg-avatar',
+                src: 'images/anon.svg',
+                alt: ''
+            });
+
+
+            //TODO just create it
             if (msg.url !== 'none') {
-                node.firstChild.setAttribute('src', msg.url);
+                img.setAttribute('src', msg.url);
             }
-            var article = node.firstChild.nextSibling;
-            var cite = article.firstChild.firstChild;
+            console.log('img is:', img);
+            var article = img.nextSibling;
+            console.log('article is:', article);
+            var header = window.Babble.getFirstChild(article);
+            var cite = header.firstChild;
             cite.innerHTML = (msg.name === '') ? 'Anonymous' : msg.name;
             var date = new Date(parseInt(msg.timestamp) * 1000);
             var hours = date.getHours();
@@ -176,9 +192,21 @@
             time.setAttribute('datetime', date.toISOString());
             time.innerHTML = formattedTime;
             var innerText = document.createTextNode(msg.message);
-            var message = article.firstChild.nextSibling;
+            var message = window.Babble.getFirstChild(article).nextSibling; //FIXME
+            console.log('p is:', message);
             message.innerHTML = innerText;
+            node.classList.remove('hidden');
+            console.log('Node is:', node);
             return node;
+        },
+        updateMsgListView: function (array) {
+            var ol = document.querySelector('.Chat-msgs-list');
+            console.log('updateMsgListView(): ol selected');
+            console.log('updateMsgListView(): array.length is:', array.length);
+            for (var i = 0; i < array.length; ++i) {
+                console.log('updateMsgListView(): in loop');
+                ol.appendChild(window.Babble.createHTMLnode(array[i]));
+            }
         },
         updateStats: function (stats) {
 
@@ -208,6 +236,13 @@
                 window.Babble.storage.setItem('babble', JSON.stringify(data));
                 return;
             } else throw new window.Babble.exception('wrong use of updateKey()');
+        },
+        getFirstChild: function getFirstChild(el) {
+            var firstChild = el.firstChild;
+            while (firstChild !== null && firstChild.nodeType === 3) { // skip TextNodes
+                firstChild = firstChild.nextSibling;
+            }
+            return firstChild;
         },
         exception: function exception(what) {
             console.error('[CRITICAL ERROR] Exception thrown: ', what);

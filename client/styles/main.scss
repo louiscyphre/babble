@@ -40,6 +40,10 @@ cite {
     float: left;
 }
 
+.hidden {
+    @extend %u-aria-hidden;
+}
+
 .Modal {
     border: 1px solid $c-border;
     position: fixed;

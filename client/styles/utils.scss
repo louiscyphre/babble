@@ -9,6 +9,11 @@
     border-radius: 50%;
 }
 
+%u-aria-hidden {
+    visibility: hidden;
+    display: none;
+}
+
  ::-webkit-scrollbar {
     width: auto;
 }
