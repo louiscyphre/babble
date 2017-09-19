@@ -156,14 +156,14 @@ dd>* {
     margin: 0.2rem;
 }
 
-.Chat-messages {
+.Chat-msgs {
     flex: 12;
     overflow-y: auto;
     overflow-x: hidden;
     border-bottom: 0.1rem solid $c-border;
 }
 
-.Chat-messages ol {
+.Chat-msgs ol {
     list-style: none;
     padding: 0;
 }
