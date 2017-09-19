@@ -1,339 +1,421 @@
 @font-face {
-  font-family: 'Nunito';
-  font-style: light;
-  font-weight: 300;
-  src: local("Nunito Light"), local("Nunito-Light"), url("/fonts/Nunito-Light.woff2") format("woff2"), url("/fonts/Nunito-Light.ttf") format("truetype");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
+    font-family: 'Nunito';
+    font-style: light;
+    font-weight: 300;
+    src: local("Nunito Light"), local("Nunito-Light"), url("/fonts/Nunito-Light.woff2") format("woff2"), url("/fonts/Nunito-Light.ttf") format("truetype");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
 
 @font-face {
-  font-family: 'Nunito';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Nunito Regular"), local("Nunito-Regular"), url("/fonts/Nunito-Regular.woff2") format("woff2"), url("/fonts/Nunito-Regular.ttf") format("truetype");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    src: local("Nunito Regular"), local("Nunito-Regular"), url("/fonts/Nunito-Regular.woff2") format("woff2"), url("/fonts/Nunito-Regular.ttf") format("truetype");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
 
 @font-face {
-  font-family: 'Nunito';
-  font-style: bold;
-  font-weight: 700;
-  src: local("Nunito Bold"), local("Nunito-Bold"), url("/fonts/Nunito-Bold.woff2") format("woff2"), url("/fonts/Nunito-Bold.ttf") format("truetype");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
+    font-family: 'Nunito';
+    font-style: bold;
+    font-weight: 700;
+    src: local("Nunito Bold"), local("Nunito-Bold"), url("/fonts/Nunito-Bold.woff2") format("woff2"), url("/fonts/Nunito-Bold.ttf") format("truetype");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
 
 @media (max-width: 638px) {
-  html {
-    font-size: 72.5%; }
-  .ChatSideBar {
-    display: none;
-    visibility: hidden; }
-  .Chat-msg-text {
-    font-size: 1.5rem; }
-  .Logo {
-    width: 40%; }
-  .Modal p > * {
-    font-size: 1.5rem; } }
+    html {
+        font-size: 72.5%;
+    }
+    .ChatSideBar {
+        display: none;
+        visibility: hidden;
+    }
+    .Chat-msg-text {
+        font-size: 1.5rem;
+    }
+    .Logo {
+        width: 40%;
+    }
+    .Modal p>* {
+        font-size: 1.5rem;
+    }
+}
 
 @media (min-width: 0px) and (max-width: 320px) {
-  .Chat-sendMessageFormButton {
-    background: url("../images/send_bg_s.webp"); }
-  .Chat-msg-text,
-  .Chat-header-stats,
-  .Chat-header,
-  dl,
-  dd .Modal,
-  .Modal p,
-  .Modal p input {
-    display: block;
-    word-break: break-all;
-    min-width: 0%; }
-  .Modal,
-  .Modal p,
-  .Modal p input {
-    overflow-y: auto; }
-  .Chat-msg-avatar {
-    float: none; }
-  cite {
-    display: inherit; }
-  time {
-    margin-left: 0; }
-  .Chat-sendMessageForm {
-    flex-flow: column wrap; }
-  .Chat-sendMessageFormText {
-    flex: 1; } }
+    .Chat-msgFormButton {
+        background: url("../images/send_bg_s.webp");
+    }
+    .Chat-msg-text,
+    .Chat-header-stats,
+    .Chat-header,
+    dl,
+    dd .Modal,
+    .Modal p,
+    .Modal p input {
+        display: block;
+        word-break: break-all;
+        min-width: 0%;
+    }
+    .Modal,
+    .Modal p,
+    .Modal p input {
+        overflow-y: auto;
+    }
+    .Chat-msg-avatar {
+        float: none;
+    }
+    cite {
+        display: inherit;
+    }
+    time {
+        margin-left: 0;
+    }
+    .Chat-msgForm {
+        flex-flow: column wrap;
+    }
+    .Chat-msgFormText {
+        flex: 1;
+    }
+}
 
 @media (min-width: 321px) and (max-width: 638px) {
-  .Chat-sendMessageFormButton {
-    background: url("../images/send_bg_m.webp"); }
-  .Modal p {
-    display: inline-flex; }
-  .Modal {
-    display: table; }
-  .Chat-header,
-  .Chat-msg {
-    display: flex; }
-  .Chat-header-stats,
-  dd {
-    display: flex;
-    flex-flow: row nowrap; }
-  .Chat-msg-avatar {
-    float: left; }
-  .Chat-sendMessageFormText {
-    flex: 8; }
-  .Modal {
-    width: 60%;
-    height: 80%; } }
+    .Chat-msgFormButton {
+        background: url("../images/send_bg_m.webp");
+    }
+    .Modal p {
+        display: inline-flex;
+    }
+    .Modal {
+        display: table;
+    }
+    .Chat-header,
+    .Chat-msg {
+        display: flex;
+    }
+    .Chat-header-stats,
+    dd {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    .Chat-msg-avatar {
+        float: left;
+    }
+    .Chat-msgFormText {
+        flex: 8;
+    }
+    .Modal {
+        width: 60%;
+        height: 80%;
+    }
+}
 
 @media (min-width: 639px) {
-  html {
-    font-size: 100%; }
-  .Logo {
-    width: 15%; }
-  .Modal {
-    width: 30%;
-    display: table; }
-  .Modal p {
-    display: inline-flex; }
-  .Modal p > * {
-    font-size: 1.2rem; }
-  .Chat-sendMessageFormText {
-    flex: 8; }
-  .Chat-sendMessageFormButton {
-    background: url("../images/send_bg.webp"); }
-  .Chat-header,
-  .Chat-msg {
-    display: flex; }
-  .Chat-header-stats,
-  dd {
-    display: flex;
-    flex-flow: row nowrap; }
-  .Chat-msg-avatar {
-    float: left; } }
+    html {
+        font-size: 100%;
+    }
+    .Logo {
+        width: 15%;
+    }
+    .Modal {
+        width: 30%;
+        display: table;
+    }
+    .Modal p {
+        display: inline-flex;
+    }
+    .Modal p>* {
+        font-size: 1.2rem;
+    }
+    .Chat-msgFormText {
+        flex: 8;
+    }
+    .Chat-msgFormButton {
+        background: url("../images/send_bg.webp");
+    }
+    .Chat-header,
+    .Chat-msg {
+        display: flex;
+    }
+    .Chat-header-stats,
+    dd {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    .Chat-msg-avatar {
+        float: left;
+    }
+}
 
 @-moz-document url-prefix() {
-  .Chat-sendMessageFormButton {
-    background: url(../images/send_bg.png); } }
+    .Chat-msgFormButton {
+        background: url(../images/send_bg.png);
+    }
+}
 
 .Chat-msg-text {
-  padding: 0.5rem 0.7rem 0.5rem 0.7rem;
-  border-radius: 1rem;
-  border: 0.1rem solid #DBDBDB;
-  max-width: 600px; }
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    border-radius: 1rem;
+    border: 0.1rem solid #DBDBDB;
+    max-width: 600px;
+}
 
 .Chat-msg-avatar {
-  border-radius: 50%; }
+    border-radius: 50%;
+}
 
 ::-webkit-scrollbar {
-  width: auto; }
+    width: auto;
+}
 
 ::-webkit-scrollbar-track {
-  background: white;
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  border: 2px solid #DBDBDB;
-  -webkit-border: 2px solid #DBDBDB; }
+    background: white;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border: 2px solid #DBDBDB;
+    -webkit-border: 2px solid #DBDBDB;
+}
 
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 1rem;
-  border-radius: 1rem;
-  background: #ebedec;
-  border: 2px solid #DBDBDB;
-  -webkit-border: 2px solid #DBDBDB; }
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+    background: #ebedec;
+    border: 2px solid #DBDBDB;
+    -webkit-border: 2px solid #DBDBDB;
+}
 
-html > *,
+html>*,
 h1 {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 400; }
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+}
 
 body,
 html {
-  margin: 0;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  display: flex; }
+    margin: 0;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
 
 h1 {
-  font-size: 1.875rem;
-  margin-top: 0; }
+    font-size: 1.875rem;
+    margin-top: 0;
+}
 
 cite {
-  font-weight: 700;
-  font-size: 1.3rem;
-  font-style: normal; }
+    font-weight: 700;
+    font-size: 1.3rem;
+    font-style: normal;
+}
 
 .MainHeader {
-  background-color: #353744;
-  display: flex;
-  align-items: center;
-  padding: 1rem; }
+    background-color: #353744;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
 
 .Logo {
-  float: left; }
+    float: left;
+}
 
 .Modal {
-  border: 1px solid #DBDBDB;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  background-color: #F9F9F9;
-  padding: 3rem;
-  box-shadow: 0 0 3rem 0 black;
-  border-radius: 0.1rem; }
+    border: 1px solid #DBDBDB;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #F9F9F9;
+    padding: 3rem;
+    box-shadow: 0 0 3rem 0 black;
+    border-radius: 0.1rem;
+}
 
 .Modal p {
-  width: 100%;
-  align-items: center;
-  margin-top: 0; }
+    width: 100%;
+    align-items: center;
+    margin-top: 0;
+}
 
 .Modal p label {
-  flex: 1;
-  color: #646464; }
+    flex: 1;
+    color: #646464;
+}
 
 .Modal p label,
 input {
-  font-weight: 700; }
+    font-weight: 700;
+}
 
 .Modal p input {
-  flex: 3;
-  padding: 0.4em;
-  border-radius: 1rem;
-  border: 2px solid #DBDBDB;
-  outline-style: none;
-  font-family: inherit;
-  font-size: 1.3rem; }
+    flex: 3;
+    padding: 0.4em;
+    border-radius: 1rem;
+    border: 2px solid #DBDBDB;
+    outline-style: none;
+    font-family: inherit;
+    font-size: 1.3rem;
+}
 
 .Modal-buttons {
-  flex-direction: row-reverse; }
+    flex-direction: row-reverse;
+}
 
 .Modal--anonymous {
-  background-image: -moz-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-  background-image: -webkit-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-  background-image: -ms-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-  background-image: -o-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-  padding: 0.4rem; }
+    background-image: -moz-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+    background-image: -webkit-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+    background-image: -ms-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+    background-image: -o-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
+    padding: 0.4rem;
+}
 
 .Modal--login {
-  background-image: -moz-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-  background-image: -webkit-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-  background-image: -ms-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-  background-image: -o-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
-  color: white;
-  padding: 0.3rem 2.3rem 0.3rem 2.3rem; }
+    background-image: -moz-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+    background-image: -webkit-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+    background-image: -ms-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+    background-image: -o-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
+    color: white;
+    padding: 0.3rem 2.3rem 0.3rem 2.3rem;
+}
 
 .Modal--anonymous,
 .Modal--login {
-  border: 0;
-  border-radius: 0.1rem;
-  margin-left: 1rem;
-  margin-top: 1rem;
-  font-family: inherit; }
+    border: 0;
+    border-radius: 0.1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-family: inherit;
+}
 
 .ChatContainer,
 .Chat,
-.Chat-sendMessageForm {
-  display: flex; }
+.Chat-msgForm {
+    display: flex;
+}
 
 .ChatContainer {
-  flex: 7;
-  overflow: auto; }
+    flex: 7;
+    overflow: auto;
+}
 
 .ChatSideBar {
-  flex: 2;
-  background-color: #61D290; }
+    flex: 2;
+    background-color: #61D290;
+}
 
 .Chat {
-  flex: 9;
-  flex-direction: column;
-  background-color: #F6F6F6; }
+    flex: 9;
+    flex-direction: column;
+    background-color: #F6F6F6;
+}
 
 .Chat-header {
-  flex: 1;
-  padding: 0.9rem; }
+    flex: 1;
+    padding: 0.9rem;
+}
 
 .Chat-header-title {
-  margin: 0;
-  align-self: center;
-  width: 100%; }
+    margin: 0;
+    align-self: center;
+    width: 100%;
+}
 
 .Chat-header-stats {
-  align-self: center;
-  font-size: 1.1rem;
-  font-weight: 700; }
+    align-self: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
 
 .Chat-header-stats,
 dd {
-  margin: 0; }
+    margin: 0;
+}
 
 dd {
-  margin-left: 0.5rem; }
+    margin-left: 0.5rem;
+}
 
-dd > * {
-  margin: 0.2rem; }
+dd>* {
+    margin: 0.2rem;
+}
 
-.Chat-messages {
-  flex: 12;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border-bottom: 0.1rem solid #DBDBDB; }
+.Chat-msgs {
+    flex: 12;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-bottom: 0.1rem solid #DBDBDB;
+}
 
-.Chat-messages ol {
-  list-style: none;
-  padding: 0; }
+.Chat-msgs ol {
+    list-style: none;
+    padding: 0;
+}
 
 .Chat-msg {
-  vertical-align: top;
-  margin: 1rem; }
+    vertical-align: top;
+    margin: 1rem;
+}
 
 .Chat-msg-avatar {
-  width: 3em;
-  height: 3em;
-  margin-right: 1rem; }
+    width: 3em;
+    height: 3em;
+    margin-right: 1rem;
+}
 
 .Chat-msg-text {
-  background-color: white;
-  margin-top: 0; }
+    background-color: white;
+    margin-top: 0;
+}
 
 .Chat-msg-text p {
-  font-size: 1.3rem;
-  color: #646464;
-  padding: 0;
-  margin: 0; }
+    font-size: 1.3rem;
+    color: #646464;
+    padding: 0;
+    margin: 0;
+}
 
 .Chat-msg-text header time {
-  font-weight: 300;
-  color: #757575;
-  margin-left: 0.5rem; }
+    font-weight: 300;
+    color: #757575;
+    margin-left: 0.5rem;
+}
 
-.Chat-sendMessageForm {
-  flex: 2;
-  border-radius: 4px;
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+.Chat-msgForm {
+    flex: 2;
+    border-radius: 4px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
 
-.Chat-sendMessageFormText {
-  resize: none;
-  border: none;
-  outline: none; }
+.Chat-msgFormText {
+    resize: none;
+    border: none;
+    outline: none;
+}
 
-.Chat-sendMessageFormButton {
-  flex: 1;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  background-color: white;
-  outline: none;
-  border: none; }
+.Chat-msgFormButton {
+    flex: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: white;
+    outline: none;
+    border: none;
+}
 
-.Chat-sendMessageFormButton:hover {
-  cursor: pointer; }
+.Chat-msgFormButton:hover {
+    cursor: pointer;
+}
 
-/*.Chat-sendMessageFormButton:active {
+
+/*.Chat-msgFormButton:active {
     outline: inherit;
 }
 
-.Chat-sendMessageFormButton:active:after {
+.Chat-msgFormButton:active:after {
     outline: none;
 }*/

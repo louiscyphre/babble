@@ -106,7 +106,7 @@ input {
 
 .ChatContainer,
 .Chat,
-.Chat-sendMessageForm {
+.Chat-msgForm {
     display: flex;
 }
 
@@ -198,7 +198,7 @@ dd>* {
     margin-left: 0.5rem;
 }
 
-.Chat-sendMessageForm {
+.Chat-msgForm {
     flex: 2;
     border-radius: 4px;
     background-color: white;
@@ -206,13 +206,13 @@ dd>* {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.Chat-sendMessageFormText {
+.Chat-msgFormText {
     resize: none;
     border: none;
     outline: none;
 }
 
-.Chat-sendMessageFormButton {
+.Chat-msgFormButton {
     flex: 1;
     background-repeat: no-repeat;
     background-position: center;
@@ -222,15 +222,15 @@ dd>* {
     border: none;
 }
 
-.Chat-sendMessageFormButton:hover {
+.Chat-msgFormButton:hover {
     cursor: pointer;
 }
 
 
-/*.Chat-sendMessageFormButton:active {
+/*.Chat-msgFormButton:active {
     outline: inherit;
 }
 
-.Chat-sendMessageFormButton:active:after {
+.Chat-msgFormButton:active:after {
     outline: none;
 }*/

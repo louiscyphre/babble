@@ -18,7 +18,7 @@
 }
 
 @media (min-width:0px) and (max-width:320px) {
-    .Chat-sendMessageFormButton {
+    .Chat-msgFormButton {
         background: url("../images/send_bg_s.webp");
     }
     .Chat-msg-text,
@@ -46,16 +46,16 @@
     time {
         margin-left: 0;
     }
-    .Chat-sendMessageForm {
+    .Chat-msgForm {
         flex-flow: column wrap;
     }
-    .Chat-sendMessageFormText {
+    .Chat-msgFormText {
         flex: 1;
     }
 }
 
 @media (min-width:321px) and (max-width:638px) {
-    .Chat-sendMessageFormButton {
+    .Chat-msgFormButton {
         background: url("../images/send_bg_m.webp");
     }
     .Modal p {
@@ -76,7 +76,7 @@
     .Chat-msg-avatar {
         float: left;
     }
-    .Chat-sendMessageFormText {
+    .Chat-msgFormText {
         flex: 8;
     }
     .Modal {
@@ -102,10 +102,10 @@
     .Modal p>* {
         font-size: 1.2rem;
     }
-    .Chat-sendMessageFormText {
+    .Chat-msgFormText {
         flex: 8;
     }
-    .Chat-sendMessageFormButton {
+    .Chat-msgFormButton {
         background: url("../images/send_bg.webp");
     }
     .Chat-header,
@@ -123,7 +123,7 @@
 }
 
 @-moz-document url-prefix() {
-    .Chat-sendMessageFormButton {
+    .Chat-msgFormButton {
         background: url(../images/send_bg.png);
     }
 }
