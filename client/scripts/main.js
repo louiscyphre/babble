@@ -163,24 +163,28 @@
             window.Babble.updateMsgListView([].concat(array));
         },
         createHTMLnode: function (msg) {
-            var node = document.createElement('li', {
-                class: 'Chat-msg'
-            });
-            console.log('node is:', node);
-            var img = document.createElement('img', {
-                class: 'Chat-msg-avatar',
-                src: 'images/anon.svg',
-                alt: ''
-            });
-
-
-            //TODO just create it
+            var li = document.createElement('li');
+            li.classList.add('Chat-msg');
+            console.log('node is:', li);
+            var img = document.createElement('img');
+            img.classList.add('Chat-msg-avatar');
             if (msg.url !== 'none') {
                 img.setAttribute('src', msg.url);
+            } else {
+                img.setAttribute('src', 'images/anon.svg');
             }
+            img.setAttribute('alt', '');
             console.log('img is:', img);
-            var article = img.nextSibling;
+
+            li.appendChild(img);
+
+
+
+            var article = document.createElement('article');
+            article.classList.add('Chat-msg-text');
             console.log('article is:', article);
+            li.appendChild(article);
+
             var header = window.Babble.getFirstChild(article);
             var cite = header.firstChild;
             cite.innerHTML = (msg.name === '') ? 'Anonymous' : msg.name;
