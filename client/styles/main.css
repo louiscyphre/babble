@@ -310,6 +310,12 @@ dd > * {
   color: #757575;
   margin-left: 0.5rem; }
 
+.Chat-msg-delete {
+  background: url("../images/del_msg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; }
+
 .Chat-msgForm {
   flex: 2;
   border-radius: 4px;

@@ -101,7 +101,9 @@
                         console.log('GET /stats answering: ', JSON.stringify(stats.get()));
                         statsreq.response.end(JSON.stringify(stats.get()));
                     }
-                    response.end(JSON.stringify(user));
+                    response.end(JSON.stringify({
+                        gravatar: users.getGravatar(user.email)
+                    }));
                 });
             } else if (url.pathname.substr(0, 7) == '/logout') {
                 requestBody = '';

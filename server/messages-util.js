@@ -4,18 +4,11 @@
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();
     } else {
-        global.utils = factory();
+        global.messages = factory();
     }
 }(this, module, function () {
-    var gravatarify = require('gravatar').url;
+    var users = require('./users');
     var messagesArray = [];
-
-    var getGravatar = function (email) {
-        if (typeof email !== 'string' || email === '') {
-            return 'none';
-        }
-        return gravatarify(email);
-    };
 
     return {
         addMessage: function addMessage(message) {
@@ -28,7 +21,7 @@
             if (isNaN(timestamp)) {
                 return 0;
             }
-            message.url = getGravatar(message.email);
+            message.url = users.getGravatar(message.email);
             delete message.email;
             console.log('addMessage(message): Adding message (email removed, gravatar added instead):', message);
             messagesArray.push(message);

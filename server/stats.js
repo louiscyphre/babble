@@ -4,7 +4,7 @@
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();
     } else {
-        global.utils = factory();
+        global.stats = factory();
     }
 }(this, module, function () {
     var users = require('./users');

@@ -4,9 +4,10 @@
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();
     } else {
-        global.utils = factory();
+        global.users = factory();
     }
 }(this, module, function () {
+    var gravatarify = require('gravatar').url;
     var users = [];
 
     return {
@@ -28,6 +29,12 @@
         },
         count: function count() {
             return users.length;
-        }
+        },
+        getGravatar: function (email) {
+            if (typeof email !== 'string' || email === '') {
+                return 'none';
+            }
+            return gravatarify(email);
+        },
     };
 }));
