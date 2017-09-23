@@ -35,7 +35,6 @@
         var message = document.getElementById(id);
         message.classList.add('hidden');
         message.setAttribute('aria-hidden', 'true');
-
         Babble.deleteMessage(id, Babble.dummy);
     }
 
