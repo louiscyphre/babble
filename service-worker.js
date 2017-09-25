@@ -1,7 +1,9 @@
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
   '/',
-  './client/index.html',
+  'https://louiscyphre.github.io/babble/#/vegans',
+  'https://louiscyphre.github.io/babble/index.html',
+  './index.html',
   'images/send_bg.webp',
   'images/send_bg_medium.webp',
   'images/send_bg_small.webp',
