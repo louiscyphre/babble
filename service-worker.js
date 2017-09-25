@@ -1,6 +1,6 @@
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
-  '/',
+
   'https://louiscyphre.github.io/babble/#/vegans',
   'https://louiscyphre.github.io/babble/index.html',
   './index.html',
