@@ -1,7 +1,7 @@
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
   '/',
-  './index.html',
+  'babble/client/index.html',
   'images/send_bg.webp',
   'images/send_bg_medium.webp',
   'images/send_bg_small.webp',
