@@ -2,19 +2,19 @@ var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
   '/',
   './index.html',
-  './images/send_bg.webp',
-  './images/send_bg_medium.webp',
-  './images/send_bg_small.webp',
-  './images/logo.svg',
-  './images/logo_small.svg',
-  './images/del_msg.svg',
-  '/images/del_msg_small.svg',
-  '/images/msgs.svg',
-  '/images/msgs_small.svg',
-  '/images/anon.svg',
-  '/images/users.svg',
-  '/images/users_small.svg',
-  '/manifest.json'
+  'images/send_bg.webp',
+  'images/send_bg_medium.webp',
+  'images/send_bg_small.webp',
+  'images/logo.svg',
+  'images/logo_small.svg',
+  'images/del_msg.svg',
+  'images/del_msg_small.svg',
+  'images/msgs.svg',
+  'images/msgs_small.svg',
+  'images/anon.svg',
+  'images/users.svg',
+  'images/users_small.svg',
+  'manifest.json'
 
 
 ];
