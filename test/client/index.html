@@ -37,38 +37,46 @@
 </head>
 
 <body>
-    <header class="MainHeader">
+
+    <form class="Modal hidden" accept-charset="utf-8">
+        <h1 tabindex="-1">Who are you?</h1>
+        <p tabindex="-1"><label for="name">Full name:</label><input type="text" name="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" tabindex="0" />
+        </p>
+        <p tabindex="-1"><label for="email">Email:</label><input type="email" name="email" placeholder="Type your email" autocomplete="email" aria-label="Type your email here" tabindex="0" />
+        </p>
+        <p class="Modal-buttons">
+            <button type="submit" class="Modal--login" aria-label="Continue as registered user" tabindex="0">Save</button>
+            <button class="Modal--anonymous" aria-label="Continue as anonymous" tabindex="0">Stay Anonymous</button>
+        </p>
+    </form>
+    <header class="MainHeader" tabindex="-1">
         <img class="Logo" src="../../client/images/logo.svg" alt="">
     </header>
-    <section class="ChatContainer">
-        <form class="Modal" action="/register" method="POST" enctype="text/plain" style="visibility:hidden">
-            <h2>Who are you?</h2>
-            <p>
-                <label for="userName">Full name:</label><input type="text" name="userName" placeholder="Type your name" autocomplete="userName" autofocus aria-label="Type your name here" />
-            </p>
-            <p>
-                <label for="userEmail">Email:</label><input type="email" name="userEmail" placeholder="Type your email" autocomplete="userEmail" aria-label="Type your email here" />
-            </p>
-            <p class="Modal-buttons">
-                <button type="submit" class="Modal--login" aria-label="Continue as registered user">Save</button>
-                <button class="Modal--anonymous" aria-label="Continue as anonymous">Stay Anonymous</button>
-            </p>
-        </form>
-
-        <nav class="ChatSideBar dbg">
-        </nav>
-        <section class="Chat dbg">
-            <header class="Chat-header dbg">
-                <h2 class="">Vegans</h2>
+    <section class="ChatContainer" tabindex="-1">
+        <nav class="ChatSideBar" tabindex="-1"></nav>
+        <main class="Chat" tabindex="-1">
+            <header class="Chat-header" tabindex="-1">
+                <h1 class="Chat-header-title" tabindex="0" aria-label="Welcome to the chat">Vegans</h1>
+                <dl class="Chat-header-stats" tabindex="-1">
+                    <dt hidden aria-label="Number of messages in chat" tabindex="0"></dt>
+                    <dd><img src="../../client/images/msgs.svg" alt="" tabindex="-1">
+                        <div class="msgsCount" tabindex="0">-</div>
+                    </dd>
+                    <dt hidden aria-label="Number of users in chat" tabindex="0"></dt>
+                    <dd><img src="../../client/images/users.svg" alt="" tabindex="-1">
+                        <div class="usersCount" tabindex="0">-</div>
+                    </dd>
+                </dl>
             </header>
-            <section class="Chat-msgs dbg">
+            <section class="Chat-msgs" tabindex="-1">
+
                 <div id="mocha"></div>
             </section>
-            <form class="Chat-msgForm dbg" method="POST" action="/messages" enctype="text/json">
-                <textarea class="Chat-msgFormText dbg" aria-label="Type new message here"></textarea>
-                <button class="Chat-msgFormButton dbg" type="submit" aria-label="Send message to chat"></button>
+            <form class="Chat-msgForm" accept-charset="utf-8">
+                <textarea class="Chat-msgFormText" aria-label="Type new message here" tabindex="0"></textarea>
+                <button class="Chat-msgFormButton" type="submit" aria-label="Send message to chat" tabindex="0"></button>
             </form>
-        </section>
+        </main>
     </section>
 
     <script src="../../node_modules/mocha/mocha.js"></script>

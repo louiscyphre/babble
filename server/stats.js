@@ -10,12 +10,15 @@
     var users = require('./users');
     var messages = require('./messages-util');
 
+    var statsRequests = [];
+
     return {
         get: function get() {
             return {
                 users: users.count(),
                 messages: messages.count(),
             };
-        }
+        },
+        requests: statsRequests
     };
 }));

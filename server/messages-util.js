@@ -23,12 +23,11 @@
             }
             message.url = users.getGravatar(message.email);
             delete message.email;
-            console.log('addMessage(message): Adding message (email removed, gravatar added instead):', message);
+            console.log('[INFO] addMessage(): (email removed, gravatar added instead):', JSON.stringify(message));
             messagesArray.push(message);
             return timestamp;
         },
         getMessages: function getMessages(counter) {
-            //console.log('getMessages(counter): Returning array:', messagesArray.slice(counter););
             return messagesArray.slice(counter);
         },
         deleteMessage: function deleteMessage(id) {
