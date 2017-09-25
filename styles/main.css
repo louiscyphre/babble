@@ -21,7 +21,7 @@
 
 @media (max-width: 638px) {
   html {
-    font-size: 62.5%; }
+    font-size: 72.5%; }
   .ChatSideBar {
     display: none;
     visibility: hidden; }
@@ -33,12 +33,54 @@
     font-size: 1.5rem; } }
 
 @media (min-width: 0px) and (max-width: 320px) {
-  .Chat-sendMessageFormButton {
-    background: url("../images/send_bg_s.webp"); } }
+  .Chat-msgFormButton {
+    background: url("../images/send_bg_s.webp"); }
+  .Chat-msg-text,
+  .Chat-header-stats,
+  .Chat-header,
+  dl,
+  dd .Modal,
+  .Modal p,
+  .Modal p input {
+    display: block;
+    word-break: break-all;
+    min-width: 0%; }
+  .Modal,
+  .Modal p,
+  .Modal p input {
+    overflow-y: auto; }
+  .Chat-msg-avatar {
+    float: none; }
+  cite {
+    display: inherit; }
+  time {
+    margin-left: 0; }
+  .Chat-msgForm {
+    flex-flow: column wrap; }
+  .Chat-msgFormText {
+    flex: 1; } }
 
 @media (min-width: 321px) and (max-width: 638px) {
-  .Chat-sendMessageFormButton {
-    background: url("../images/send_bg_m.webp"); } }
+  .Chat-msgFormButton {
+    background: url("../images/send_bg_m.webp"); }
+  .Modal p {
+    display: inline-flex; }
+  .Modal {
+    display: table; }
+  .Chat-header,
+  .Chat-msg {
+    display: flex; }
+  .Chat-header-stats,
+  dd {
+    display: flex;
+    flex-flow: row nowrap; }
+  .Chat-msg-avatar {
+    float: left; }
+  .Chat-msgFormText {
+    flex: 8; }
+  .Modal {
+    width: 60%;
+    height: 80%; } }
 
 @media (min-width: 639px) {
   html {
@@ -46,24 +88,42 @@
   .Logo {
     width: 15%; }
   .Modal {
-    width: 30%; }
+    width: 30%;
+    display: table; }
+  .Modal p {
+    display: inline-flex; }
   .Modal p > * {
     font-size: 1.2rem; }
-  .Chat-sendMessageFormButton {
-    background: url("../images/send_bg.webp"); } }
+  .Chat-msgFormText {
+    flex: 8; }
+  .Chat-msgFormButton {
+    background: url("../images/send_bg.webp"); }
+  .Chat-header,
+  .Chat-msg {
+    display: flex; }
+  .Chat-header-stats,
+  dd {
+    display: flex;
+    flex-flow: row nowrap; }
+  .Chat-msg-avatar {
+    float: left; } }
 
 @-moz-document url-prefix() {
-  .Chat-sendMessageFormButton {
+  .Chat-msgFormButton {
     background: url(../images/send_bg.png); } }
 
 .Chat-msg-text {
-  padding: 0.5rem;
+  padding: 0.5rem 0.7rem 0.5rem 0.7rem;
   border-radius: 1rem;
   border: 0.1rem solid #DBDBDB;
   max-width: 600px; }
 
 .Chat-msg-avatar {
   border-radius: 50%; }
+
+.hidden {
+  visibility: hidden;
+  display: none; }
 
 ::-webkit-scrollbar {
   width: auto; }
@@ -82,8 +142,8 @@
   border: 2px solid #DBDBDB;
   -webkit-border: 2px solid #DBDBDB; }
 
-html,
-h1 > * {
+html > *,
+h1 {
   font-family: 'Nunito', sans-serif;
   font-weight: 400; }
 
@@ -98,11 +158,6 @@ html {
 h1 {
   font-size: 1.875rem;
   margin-top: 0; }
-
-h2 {
-  display: inline-block;
-  margin: 0;
-  padding: 0; }
 
 .MainHeader {
   background-color: #353744;
@@ -123,13 +178,11 @@ h2 {
   margin: auto;
   background-color: #F9F9F9;
   padding: 3rem;
-  box-shadow: 0 0 1rem 0 black;
-  border-radius: 0.1rem;
-  display: table; }
+  box-shadow: 0 0 3rem 0 black;
+  border-radius: 0.1rem; }
 
 .Modal p {
   width: 100%;
-  display: inline-flex;
   align-items: center;
   margin-top: 0; }
 
@@ -146,7 +199,9 @@ input {
   padding: 0.4em;
   border-radius: 1rem;
   border: 2px solid #DBDBDB;
-  outline-style: none; }
+  outline-style: none;
+  font-family: inherit;
+  font-size: 1.3rem; }
 
 .Modal-buttons {
   flex-direction: row-reverse; }
@@ -156,7 +211,7 @@ input {
   background-image: -webkit-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
   background-image: -ms-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
   background-image: -o-linear-gradient(90deg, #B4B4B4 0%, #CFCFCF 100%);
-  min-width: 30%; }
+  padding: 0.4rem; }
 
 .Modal--login {
   background-image: -moz-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
@@ -164,19 +219,19 @@ input {
   background-image: -ms-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
   background-image: -o-linear-gradient(90deg, #47A272 0%, #7DD84E 100%);
   color: white;
-  min-width: 20%; }
+  padding: 0.3rem 2.3rem 0.3rem 2.3rem; }
 
 .Modal--anonymous,
 .Modal--login {
   border: 0;
   border-radius: 0.1rem;
   margin-left: 1rem;
-  margin-top: 1rem; }
+  margin-top: 1rem;
+  font-family: inherit; }
 
 .ChatContainer,
 .Chat,
-.Chat-msg,
-.Chat-sendMessageForm {
+.Chat-msgForm {
   display: flex; }
 
 .ChatContainer {
@@ -194,7 +249,6 @@ input {
 
 .Chat-header {
   flex: 1;
-  display: flex;
   padding: 0.9rem; }
 
 .Chat-header-title {
@@ -209,9 +263,7 @@ input {
 
 .Chat-header-stats,
 dd {
-  margin: 0;
-  display: flex;
-  flex-flow: row nowrap; }
+  margin: 0; }
 
 dd {
   margin-left: 0.5rem; }
@@ -219,13 +271,13 @@ dd {
 dd > * {
   margin: 0.2rem; }
 
-.Chat-messages {
+.Chat-msgs {
   flex: 12;
   overflow-y: auto;
   overflow-x: hidden;
   border-bottom: 0.1rem solid #DBDBDB; }
 
-.Chat-messages ol {
+.Chat-msgs ol {
   list-style: none;
   padding: 0; }
 
@@ -236,12 +288,15 @@ dd > * {
 .Chat-msg-avatar {
   width: 3em;
   height: 3em;
-  float: left;
   margin-right: 1rem; }
+
+cite {
+  font-weight: 700;
+  font-size: 1.3rem;
+  font-style: normal; }
 
 .Chat-msg-text {
   background-color: white;
-  display: inline-block;
   margin-top: 0; }
 
 .Chat-msg-text p {
@@ -255,20 +310,34 @@ dd > * {
   color: #757575;
   margin-left: 0.5rem; }
 
-.Chat-sendMessageForm {
+.Chat-msg-delete {
+  background: url("../images/del_msg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  padding: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  cursor: pointer;
+  float: right;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0; }
+
+.Chat-msgForm {
   flex: 2;
   border-radius: 4px;
   background-color: white;
   padding: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
 
-.Chat-sendMessageFormText {
-  flex: 8;
+.Chat-msgFormText {
   resize: none;
   border: none;
   outline: none; }
 
-.Chat-sendMessageFormButton {
+.Chat-msgFormButton {
   flex: 1;
   background-repeat: no-repeat;
   background-position: center;
@@ -277,8 +346,13 @@ dd > * {
   outline: none;
   border: none; }
 
-.Chat-sendMessageFormButton:active {
-  outline: inherit; }
+.Chat-msgFormButton:hover {
+  cursor: pointer; }
 
-.Chat-sendMessageFormButton:active:after {
-  outline: none; }
+/*.Chat-msgFormButton:active {
+    outline: inherit;
+}
+
+.Chat-msgFormButton:active:after {
+    outline: none;
+}*/
