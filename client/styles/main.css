@@ -327,6 +327,12 @@ cite {
   background-color: white;
   margin-top: 0; }
 
+.Chat-msg-text--own {
+  background-color: white; }
+
+.Chat-msg-text--own:hover {
+  background-color: #EBEDEC; }
+
 .Chat-msg-text p {
   font-size: 1.3rem;
   color: #646464;

@@ -28,7 +28,6 @@
         e.target.classList.add('hidden');
         e.target.setAttribute('aria-hidden', 'true');
         var pre = document.querySelector('.Shadowmaker');
-        pre.style.backgroundColor = 'rgba(0, 0, 0, 0)';
         pre.classList.add('hidden');
         pre.setAttribute('aria-hidden', 'true');
     }
@@ -251,6 +250,9 @@
         createArticleHTML: function (msg) {
             var article = document.createElement('article');
             article.classList.add('Chat-msg-text');
+            if (window.Babble.gravatar === msg.url) {
+                article.classList.add('Chat-msg-text--own');
+            }
             article.setAttribute('tabindex', '-1');
 
             article.appendChild(window.Babble.createHeaderHTML(msg));
