@@ -14,11 +14,11 @@
     display: none;
 }
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: auto;
 }
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: white;
     border-radius: $borderRadius;
     -webkit-border-radius: $borderRadius;
@@ -26,7 +26,7 @@
     -webkit-border: 2px solid $c-border;
 }
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     -webkit-border-radius: $borderRadius;
     border-radius: $borderRadius;
     background: $c-border + #101211;

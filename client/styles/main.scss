@@ -18,6 +18,7 @@ html {
     display: flex;
 }
 
+
 h1 {
     font-size: 1.875rem;
     margin-top: 0;
@@ -40,17 +41,26 @@ h1 {
     @extend %u-aria-hidden;
 }
 
+.Shadowmaker,
 .Modal {
-    border: 1px solid $c-border;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+.Shadowmaker {
+    background-color: rgba(0, 0, 0, 0.43);
+    margin: 0;
+    padding: 0;
+}
+
+.Modal {
+    border: 1px solid $c-border;
+    border-radius: 0.1rem;
     margin: auto;
     background-color: $c-modalBackground;
-    box-shadow: 0 0 3rem 0 black;
-    border-radius: 0.1rem;
 }
 
 .Modal p {

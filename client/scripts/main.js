@@ -27,6 +27,10 @@
         });
         e.target.classList.add('hidden');
         e.target.setAttribute('aria-hidden', 'true');
+        var pre = document.querySelector('.Shadowmaker');
+        pre.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        pre.classList.add('hidden');
+        pre.setAttribute('aria-hidden', 'true');
     }
 
     function deleteMessageFromServer(e) {

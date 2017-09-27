@@ -46,7 +46,7 @@
   .Modal {
     padding: 3rem; }
   .Modal--anonymous {
-    padding: 0.3rem; }
+    padding: 0.4rem 0.7rem 0.4rem 0.7rem; }
   .Modal--login {
     padding: 0.4rem 2.3rem 0.4rem 2.3rem; } }
 
@@ -193,17 +193,24 @@ h1 {
 .Logo {
   float: left; }
 
+.Shadowmaker,
 .Modal {
-  border: 1px solid #DBDBDB;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0; }
+
+.Shadowmaker {
+  background-color: rgba(0, 0, 0, 0.43);
+  margin: 0;
+  padding: 0; }
+
+.Modal {
+  border: 1px solid #DBDBDB;
+  border-radius: 0.1rem;
   margin: auto;
-  background-color: #F9F9F9;
-  box-shadow: 0 0 3rem 0 black;
-  border-radius: 0.1rem; }
+  background-color: #F9F9F9; }
 
 .Modal p {
   width: 100%;
