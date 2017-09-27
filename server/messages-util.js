@@ -14,12 +14,13 @@
         addMessage: function addMessage(message) {
             if (!message.hasOwnProperty('name') ||
                 !message.hasOwnProperty('email') ||
+                !message.hasOwnProperty('message') ||
                 !message.hasOwnProperty('timestamp')) {
-                return;
+                return -1;
             }
             var timestamp = parseInt(message.timestamp);
             if (isNaN(timestamp)) {
-                return 0;
+                return -1;
             }
             message.url = users.getGravatar(message.email);
             delete message.email;
