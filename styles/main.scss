@@ -1,4 +1,4 @@
-//@import 'fonts.scss';
+@import 'fonts.scss';
 @import 'screen.scss';
 @import 'variables.scss';
 @import 'utils.scss';
@@ -86,7 +86,7 @@ dd {
     margin-left: 0.5rem;
 }
 
-dd>* {
+dd > * {
     margin: 0.2rem;
 }
 
@@ -181,7 +181,7 @@ dd>* {
     color: $c-msgText;
 }
 
-.Modal p>* {
+.Modal p > * {
     font-family: inherit;
 }
 
