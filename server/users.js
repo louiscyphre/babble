@@ -10,7 +10,7 @@
     var gravatarify = require('gravatar').url;
     var users = [];
 
-    return {
+    var usersutil = {
         login: function login(user) {
             var index = users.indexOf(user);
             if (index === -1) {
@@ -36,8 +36,8 @@
             }
             return gravatarify(email);
         },
-        processAuth: function processAuth(authCallback, request, response,
-            requestsHandler, pendingRequests, msg) {
+        doAuth: function doAuth(authCallback, request, response,
+            requestsHandler, statsModule) {
 
             var requestBody = '';
             request.on('data', function (chunk) {
@@ -46,11 +46,12 @@
             request.on('end', function () {
                 var user = JSON.parse(requestBody);
                 authCallback(user);
-                requestsHandler(pendingRequests, msg);
+                requestsHandler(statsModule.requests, statsModule.get());
                 response.end(JSON.stringify({
-                    gravatar: gravatarify(user.email)
+                    gravatar: usersutil.getGravatar(user.email)
                 }));
             });
         }
     };
+    return usersutil;
 }));

@@ -21,10 +21,7 @@
     // TODO
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
-        response.setHeader('Access-Control-Allow-Origin', '*');
-        response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
-        response.setHeader('Cache-Control', 'max-age=0, public');
+        utils.setResponseHeaders(response);
         var url = urlUtil.parse(request.url);
         var requestBody = '';
         if (request.method === 'GET') {
@@ -36,18 +33,10 @@
                 if (messages.count() > data.counter) {
                     response.end(JSON.stringify(messages.getMessages(data.counter)));
                 } else {
-                    var res = {
-                        response: response,
-                        timestamp: Date.now()
-                    };
-                    requests.push(res);
+                    utils.pushResponseToStack(requests, response);
                 }
             } else if (url.pathname.substr(0, 6) == '/stats') {
-                var resp = {
-                    response: response,
-                    timestamp: Date.now()
-                };
-                stats.requests.push(resp);
+                utils.pushResponseToStack(stats.requests, response);
             } else {
                 response.writeHead(400);
             }
@@ -70,19 +59,16 @@
                     }));
                 });
             } else if (url.pathname.substr(0, 6) == '/login') {
-                users.doAuth(users.login, request, response, utils.closePendingRequests, stats.requests, stats.get());
+                users.doAuth(users.login, request, response, utils.closePendingRequests, stats);
             } else if (url.pathname.substr(0, 7) == '/logout') {
-                users.doAuth(users.logout, request, response, utils.closePendingRequests, stats.requests, stats.get());
+                users.doAuth(users.logout, request, response, utils.closePendingRequests, stats);
             }
-        } else if (request.method === 'DELETE') {
-            if (url.pathname.substr(0, 9) == '/messages') {
-                var strid = url.pathname.replace('/messages/', '');
-                messages.deleteMessage(strid);
-                utils.closePendingRequests(stats.requests, stats.get());
-                response.end(JSON.stringify(true));
-            }
+        } else if (request.method === 'DELETE' && url.pathname.substr(0, 9) == '/messages') {
+            var strid = url.pathname.replace('/messages/', '');
+            messages.deleteMessage(strid);
+            utils.closePendingRequests(stats.requests, stats.get());
+            response.end(JSON.stringify(true));
         } else if (request.method === 'OPTIONS') {
-
             response.writeHead(204, {
                 'Content-Type': 'text/plain'
             });

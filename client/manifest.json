@@ -1,6 +1,6 @@
 {
-    "name": "Babble - Talk freely",
     "short_name": "Babble",
+    "name": "Babble",
     "start_url": "/",
     "background_color": "#FFFFFF",
     "theme_color": "#FFFFFF",
