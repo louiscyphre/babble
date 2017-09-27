@@ -10,9 +10,18 @@
     var gravatarify = require('gravatar').url;
     var users = [];
 
+    function isExist(user, array) {
+        for (var i = array.length - 1; i >= 0; --i) {
+            if (user.email === array[i].email) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     var usersutil = {
         login: function login(user) {
-            var index = users.indexOf(user);
+            var index = isExist(user, users);
             if (index === -1) {
                 users.push(user);
             }
@@ -20,7 +29,7 @@
             console.log('[INFO] login(): all users:', JSON.stringify(users));
         },
         logout: function logout(user) {
-            var index = users.indexOf(user);
+            var index = isExist(user, users);
             if (index !== -1) {
                 users.splice(index, 1);
             }
