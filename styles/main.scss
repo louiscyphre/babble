@@ -3,42 +3,26 @@
 @import 'variables.scss';
 @import 'utils.scss';
 @import 'functions.scss';
-
-html,
+html > *,
 h1 {
     font-family: 'Nunito', sans-serif;
-    font-weight: normal;
+    font-weight: 400;
 }
 
 body,
 html {
     margin: 0;
-    flex-flow: column nowrap;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+    display: flex;
 }
 
 h1 {
     font-size: 1.875rem;
     margin-top: 0;
-}
-
-html,
-body,
-.ChatContainer,
-.Chat,
-.Chat-msg,
-.Chat-sendMessageForm {
-    display: flex;
-}
-
-.ChatContainer {
-    flex: 7;
-}
-
-.ChatSideBar {
-    flex: 2;
-    background-color: $c-sidebar;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 .MainHeader {
@@ -52,107 +36,8 @@ body,
     float: left;
 }
 
-.Chat {
-    flex: 9;
-    flex-direction: column;
-    background-color: $c-chatArea;
-}
-
-.Chat-header {
-    flex: 1;
-    display: flex;
-    padding: 0.9rem;
-}
-
-.Chat-header-title {
-    margin: 0;
-    align-self: center;
-    width: 100%;
-}
-
-.Chat-header-stats {
-    align-self: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-
-.Chat-header-stats,
-dd {
-    margin: 0;
-    display: flex;
-    flex-flow: row nowrap;
-}
-
-dd {
-    margin-left: 0.5rem;
-}
-
-dd > * {
-    margin: 0.2rem;
-}
-
-.Chat-messages {
-    flex: 12;
-    overflow-y: auto;
-    border-bottom: 0.1rem solid $c-border;
-    overflow-x: hidden;
-}
-
-.Chat-messages ol {
-    list-style: none;
-    padding: 0;
-}
-
-.Chat-msg {
-    vertical-align: top;
-    margin: 1rem;
-}
-
-.Chat-msg-avatar {
-    @extend %u-circle;
-    @include dimensions($avatarSize, $avatarSize);
-    float: left;
-    margin-right: 1rem;
-}
-
-.Chat-msg-text {
-    @extend %u-rounded-rectangle;
-    background-color: white;
-    display: inline-block;
-    margin-top: 0;
-}
-
-.Chat-sendMessageForm {
-    flex: 2;
-    border-radius: 4px;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-
-.Chat-sendMessageFormText {
-    flex: 8;
-    resize: none;
-    border: none;
-    outline: none;
-}
-
-.Chat-sendMessageFormButton {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    background-color: white;
-    outline: none;
-    border: none;
-    flex: 1;
-}
-
-.Chat-sendMessageFormButton:active {
-    outline: inherit;
-}
-
-.Chat-sendMessageFormButton:active:after {
-    outline: none;
+.hidden {
+    @extend %u-aria-hidden;
 }
 
 .Modal {
@@ -164,15 +49,12 @@ dd > * {
     bottom: 0;
     margin: auto;
     background-color: $c-modalBackground;
-    padding: 3rem;
-    box-shadow: 0 0 1rem 0 black;
+    box-shadow: 0 0 3rem 0 black;
     border-radius: 0.1rem;
-    display: table;
 }
 
 .Modal p {
     width: 100%;
-    display: inline-flex;
     align-items: center;
     margin-top: 0;
 }
@@ -180,10 +62,6 @@ dd > * {
 .Modal p label {
     flex: 1;
     color: $c-msgText;
-}
-
-.Modal p > * {
-    font-family: inherit;
 }
 
 .Modal p label,
@@ -197,6 +75,8 @@ input {
     border-radius: $borderRadius;
     border: 2px solid $c-border;
     outline-style: none;
+    font-family: inherit;
+    font-size: 1.3rem;
 }
 
 .Modal-buttons {
@@ -205,13 +85,11 @@ input {
 
 .Modal--anonymous {
     @include gradient($degree, $c-anon-gradient-lower, $c-anon-gradient-upper);
-    min-width: 30%;
 }
 
 .Modal--login {
     @include gradient($degree, $c-login-gradient-lower, $c-login-gradient-upper);
     color: white;
-    min-width: 20%;
 }
 
 .Modal--anonymous,
@@ -220,4 +98,157 @@ input {
     border-radius: 0.1rem;
     margin-left: 1rem;
     margin-top: 1rem;
+    font-family: inherit;
 }
+
+.ChatContainer,
+.Chat,
+.Chat-msgForm {
+    display: flex;
+}
+
+.ChatContainer {
+    flex: 7;
+    overflow: auto;
+}
+
+.ChatSideBar {
+    background-color: $c-sidebar;
+}
+
+.Chat {
+    flex: 9;
+    flex-direction: column;
+    background-color: $c-chatArea;
+}
+
+.Chat-header {
+    flex: 1;
+    padding: 0.9rem;
+}
+
+.Chat-header-title {
+    margin: 0;
+    align-self: center;
+    width: 100%;
+}
+
+.Chat-header-stats {
+    align-self: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.Chat-header-stats,
+dd {
+    margin: 0;
+}
+
+dd {
+    margin-left: 0.5rem;
+}
+
+dd > * {
+    margin: 0.2rem;
+}
+
+.Chat-msgs {
+    flex: 12;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-bottom: 0.1rem solid $c-border;
+}
+
+.Chat-msgs ol {
+    list-style: none;
+    padding: 0;
+}
+
+.Chat-msg {
+    vertical-align: top;
+    margin: 1rem;
+}
+
+.Chat-msg-avatar {
+    @extend %u-circle;
+    @include dimensions($avatarSize, $avatarSize);
+    margin-right: 1rem;
+}
+
+cite {
+    font-weight: 700;
+    font-size: 1.3rem;
+    font-style: normal;
+}
+
+.Chat-msg-text {
+    @extend %u-rounded-rectangle;
+    background-color: white;
+    margin-top: 0;
+}
+
+.Chat-msg-text p {
+    font-size: 1.3rem;
+    color: $c-msgText;
+    padding: 0;
+    margin: 0;
+}
+
+.Chat-msg-text header time {
+    font-weight: 300;
+    color: $c-msgTime;
+    margin-left: 0.5rem;
+}
+
+.Chat-msg-delete {
+    background: url("../images/del_msg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    padding: 0;
+    width: 0.9rem;
+    height: 0.9rem;
+    cursor: pointer;
+    float: right;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.Chat-msgForm {
+    flex: 2;
+    border-radius: 4px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.Chat-msgFormText {
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+.Chat-msgFormButton {
+    flex: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-color: white;
+    outline: none;
+    border: none;
+}
+
+.Chat-msgFormButton:hover {
+    cursor: pointer;
+}
+
+
+/*.Chat-msgFormButton:active {
+    outline: inherit;
+}
+
+.Chat-msgFormButton:active:after {
+    outline: none;
+}*/
