@@ -46,7 +46,7 @@
   .Modal {
     padding: 3rem; }
   .Modal--anonymous {
-    padding: 0.4rem; }
+    padding: 0.3rem; }
   .Modal--login {
     padding: 0.4rem 2.3rem 0.4rem 2.3rem; } }
 
@@ -369,11 +369,3 @@ cite {
 
 .Chat-msgFormButton:hover {
   cursor: pointer; }
-
-/*.Chat-msgFormButton:active {
-    outline: inherit;
-}
-
-.Chat-msgFormButton:active:after {
-    outline: none;
-}*/
