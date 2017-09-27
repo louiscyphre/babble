@@ -59,11 +59,12 @@
                     }));
                 });
             } else if (url.pathname.substr(0, 6) == '/login') {
-                users.doAuth(users.login, request, response, utils.closePendingRequests, stats);
+                users.doAuth(users.login, request, response, stats);
             } else if (url.pathname.substr(0, 7) == '/logout') {
-                users.doAuth(users.logout, request, response, utils.closePendingRequests, stats);
+                users.doAuth(users.logout, request, response, stats);
             }
-        } else if (request.method === 'DELETE' && url.pathname.substr(0, 9) == '/messages') {
+        } else if (request.method === 'DELETE' &&
+            url.pathname.substr(0, 9) == '/messages') {
             var strid = url.pathname.replace('/messages/', '');
             messages.deleteMessage(strid);
             utils.closePendingRequests(stats.requests, stats.get());

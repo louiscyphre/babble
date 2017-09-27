@@ -1,4 +1,4 @@
-@media (max-width:638px) {
+@media (min-width:0px) and (max-width:638px) {
     html {
         font-size: 72.5%;
     }
@@ -9,11 +9,39 @@
     .Chat-msg-text {
         font-size: 1.5rem;
     }
+    .Chat-msg-text p {
+        word-wrap: break-word;
+        word-break: break-all;
+    }
     .Logo {
         width: 40%;
     }
-    .Modal p>* {
+    .Modal p > * {
         font-size: 1.5rem;
+    }
+}
+
+@media (min-width:0px) and (max-width:160px) {
+    .Modal {
+        padding: 0;
+    }
+    .Modal--anonymous,
+    .Modal--login {
+        padding: 0;
+    }
+}
+
+@media (min-width:161px) {
+
+    .Modal {
+        padding: 3rem;
+    }
+    .Modal--anonymous {
+
+        padding: 0.4rem;
+    }
+    .Modal--login {
+        padding: 0.4rem 2.3rem 0.4rem 2.3rem;
     }
 }
 
@@ -30,6 +58,7 @@
     .Modal p input {
         display: block;
         word-break: break-all;
+        word-wrap: break-word;
         min-width: 0%;
     }
     .Modal,
@@ -99,7 +128,7 @@
     .Modal p {
         display: inline-flex;
     }
-    .Modal p>* {
+    .Modal p > * {
         font-size: 1.2rem;
     }
     .Chat-msgFormText {
@@ -112,6 +141,9 @@
     .Chat-msg {
         display: flex;
     }
+    .Chat-msg-text p {
+        word-wrap: break-word;
+    }
     .Chat-header-stats,
     dd {
         display: flex;
@@ -119,6 +151,9 @@
     }
     .Chat-msg-avatar {
         float: left;
+    }
+    .ChatSideBar {
+        flex: 2;
     }
 }
 

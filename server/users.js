@@ -8,6 +8,7 @@
     }
 }(this, module, function () {
     var gravatarify = require('gravatar').url;
+    var utils = require('./server-util');
     var users = [];
 
     function isExist(user, array) {
@@ -45,8 +46,7 @@
             }
             return gravatarify(email);
         },
-        doAuth: function doAuth(authCallback, request, response,
-            requestsHandler, statsModule) {
+        doAuth: function doAuth(authCallback, request, response, statsModule) {
 
             var requestBody = '';
             request.on('data', function (chunk) {
@@ -55,7 +55,7 @@
             request.on('end', function () {
                 var user = JSON.parse(requestBody);
                 authCallback(user);
-                requestsHandler(statsModule.requests, statsModule.get());
+                utils.closePendingRequests(statsModule.requests, statsModule.get());
                 response.end(JSON.stringify({
                     gravatar: usersutil.getGravatar(user.email)
                 }));

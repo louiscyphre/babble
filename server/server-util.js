@@ -16,7 +16,7 @@
             for (var i = requests.length - 1; i >= 0; i--) {
                 if (requests[i].timestamp >= expirationTime) {
                     requests[i].response.end("");
-                    console.log('[INFO] closeExpired(requests, timeout): closing request:', i);
+                    console.log('[INFO] closeExpired(requests, timeout): closing request with timestamp:', requests[i].timestamp);
                     requests.splice(i, 1);
                 }
             }

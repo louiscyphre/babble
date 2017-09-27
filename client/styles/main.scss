@@ -3,7 +3,7 @@
 @import 'variables.scss';
 @import 'utils.scss';
 @import 'functions.scss';
-html>*,
+html > *,
 h1 {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
@@ -21,6 +21,8 @@ html {
 h1 {
     font-size: 1.875rem;
     margin-top: 0;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 .MainHeader {
@@ -47,7 +49,6 @@ h1 {
     bottom: 0;
     margin: auto;
     background-color: $c-modalBackground;
-    padding: 3rem;
     box-shadow: 0 0 3rem 0 black;
     border-radius: 0.1rem;
 }
@@ -84,13 +85,11 @@ input {
 
 .Modal--anonymous {
     @include gradient($degree, $c-anon-gradient-lower, $c-anon-gradient-upper);
-    padding: 0.4rem;
 }
 
 .Modal--login {
     @include gradient($degree, $c-login-gradient-lower, $c-login-gradient-upper);
     color: white;
-    padding: 0.3rem 2.3rem 0.3rem 2.3rem;
 }
 
 .Modal--anonymous,
@@ -114,7 +113,6 @@ input {
 }
 
 .ChatSideBar {
-    flex: 2;
     background-color: $c-sidebar;
 }
 
@@ -150,7 +148,7 @@ dd {
     margin-left: 0.5rem;
 }
 
-dd>* {
+dd > * {
     margin: 0.2rem;
 }
 
