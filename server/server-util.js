@@ -16,7 +16,7 @@
             for (var i = requests.length - 1; i >= 0; i--) {
                 if (requests[i].timestamp >= expirationTime) {
                     requests[i].response.end("");
-                    console.log('[INFO] closeExpired(requests, timeout): closing request with timestamp:', requests[i].timestamp);
+                    //console.log('[INFO] closeExpired(requests, timeout): closing request with timestamp:', requests[i].timestamp);
                     requests.splice(i, 1);
                 }
             }
@@ -24,7 +24,7 @@
         closePendingRequests: function closePendingRequests(requests, msg) {
             while (requests.length > 0) {
                 var request = requests.pop();
-                console.log('[INFO] closePendingRequests(): ', JSON.stringify(msg));
+                //console.log('[INFO] closePendingRequests(): ', JSON.stringify(msg));
                 request.response.end(JSON.stringify(msg));
             }
         },
@@ -33,6 +33,7 @@
             response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
             response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
             response.setHeader('Cache-Control', 'max-age=0, public');
+            response.setHeader('Content-Type', 'text/plain');
         },
         pushResponseToStack: function (requests, response) {
             var resp = {

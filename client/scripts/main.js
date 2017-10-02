@@ -7,7 +7,7 @@
 
         var data = JSON.parse(window.Babble.storage.getItem('babble'));
         var textarea = document.querySelector('.Chat-msgFormText');
-
+        // gjghgg
         var message = {
             name: data.userInfo.name,
             email: data.userInfo.email,
@@ -17,6 +17,7 @@
         textarea.value = "";
         window.Babble.postMessage(message, window.Babble.dummy);
     }
+
 
     function submitRegisterForm(e) {
         e.preventDefault();
@@ -48,10 +49,6 @@
         deleteMessageImg: 'images/del_msg.svg',
         messages: [],
         messagesCounter: 0,
-        stats: {
-            users: 0,
-            messages: 0
-        },
         storage: localStorage,
         gravatar: '',
 
@@ -113,11 +110,12 @@
         poll: function poll(url, callback) {
             window.Babble.request('GET', url).then(function (ans) {
                 if (ans !== "") {
+                    console.log('server answer: ', ans);
                     callback(JSON.parse(ans));
                 }
                 poll(url, callback);
             }).catch(function (err) {
-                console.log(err);
+                console.log('Error from server: ', err);
             });
         },
 
@@ -134,7 +132,7 @@
         postMessage: function postMessage(message, callback) {
             window.Babble.updateKeyInLocalStorage('currentMessage', message.message);
             window.Babble.request('POST', '/messages', message).then(function (ans) {
-                callback(ans);
+                callback(JSON.parse(ans));
             }).catch(function (err) {
                 console.log(err);
             });
@@ -156,6 +154,7 @@
         },
 
         storeMessages: function (array) {
+            console.log('Trying to append this array: ', array);
             window.Babble.messages = window.Babble.messages.concat(array);
             window.Babble.messagesCounter = window.Babble.messages.length;
             window.Babble.appendToListView([].concat(array));
@@ -284,11 +283,9 @@
                 data.userInfo.name = value.name;
                 data.userInfo.email = value.email;
                 window.Babble.storage.setItem('babble', JSON.stringify(data));
-                return;
             } else if (keyName === 'currentMessage') {
                 data.currentMessage = value;
                 window.Babble.storage.setItem('babble', JSON.stringify(data));
-                return;
             }
         }
     };

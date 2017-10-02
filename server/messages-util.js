@@ -24,16 +24,22 @@
             }
             message.url = users.getGravatar(message.email);
             delete message.email;
-            console.log('[INFO] addMessage(): (email removed, gravatar added instead):', JSON.stringify(message));
+            //console.log('[INFO] addMessage(): (email removed, gravatar added instead):', JSON.stringify(message));
             messagesArray.push(message);
             return timestamp;
         },
         getMessages: function getMessages(counter) {
+            if (typeof counter !== 'number') {
+                return [];
+            }
             return messagesArray.slice(counter);
         },
         deleteMessage: function deleteMessage(id) {
+            if (typeof id !== 'string' || messagesArray.length === 0) {
+                return;
+            }
             var timestamp = parseInt(id);
-            if (isNaN(timestamp) || messagesArray.length === 0) {
+            if (isNaN(timestamp)) {
                 return;
             }
             for (var i = messagesArray.length - 1; i >= 0; i--) {
