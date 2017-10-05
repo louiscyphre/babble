@@ -6,23 +6,24 @@
     var urlUtil = require('url');
     var queryUtil = require('querystring');
 
+    var constants = require('./constants');
     var messages = require('./messages-util');
     var utils = require('./server-util');
     var users = require('./users');
     var stats = require('./stats');
 
-    var requests = [];
-
     setInterval(function () {
-        var expirationTime = Date.now() - 180000;
-        utils.closeExpired(requests, expirationTime);
+        var expirationTime = Date.now() - constants.HOLDING_REQUEST_TIMEOUT;
+        utils.closeExpired(messages.requests, expirationTime);
         utils.closeExpired(stats.requests, expirationTime);
-    }, 180000);
-    // TODO
-    // FIXME divide, neat
+    }, constants.HOLDING_REQUEST_TIMEOUT);
+
     var server = http.createServer(function (request, response) {
+
         utils.setResponseHeaders(response);
+
         var url = urlUtil.parse(request.url);
+<<<<<<< HEAD
         var requestBody = '';
         if (request.method === 'GET') {
             var data = queryUtil.parse(url.query);
@@ -53,31 +54,34 @@
                     id = messages.addMessage(msg);
                     utils.closePendingRequests(requests, msg);
                     utils.closePendingRequests(stats.requests, stats.get());
+=======
+        var path = url.pathname.substr(0, 9);
+        var requestType = request.method + ' ' + path;
+>>>>>>> 4c2ce34b11587abcd2af91eade24cdc5f24b9773
 
-                    response.end(JSON.stringify({
-                        id: id.toString()
-                    }));
-                });
-            } else if (url.pathname.substr(0, 6) == '/login') {
-                users.doAuth(users.login, request, response, stats);
-            } else if (url.pathname.substr(0, 7) == '/logout') {
-                users.doAuth(users.logout, request, response, stats);
-            }
-        } else if (request.method === 'DELETE' &&
-            url.pathname.substr(0, 9) == '/messages') {
-            var strid = url.pathname.replace('/messages/', '');
-            messages.deleteMessage(strid);
-            utils.closePendingRequests(stats.requests, stats.get());
-            response.end(JSON.stringify(true));
+        if (requestType === 'GET /messages') {
+            var data = queryUtil.parse(url.query);
+            utils.doGETmessages(url, data, response, messages);
+        } else if (requestType === 'GET /stats') {
+            utils.pushResponseToStack(stats.requests, response);
+        } else if (requestType === 'POST /messages') {
+            utils.doPOSTmessages(request, response, messages, stats);
+        } else if (requestType === 'POST /login') {
+            users.doAuth(users.login, request, response, stats);
+        } else if (requestType === 'POST /logout') {
+            users.doAuth(users.logout, request, response, stats);
+        } else if (requestType === 'DELETE /messages') {
+            utils.doDELETEmessages(url, response, messages, stats);
         } else if (request.method === 'OPTIONS') {
-            response.writeHead(204, {
-                'Content-Type': 'text/plain'
-            });
-            response.end();
+            utils.responseWith(response, constants.httpSuccessCodes.NO_CONTENT);
         } else {
-            response.writeHead(405);
-            response.end();
+            utils.responseWith(response, constants.httpErrorCodes.METHOD_NOT_ALLOWED);
         }
+<<<<<<< HEAD
     });
     server.listen(9000);
 }(this.window));
+=======
+    }).listen(constants.SERVER_PORT);
+}(this.window));
+>>>>>>> 4c2ce34b11587abcd2af91eade24cdc5f24b9773
