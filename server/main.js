@@ -23,41 +23,8 @@
         utils.setResponseHeaders(response);
 
         var url = urlUtil.parse(request.url);
-<<<<<<< HEAD
-        var requestBody = '';
-        if (request.method === 'GET') {
-            var data = queryUtil.parse(url.query);
-            if (url.pathname.substr(0, 9) == '/messages') {
-                if (!data.counter || isNaN(parseInt(data.counter))) {
-                    response.writeHead(400);
-                }
-                if (messages.count() > data.counter) {
-                    response.end(JSON.stringify(messages.getMessages(data.counter)));
-                } else {
-                    utils.pushResponseToStack(requests, response);
-                }
-            } else if (url.pathname.substr(0, 6) == '/stats') {
-                utils.pushResponseToStack(stats.requests, response);
-            } else {
-                response.writeHead(400);
-            }
-        } else if (request.method === 'POST') {
-            var user;
-            if (url.pathname.substr(0, 9) == '/messages') {
-                var id = 0;
-                requestBody = '';
-                request.on('data', function (chunk) {
-                    requestBody += chunk;
-                });
-                request.on('end', function () {
-                    var msg = JSON.parse(requestBody);
-                    id = messages.addMessage(msg);
-                    utils.closePendingRequests(requests, msg);
-                    utils.closePendingRequests(stats.requests, stats.get());
-=======
         var path = url.pathname.substr(0, 9);
         var requestType = request.method + ' ' + path;
->>>>>>> 4c2ce34b11587abcd2af91eade24cdc5f24b9773
 
         if (requestType === 'GET /messages') {
             var data = queryUtil.parse(url.query);
@@ -77,11 +44,5 @@
         } else {
             utils.responseWith(response, constants.httpErrorCodes.METHOD_NOT_ALLOWED);
         }
-<<<<<<< HEAD
-    });
-    server.listen(9000);
-}(this.window));
-=======
     }).listen(constants.SERVER_PORT);
 }(this.window));
->>>>>>> 4c2ce34b11587abcd2af91eade24cdc5f24b9773

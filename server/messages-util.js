@@ -51,14 +51,10 @@
         },
         count: function count() {
             return messagesArray.length;
-<<<<<<< HEAD
-        }
-=======
         },
         clear: function clear() {
             messagesArray = [];
         },
         requests: requests
->>>>>>> 4c2ce34b11587abcd2af91eade24cdc5f24b9773
     };
 }));
