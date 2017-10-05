@@ -12,11 +12,9 @@
     var users = require('./users');
     var stats = require('./stats');
 
-    var requests = [];
-
     setInterval(function () {
         var expirationTime = Date.now() - constants.HOLDING_REQUEST_TIMEOUT;
-        utils.closeExpired(requests, expirationTime);
+        utils.closeExpired(messages.requests, expirationTime);
         utils.closeExpired(stats.requests, expirationTime);
     }, constants.HOLDING_REQUEST_TIMEOUT);
 
