@@ -2,21 +2,21 @@
   font-family: 'Nunito';
   font-style: light;
   font-weight: 300;
-  src: local("Nunito Light"), local("Nunito-Light"), url("../fonts/Nunito-Light.woff2") format("woff2"), url("../fonts/Nunito-Light.ttf") format("truetype");
+  src: local("Nunito Light"), local("Nunito-Light"), url("/fonts/Nunito-Light.woff2") format("woff2"), url("/fonts/Nunito-Light.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
 
 @font-face {
   font-family: 'Nunito';
   font-style: normal;
   font-weight: 400;
-  src: local("Nunito Regular"), local("Nunito-Regular"), url("../fonts/Nunito-Regular.woff2") format("woff2"), url("../fonts/Nunito-Regular.ttf") format("truetype");
+  src: local("Nunito Regular"), local("Nunito-Regular"), url("/fonts/Nunito-Regular.woff2") format("woff2"), url("/fonts/Nunito-Regular.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
 
 @font-face {
   font-family: 'Nunito';
   font-style: bold;
   font-weight: 700;
-  src: local("Nunito Bold"), local("Nunito-Bold"), url("../fonts/Nunito-Bold.woff2") format("woff2"), url("../fonts/Nunito-Bold.ttf") format("truetype");
+  src: local("Nunito Bold"), local("Nunito-Bold"), url("/fonts/Nunito-Bold.woff2") format("woff2"), url("/fonts/Nunito-Bold.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
 
 @media (min-width: 0px) and (max-width: 638px) {
@@ -46,7 +46,7 @@
   .Modal {
     padding: 3rem; }
   .Modal--anonymous {
-    padding: 0.4rem; }
+    padding: 0.4rem 0.7rem 0.4rem 0.7rem; }
   .Modal--login {
     padding: 0.4rem 2.3rem 0.4rem 2.3rem; } }
 
@@ -193,17 +193,24 @@ h1 {
 .Logo {
   float: left; }
 
+.Shadowmaker,
 .Modal {
-  border: 1px solid #DBDBDB;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0; }
+
+.Shadowmaker {
+  background-color: rgba(0, 0, 0, 0.43);
+  margin: 0;
+  padding: 0; }
+
+.Modal {
+  border: 1px solid #DBDBDB;
+  border-radius: 0.1rem;
   margin: auto;
-  background-color: #F9F9F9;
-  box-shadow: 0 0 3rem 0 black;
-  border-radius: 0.1rem; }
+  background-color: #F9F9F9; }
 
 .Modal p {
   width: 100%;
@@ -320,6 +327,12 @@ cite {
   background-color: white;
   margin-top: 0; }
 
+.Chat-msg-text--own {
+  background-color: white; }
+
+.Chat-msg-text--own:hover {
+  background-color: #EBEDEC; }
+
 .Chat-msg-text p {
   font-size: 1.3rem;
   color: #646464;
@@ -369,11 +382,3 @@ cite {
 
 .Chat-msgFormButton:hover {
   cursor: pointer; }
-
-/*.Chat-msgFormButton:active {
-    outline: inherit;
-}
-
-.Chat-msgFormButton:active:after {
-    outline: none;
-}*/
