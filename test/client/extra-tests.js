@@ -55,10 +55,10 @@
 
                 let callback = sinon.spy();
                 Babble.postMessage(message, callback);
-                //server.respond();
-                //setTimeout(function () {
-                ///    sinon.assert.calledWith(callback, ans);
-                //}, 3000);
+                server.respond();
+                setTimeout(function () {
+                    sinon.assert.calledWith(callback, ans);
+                }, 3000);
             });
         });
     });

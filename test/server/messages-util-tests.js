@@ -130,11 +130,5 @@
                 assert.deepEqual(messages.count(), array.length);
             });
         });
-        describe('messages.clear():', function () {
-            it('should delete all messages', function () {
-                messages.clear();
-                assert.deepEqual([], messages.getMessages(0));
-            });
-        });
     });
 }());

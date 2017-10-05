@@ -7,7 +7,7 @@
 
         var data = JSON.parse(window.Babble.storage.getItem('babble'));
         var textarea = document.querySelector('.Chat-msgFormText');
-
+        // gjghgg
         var message = {
             name: data.userInfo.name,
             email: data.userInfo.email,
@@ -15,7 +15,7 @@
             timestamp: window.Date.now()
         };
         textarea.value = "";
-        window.Babble.postMessage(message, window.Babble.saveLastMessage);
+        window.Babble.postMessage(message, window.Babble.dummy);
     }
 
 
@@ -35,7 +35,7 @@
 
     function deleteMessageFromServer(e) {
         e.preventDefault();
-        var id = e.target.parentNode.parentNode.parentNode.id; //FIXME TODO
+        var id = e.target.parentNode.parentNode.parentNode.id;
         console.log('deleteMessageFromServer():Message id is:', id);
         var message = document.getElementById(id);
         message.classList.add('hidden');
@@ -47,13 +47,15 @@
         apiServerUrl: 'http://localhost:9000',
         anonymousAvatar: 'images/anon.svg',
         deleteMessageImg: 'images/del_msg.svg',
-        messages: undefined,
+        messages: [],
+        messagesCounter: 0,
         storage: localStorage,
         gravatar: '',
 
         run: function (document, window, console) {
 
             window.Babble.updateKeyInLocalStorage('allKeys', '');
+            window.Babble.getStats(window.Babble.updateStats);
 
             var msgForm = document.querySelector('.Chat-msgForm');
             msgForm.onsubmit = submitNewMessageForm;
@@ -64,7 +66,8 @@
             window.onbeforeunload = function () {
                 var data = (JSON.parse(window.Babble.storage.getItem('babble'))).userInfo;
                 window.Babble.request('POST', '/logout', data).then(function (answer) {
-                    window.Babble.updateKeyInLocalStorage('all', ''); // FIXME Last message: to see or not to see?
+                    console.log('Answer on POST /logout:', answer);
+                    window.Babble.updateKeyInLocalStorage('all', '');
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -88,8 +91,7 @@
                 };
                 var fullUrl;
                 if (requestPath === '/messages?counter=') {
-                    var counter = window.Babble.messages.length.toString();
-                    fullUrl = window.Babble.apiServerUrl + requestPath + counter;
+                    fullUrl = window.Babble.apiServerUrl + requestPath + window.Babble.messagesCounter.toString();
                 } else {
                     fullUrl = window.Babble.apiServerUrl + requestPath;
                 }
@@ -107,7 +109,8 @@
 
         poll: function poll(url, callback) {
             window.Babble.request('GET', url).then(function (ans) {
-                if (ans !== "") { //console.log('server answer: ', ans);
+                if (ans !== "") {
+                    console.log('server answer: ', ans);
                     callback(JSON.parse(ans));
                 }
                 poll(url, callback);
@@ -118,25 +121,25 @@
 
         register: function register(userInfo) {
             window.Babble.updateKeyInLocalStorage('userInfo', userInfo);
-            window.Babble.getStats(window.Babble.updateStats);
             window.Babble.request('POST', '/login', userInfo).then(function (ans) {
                 window.Babble.gravatar = (JSON.parse(ans)).gravatar;
-                window.Babble.getMessages(0, window.Babble.initMessagesArray);
+                window.Babble.getMessages(window.Babble.messagesCounter, window.Babble.storeMessages);
             }).catch(function (err) {
                 console.log(err);
             });
         },
 
         postMessage: function postMessage(message, callback) {
-            callback(message);
-            window.Babble.request('POST', '/messages', message).catch(function (err) {
+            window.Babble.updateKeyInLocalStorage('currentMessage', message.message);
+            window.Babble.request('POST', '/messages', message).then(function (ans) {
+                callback(JSON.parse(ans));
+            }).catch(function (err) {
                 console.log(err);
             });
         },
 
         getMessages: function getMessages(counter, callback) {
-            callback([]);
-            window.Babble.poll('/messages?counter=', window.Babble.storeMessages);
+            window.Babble.poll('/messages?counter=', callback);
         },
 
         deleteMessage: function deleteMessage(id, callback) {
@@ -151,7 +154,9 @@
         },
 
         storeMessages: function (array) {
+            console.log('Trying to append this array: ', array);
             window.Babble.messages = window.Babble.messages.concat(array);
+            window.Babble.messagesCounter = window.Babble.messages.length;
             window.Babble.appendToListView([].concat(array));
         },
 
@@ -167,6 +172,8 @@
                 --window.Babble.messagesCounter;
             }
         },
+
+        dummy: function (any) {},
 
         createMessageHTML: function (msg) {
             var li = document.createElement('li');
@@ -253,19 +260,11 @@
             return article;
         },
 
-        initMessagesArray: function (array) {
-            window.Babble.messages = array;
-        },
-
         updateStats: function (stats) {
             var msgsCount = document.querySelector('.msgsCount');
             msgsCount.textContent = stats.messages.toString();
             var usersCount = document.querySelector('.usersCount');
             usersCount.textContent = stats.users.toString();
-        },
-
-        saveLastMessage: function (message) {
-            window.Babble.updateKeyInLocalStorage('currentMessage', message.message);
         },
 
         updateKeyInLocalStorage: function (keyName, value) {
