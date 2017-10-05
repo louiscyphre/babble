@@ -4,10 +4,8 @@
     "description": "Web Chat",
     "main": "server/main.js",
     "dependencies": {
-        "eslint": "^4.7.2",
         "gravatar": "^1.6.0",
-        "http-server": "^0.10.0",
-        "jshint": "^2.9.5"
+        "http-server": "^0.10.0"
     },
     "devDependencies": {
         "chai": "^4.1.1",
@@ -19,7 +17,7 @@
         "sinon": "^3.2.1"
     },
     "scripts": {
-        "test": "mocha test/server/messages-util-tests.js test/server/server-util-tests.js || true",
+        "test": "mocha test/server/messages-util-tests.js test/server/server-util-tests.js test/server/stats-tests.js test/server/users-tests.js || true",
         "test-in-browser": "http-server -p 8081",
         "test-all": "npm-run-all -p test test-in-browser",
         "sass": "node-sass --watch client/styles/main.scss -o client/styles",

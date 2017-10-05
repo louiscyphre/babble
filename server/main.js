@@ -27,11 +27,12 @@
         if (request.method === 'GET') {
             var data = queryUtil.parse(url.query);
             if (url.pathname.substr(0, 9) == '/messages') {
-                if (!data.counter || isNaN(parseInt(data.counter))) {
+                var seenCounter = parseInt(data.counter);
+                if (!data.counter || isNaN(seenCounter)) {
                     response.writeHead(400);
                 }
-                if (messages.count() > data.counter) {
-                    response.end(JSON.stringify(messages.getMessages(data.counter)));
+                if (messages.count() > seenCounter) {
+                    response.end(JSON.stringify(messages.getMessages(seenCounter)));
                 } else {
                     utils.pushResponseToStack(requests, response);
                 }

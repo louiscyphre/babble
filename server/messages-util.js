@@ -50,6 +50,9 @@
         },
         count: function count() {
             return messagesArray.length;
+        },
+        clear: function clear() {
+            messagesArray = [];
         }
     };
 }));

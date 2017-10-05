@@ -31,6 +31,7 @@
             src: local('Nunito Bold'), local('Nunito-Bold'), url('/client/fonts/Nunito-Bold.woff2') format('woff2'), url('/client/fonts/Nunito-Bold.ttf') format('truetype');
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
         }
+
     </style>
 </head>
 
@@ -38,11 +39,9 @@
 
     <form class="Modal hidden" accept-charset="utf-8">
         <h1 tabindex="-1">Who are you?</h1>
-        <p tabindex="-1"><label for="name">Full name:</label><input type="text" name="name" placeholder="Type your name" autocomplete="name"
-                autofocus aria-label="Type your name here" tabindex="0" />
+        <p tabindex="-1"><label for="name">Full name:</label><input type="text" name="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" tabindex="0" />
         </p>
-        <p tabindex="-1"><label for="email">Email:</label><input type="email" name="email" placeholder="Type your email" autocomplete="email"
-                aria-label="Type your email here" tabindex="0" />
+        <p tabindex="-1"><label for="email">Email:</label><input type="email" name="email" placeholder="Type your email" autocomplete="email" aria-label="Type your email here" tabindex="0" />
         </p>
         <p class="Modal-buttons">
             <button type="submit" class="Modal--login" aria-label="Continue as registered user" tabindex="0">Save</button>
@@ -86,14 +85,16 @@
     <script src="../../node_modules/sinon/pkg/sinon.js"></script>
     <script>
         mocha.setup('bdd');
+
     </script>
     <!-- thing to test -->
     <script src="../../client/scripts/main.js"></script>
     <!-- your test files -->
-    <!--script src="test.js"></script-->
-    <script src="extra-tests.js"></script>
+    <script src="test.js"></script>
+    <!--script src="extra-tests.js"></script-->
     <script>
         mocha.run();
+
     </script>
 </body>
 
