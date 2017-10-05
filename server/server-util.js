@@ -42,5 +42,9 @@
             };
             requests.push(resp);
         },
+        responseWithError: function (response, errorCode) {
+            response.writeHead(errorCode);
+            response.end();
+        },
     };
 }));

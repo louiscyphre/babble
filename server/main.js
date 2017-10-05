@@ -6,6 +6,7 @@
     var urlUtil = require('url');
     var queryUtil = require('querystring');
 
+    var constants = require('./constants');
     var messages = require('./messages-util');
     var utils = require('./server-util');
     var users = require('./users');
@@ -14,10 +15,10 @@
     var requests = [];
 
     setInterval(function () {
-        var expirationTime = Date.now() - 180000;
+        var expirationTime = Date.now() - constants.HOLDING_REQUEST_TIMEOUT;
         utils.closeExpired(requests, expirationTime);
         utils.closeExpired(stats.requests, expirationTime);
-    }, 180000);
+    }, constants.HOLDING_REQUEST_TIMEOUT);
     // TODO
     // FIXME divide, neat
     var server = http.createServer(function (request, response) {
@@ -31,7 +32,7 @@
             var data = queryUtil.parse(url.query);
             var seenCounter = parseInt(data.counter);
             if (!data.counter || isNaN(seenCounter)) {
-                response.writeHead(400);
+                response.writeHead(constants.httpErrorCodes.BAD_REQUEST);
             }
             if (messages.count() > seenCounter) {
                 response.end(JSON.stringify(messages.getMessages(seenCounter)));
@@ -66,14 +67,13 @@
             utils.closePendingRequests(stats.requests, stats.get());
             response.end(JSON.stringify(true));
         } else if (request.method === 'OPTIONS') {
-            response.writeHead(204, {
+            response.writeHead(constants.httpSuccessCodes.NO_CONTENT, {
                 'Content-Type': 'text/plain'
             });
             response.end();
         } else { //FIXME to add handle errors here
-            response.writeHead(405);
+            response.writeHead(constants.httpErrorCodes.METHOD_NOT_ALLOWED);
             response.end();
         }
-    });
-    server.listen(9000);
+    }).listen(constants.SERVER_PORT);
 }(this.window));

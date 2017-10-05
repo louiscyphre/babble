@@ -58,5 +58,16 @@
             });
         });
 
+        describe('users.doAuth():', function () {
+            it('should call request.on() to attach events', function () {
+                let request = {},
+                    response = {},
+                    statsModule = {};
+                request.on = sinon.spy();
+                users.doAuth(users.login, request, response, statsModule);
+                request.on.calledWith('data');
+                request.on.calledWith('end');
+            });
+        });
     });
 }());
