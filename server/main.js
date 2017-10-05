@@ -24,9 +24,10 @@
         utils.setResponseHeaders(response);
         var url = urlUtil.parse(request.url);
         var requestBody = '';
+        var path = url.pathname.substr(0, 9);
         if (request.method === 'GET') {
             var data = queryUtil.parse(url.query);
-            if (url.pathname.substr(0, 9) == '/messages') {
+            if (path == '/messages') {
                 var seenCounter = parseInt(data.counter);
                 if (!data.counter || isNaN(seenCounter)) {
                     response.writeHead(400);
@@ -36,14 +37,14 @@
                 } else {
                     utils.pushResponseToStack(requests, response);
                 }
-            } else if (url.pathname.substr(0, 6) == '/stats') {
+            } else if (path == '/stats') {
                 utils.pushResponseToStack(stats.requests, response);
             } else {
                 response.writeHead(400);
             }
         } else if (request.method === 'POST') {
             var user;
-            if (url.pathname.substr(0, 9) == '/messages') {
+            if (path == '/messages') {
                 var id = 0;
                 requestBody = '';
                 request.on('data', function (chunk) {
@@ -59,13 +60,13 @@
                         id: id.toString()
                     }));
                 });
-            } else if (url.pathname.substr(0, 6) == '/login') {
+            } else if (path == '/login') {
                 users.doAuth(users.login, request, response, stats);
-            } else if (url.pathname.substr(0, 7) == '/logout') {
+            } else if (path == '/logout') {
                 users.doAuth(users.logout, request, response, stats);
             }
         } else if (request.method === 'DELETE' &&
-            url.pathname.substr(0, 9) == '/messages') {
+            path == '/messages') {
             var strid = url.pathname.replace('/messages/', '');
             messages.deleteMessage(strid);
             utils.closePendingRequests(stats.requests, stats.get());
