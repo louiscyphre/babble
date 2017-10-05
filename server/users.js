@@ -26,8 +26,8 @@
             if (index === -1) {
                 users.push(user);
             }
-            console.log('[INFO] login(): logged in:', JSON.stringify(user));
-            console.log('[INFO] login(): all users:', JSON.stringify(users));
+            //console.log('[INFO] login(): logged in:', JSON.stringify(user));
+            //console.log('[INFO] login(): all users:', JSON.stringify(users));
         },
         logout: function logout(user) {
             var index = isExist(user, users);
@@ -36,9 +36,6 @@
             }
             console.log('[INFO] logout(): logged out:', JSON.stringify(user));
             console.log('[INFO] logout(): all users:', JSON.stringify(users));
-        },
-        count: function count() {
-            return users.length;
         },
         getGravatar: function getGravatar(email) {
             if (typeof email !== 'string' || email === '') {
@@ -60,6 +57,12 @@
                     gravatar: usersutil.getGravatar(user.email)
                 }));
             });
+        },
+        count: function count() {
+            return users.length;
+        },
+        clear: function clear() {
+            users = [];
         }
     };
     return usersutil;

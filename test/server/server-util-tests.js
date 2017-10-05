@@ -30,18 +30,6 @@
             it('should call .end() of each response', function () {
                 sinon.assert.called(spy);
             });
-            it('response must be timestamped', function () {
-                assert.deepEqual(true, requests[0].hasOwnProperty('timestamp'));
-            });
-        });
-        describe('utils.closeExpired():', function () {
-            it('should close all expired requests (expirationTime = 0)', function () {
-                utils.closeExpired(requests, 0);
-                assert.deepEqual([], requests);
-            });
-            it('should call .end() of each response', function () {
-                sinon.assert.called(spy);
-            });
             it('.end() should be called as .end("")', function () {
                 sinon.assert.calledWith(spy, "");
             });
@@ -60,7 +48,6 @@
                 assert.deepEqual([], requests);
                 sinon.assert.called(spy);
                 sinon.assert.calledWith(spy, JSON.stringify(message));
-
             });
         });
         describe('utils.setResponseHeaders():', function () {
