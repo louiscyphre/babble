@@ -9,6 +9,7 @@
 }(this, module, function () {
     var users = require('./users');
     var messagesArray = [];
+    var requests = [];
 
     return {
         addMessage: function addMessage(message) {
@@ -53,6 +54,7 @@
         },
         clear: function clear() {
             messagesArray = [];
-        }
+        },
+        requests: requests
     };
 }));
