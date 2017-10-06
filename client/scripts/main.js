@@ -18,7 +18,6 @@
         window.Babble.postMessage(message, window.Babble.saveLastMessage);
     }
 
-
     function submitRegisterForm(e) {
         e.preventDefault();
 
@@ -35,12 +34,12 @@
 
     function deleteMessageFromServer(e) {
         e.preventDefault();
-        var id = e.target.parentNode.parentNode.parentNode.id; //FIXME TODO
+        var id = parseInt(e.target.parentNode.parentNode.parentNode.id); //FIXME TODO
         console.log('deleteMessageFromServer():Message id is:', id);
         var message = document.getElementById(id);
         message.classList.add('hidden');
         message.setAttribute('aria-hidden', 'true');
-        window.Babble.deleteMessage(id, window.Babble.decreaseCounter); //FIXME COUNTER NOT EXIST ANYMORE!
+        window.Babble.deleteMessage(id, window.Babble.deleteMessageFromClient);
     }
 
     window.Babble = {
@@ -78,6 +77,7 @@
 
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 400) {
+                        //console.log('Server answered with:', xhr.responseText);
                         resolve(xhr.responseText);
                     } else {
                         reject(xhr.responseText);
@@ -141,7 +141,9 @@
 
         deleteMessage: function deleteMessage(id, callback) {
             window.Babble.request('DELETE', '/messages/' + id)
-                .then(callback(true)).catch(function (err) {
+                .then(function (ans) {
+                    callback(JSON.parse(ans), id);
+                }).catch(function (err) {
                     console.log(err);
                 });
         },
@@ -162,10 +164,24 @@
             }
         },
 
-        decreaseCounter: function (serverAck) {
-            if (serverAck) {
-                --window.Babble.messagesCounter;
+        deleteMessageFromClient: function (serverAck, id) {
+            //console.log('Deleting from client: message serverAck, id:', serverAck, id);
+            if (!serverAck || !id) {
+                return;
             }
+            //console.log('Deleting from client: message id:', id);
+            for (var i = window.Babble.messages.length - 1; i >= 0; --i) {
+                if (id === window.Babble.messages[i].timestamp) {
+                    //console.log('Splicing:', i);
+                    window.Babble.messages.splice(i, 1);
+                }
+            }
+            window.Babble.deleteMessageHTML(id);
+        },
+
+        deleteMessageHTML: function (id) {
+            var ol = document.querySelector('.Chat-msgs-list');
+            ol.removeChild(document.getElementById(id));
         },
 
         createMessageHTML: function (msg) {
