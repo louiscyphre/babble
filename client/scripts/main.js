@@ -40,7 +40,7 @@
         var message = document.getElementById(id);
         message.classList.add('hidden');
         message.setAttribute('aria-hidden', 'true');
-        window.Babble.deleteMessage(id, window.Babble.decreaseCounter);
+        window.Babble.deleteMessage(id, window.Babble.decreaseCounter); //FIXME COUNTER NOT EXIST ANYMORE!
     }
 
     window.Babble = {
