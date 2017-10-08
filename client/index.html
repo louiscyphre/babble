@@ -13,9 +13,11 @@
     <pre class="Shadowmaker" tabindex="-1"></pre>
     <form class="Modal" method="post" action="http://localhost:9000/login" accept-charset="utf-8">
         <h1 tabindex="-1">Who are you?</h1>
-        <p tabindex="-1"><label for="name">Full name:</label><input type="text" name="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" tabindex="0" />
+        <p tabindex="-1">
+            <label for="name">Full name:</label>
+            <input type="text" id="name" placeholder="Type your name" autocomplete="name" autofocus aria-label="Type your name here" tabindex="0" />
         </p>
-        <p tabindex="-1"><label for="email">Email:</label><input type="email" name="email" placeholder="Type your email" autocomplete="email" aria-label="Type your email here" tabindex="0" />
+        <p tabindex="-1"><label for="email">Email:</label><input type="email" id="email" placeholder="Type your email" autocomplete="email" aria-label="Type your email here" tabindex="0" />
         </p>
         <p class="Modal-buttons">
             <button type="submit" class="Modal--login" aria-label="Continue as registered user" tabindex="0">Save</button>

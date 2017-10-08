@@ -32,16 +32,6 @@
         pre.setAttribute('aria-hidden', 'true');
     }
 
-    function deleteMessageFromServer(e) {
-        e.preventDefault();
-        var id = parseInt(e.target.parentNode.parentNode.parentNode.id); //FIXME TODO
-        console.log('deleteMessageFromServer():Message id is:', id);
-        var message = document.getElementById(id);
-        message.classList.add('hidden');
-        message.setAttribute('aria-hidden', 'true');
-        window.Babble.deleteMessage(id, window.Babble.deleteMessageFromClient);
-    }
-
     window.Babble = {
         apiServerUrl: 'http://localhost:9000',
         anonymousAvatar: 'images/anon.svg',
@@ -74,7 +64,7 @@
             return new Promise(function (resolve, reject) {
 
                 var xhr = new XMLHttpRequest();
-
+                //xhr.addEventListener("load", callback);
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 400) {
                         //console.log('Server answered with:', xhr.responseText);
@@ -243,7 +233,9 @@
             button.setAttribute('type', 'submit');
             button.setAttribute('tabindex', '0');
             button.setAttribute('aria-label', 'Delete this message');
-            button.onclick = deleteMessageFromServer;
+            button.onclick = function (e) {
+                window.Babble.deleteMessage(msg.timestamp, window.Babble.deleteMessageFromClient);
+            };
             return button;
         },
 
