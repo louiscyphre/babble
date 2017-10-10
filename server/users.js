@@ -34,14 +34,16 @@
             if (index !== -1) {
                 users.splice(index, 1);
             }
-            console.log('[INFO] logout(): logged out:', JSON.stringify(user));
-            console.log('[INFO] logout(): all users:', JSON.stringify(users));
+            //console.log('[INFO] logout(): logged out:', JSON.stringify(user));
+            //console.log('[INFO] logout(): all users:', JSON.stringify(users));
         },
         getGravatar: function getGravatar(email) {
             if (typeof email !== 'string' || email === '') {
                 return 'none';
             }
-            return gravatarify(email);
+            return gravatarify(email, {
+                d: 'retro'
+            }, true);
         },
         doAuth: function doAuth(authCallback, request, response, statsModule) {
 

@@ -1,4 +1,4 @@
-(function (window, document, console, localStorage, XMLHttpRequest, Promise, navigator) {
+(function (window, document, console, localStorage, XMLHttpRequest, Promise) {
 
     'use strict';
 
@@ -15,7 +15,7 @@
             timestamp: window.Date.now()
         };
         textarea.value = "";
-        window.Babble.postMessage(message, window.Babble.saveLastMessage);
+        window.Babble.postMessage(message, window.Babble.updateKeyInLocalStorage);
     }
 
     function submitRegisterForm(e) {
@@ -36,7 +36,7 @@
         apiServerUrl: 'http://localhost:9000',
         anonymousAvatar: 'images/anon.svg',
         deleteMessageImg: 'images/del_msg.svg',
-        messages: undefined,
+        messages: [],
         storage: localStorage,
         gravatar: '',
 
@@ -86,8 +86,7 @@
                 xhr.open(method, fullUrl, true);
                 xhr.setRequestHeader('Content-Type', 'text/plain');
                 console.log('request: URL: ', method + ' ' + fullUrl);
-                if (method === 'POST') {
-                    console.log('POSTing: ', JSON.stringify(data));
+                if (method === 'POST') { //console.log('POSTing: ', JSON.stringify(data));
                     xhr.send(JSON.stringify(data));
                 } else {
                     xhr.send();
@@ -111,22 +110,26 @@
             window.Babble.getStats(window.Babble.updateStats);
             window.Babble.request('POST', '/login', userInfo).then(function (ans) {
                 window.Babble.gravatar = (JSON.parse(ans)).gravatar;
-                window.Babble.getMessages(0, window.Babble.initMessagesArray);
+                window.Babble.getMessages(0, window.Babble.storeMessages);
             }).catch(function (err) {
                 console.log(err);
             });
         },
 
         postMessage: function postMessage(message, callback) {
-            callback(message);
+            callback('currentMessage', message.message);
             window.Babble.request('POST', '/messages', message).catch(function (err) {
                 console.log(err);
             });
         },
 
         getMessages: function getMessages(counter, callback) {
-            callback([]);
-            window.Babble.poll('/messages?counter=', window.Babble.storeMessages);
+            window.Babble.poll('/messages?counter=', callback);
+        },
+
+
+        getStats: function getStats(callback) {
+            window.Babble.poll('/stats', callback);
         },
 
         deleteMessage: function deleteMessage(id, callback) {
@@ -136,10 +139,6 @@
                 }).catch(function (err) {
                     console.log(err);
                 });
-        },
-
-        getStats: function getStats(callback) {
-            window.Babble.poll('/stats', callback);
         },
 
         storeMessages: function (array) {
@@ -152,17 +151,15 @@
             for (var i = 0; i < array.length; ++i) {
                 ol.appendChild(window.Babble.createMessageHTML(array[i]));
             }
+            ol.lastChild.scrollIntoView(true);
         },
 
         deleteMessageFromClient: function (serverAck, id) {
-            //console.log('Deleting from client: message serverAck, id:', serverAck, id);
             if (!serverAck || !id) {
                 return;
             }
-            //console.log('Deleting from client: message id:', id);
             for (var i = window.Babble.messages.length - 1; i >= 0; --i) {
                 if (id === window.Babble.messages[i].timestamp) {
-                    //console.log('Splicing:', i);
                     window.Babble.messages.splice(i, 1);
                 }
             }
@@ -233,7 +230,7 @@
             button.setAttribute('type', 'submit');
             button.setAttribute('tabindex', '0');
             button.setAttribute('aria-label', 'Delete this message');
-            button.onclick = function (e) {
+            button.onclick = function () {
                 window.Babble.deleteMessage(msg.timestamp, window.Babble.deleteMessageFromClient);
             };
             return button;
@@ -254,15 +251,9 @@
                 article.classList.add('Chat-msg-text--own');
             }
             article.setAttribute('tabindex', '-1');
-
             article.appendChild(window.Babble.createHeaderHTML(msg));
             article.appendChild(window.Babble.createParagraphHTML(msg));
-
             return article;
-        },
-
-        initMessagesArray: function (array) {
-            window.Babble.messages = array;
         },
 
         updateStats: function (stats) {
@@ -270,10 +261,6 @@
             msgsCount.textContent = stats.messages.toString();
             var usersCount = document.querySelector('.usersCount');
             usersCount.textContent = stats.users.toString();
-        },
-
-        saveLastMessage: function (message) {
-            window.Babble.updateKeyInLocalStorage('currentMessage', message.message);
         },
 
         updateKeyInLocalStorage: function (keyName, value) {
@@ -301,4 +288,4 @@
 
     window.Babble.run(document, window, console);
 
-})(this.window, this.document, this.console, this.localStorage, this.XMLHttpRequest, this.Promise, this.navigator);
+})(this.window, this.document, this.console, this.localStorage, this.XMLHttpRequest, this.Promise);
