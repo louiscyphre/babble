@@ -1,10 +1,6 @@
 #!/bin/bash
 
-
-#&& cat client/styles/main.min.css | sed -e 's/(\/fonts\/N/(\.\.\/fonts\/N/g' > client/styles/_main.min.css \
-
-cd /home/student/Desktop/ClientSide/project/babble \
-&& git checkout gh-pages \
+git checkout gh-pages \
 && git rm -f index.html \
 && git checkout master client/index.html \
 && git mv client/index.html index.html \
