@@ -53,7 +53,7 @@
             response.end();
         },
 
-        doGETmessages: function doGETmessages(url, data, response, messages) {
+        doGETmessages: function doGETmessages(data, response, messages) {
 
             var seenCounter = parseInt(data.counter);
             if (!data.counter || isNaN(seenCounter)) {
@@ -87,9 +87,9 @@
         doDELETEmessages: function (url, response, messages, stats) {
 
             var strid = url.pathname.replace('/messages/', '');
-            messages.deleteMessage(strid);
+            var result = messages.deleteMessage(strid);
             utils.closePendingRequests(stats.requests, stats.get());
-            response.end(JSON.stringify(true));
+            response.end(JSON.stringify(result));
         }
     };
     return utils;

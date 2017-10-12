@@ -37,17 +37,19 @@
         },
         deleteMessage: function deleteMessage(id) {
             if (typeof id !== 'string' || messagesArray.length === 0) {
-                return;
+                return false;
             }
             var timestamp = parseInt(id);
             if (isNaN(timestamp)) {
-                return;
+                return false;
             }
             for (var i = messagesArray.length - 1; i >= 0; i--) {
                 if (parseInt(messagesArray[i].timestamp) === timestamp) {
                     messagesArray.splice(i, 1);
+                    return true;
                 }
             }
+            return false;
         },
         count: function count() {
             return messagesArray.length;

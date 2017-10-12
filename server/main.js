@@ -28,7 +28,7 @@
 
         if (requestType === 'GET /messages') {
             var data = queryUtil.parse(url.query);
-            utils.doGETmessages(url, data, response, messages);
+            utils.doGETmessages(data, response, messages);
         } else if (requestType === 'GET /stats') {
             utils.pushResponseToStack(stats.requests, response);
         } else if (requestType === 'POST /messages') {

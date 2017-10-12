@@ -5,6 +5,8 @@
     let assert = require('assert');
     let sinon = require('sinon');
     let utils = require('../../server/server-util');
+    let messages = require('../../server/messages-util');
+    let stats = require('../../server/stats');
 
     describe('server-util module functions:', function () {
         let requests = [];
@@ -53,10 +55,7 @@
         describe('utils.setResponseHeaders():', function () {
             it('should set apropriate headers for response', function () {
 
-                let response = {
-                    setHeader: spy
-                };
-
+                response.setHeader = spy;
                 utils.setResponseHeaders(response);
 
                 sinon.assert.calledWith(spy, 'Access-Control-Allow-Origin', '*');
@@ -64,6 +63,66 @@
                 sinon.assert.calledWith(spy, 'Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
                 sinon.assert.calledWith(spy, 'Cache-Control', 'max-age=0, public');
                 sinon.assert.calledWith(spy, 'Content-Type', 'text/plain');
+            });
+        });
+        describe('utils.responseWith():', function () {
+            it('should set error code for response with writeHead()', function () {
+
+                response.writeHead = spy;
+
+                utils.responseWith(response, 404);
+                sinon.assert.calledWith(spy, 404);
+            });
+        });
+
+        describe('utils.doGETmessages():', function () {
+            it('should push to response all asked messages', function () {
+
+                let data = {
+                    counter: 0
+                };
+                let msg = {
+                    name: 'Admin',
+                    email: 'mail@gmail.com',
+                    message: 'Hi',
+                    timestamp: 1506983034931
+                };
+                messages.clear();
+
+                messages.addMessage(msg);
+                utils.doGETmessages(data, response, messages);
+                sinon.assert.calledWith(response.end, JSON.stringify([msg]));
+            });
+        });
+
+        describe('utils.doDELETEmessages():', function () {
+            it('should delete message on specified url and release stats requests', function () {
+
+                let url = {
+                    pathname: '/messages/1506983034931'
+                };
+                let statsResponse = {
+                    end: sinon.spy()
+                };
+                let msg = {
+                    name: 'Admin',
+                    email: 'mail@gmail.com',
+                    message: 'Hi',
+                    timestamp: 1506983034931
+                };
+                messages.clear();
+
+                messages.addMessage(msg);
+
+                utils.pushResponseToStack(stats.requests, statsResponse);
+                assert.equal(true, stats.requests.length >= 1);
+
+                utils.doDELETEmessages(url, response, messages, stats);
+
+                assert.deepEqual([], stats.requests);
+                sinon.assert.calledWith(response.end, JSON.stringify(true));
+                let allMessages = messages.getMessages(0);
+                assert.deepEqual(allMessages, []);
             });
         });
     });

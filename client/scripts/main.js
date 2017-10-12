@@ -53,7 +53,7 @@
             window.onbeforeunload = function () {
                 var data = (JSON.parse(window.Babble.storage.getItem('babble'))).userInfo;
                 window.Babble.request('POST', '/logout', data).then(function (answer) {
-                    window.Babble.updateKeyInLocalStorage('all', ''); // FIXME Last message: to see or not to see?
+                    window.Babble.updateKeyInLocalStorage('allKeys', '');
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -64,10 +64,8 @@
             return new Promise(function (resolve, reject) {
 
                 var xhr = new XMLHttpRequest();
-                //xhr.addEventListener("load", callback);
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 400) {
-                        //console.log('Server answered with:', xhr.responseText);
                         resolve(xhr.responseText);
                     } else {
                         reject(xhr.responseText);
@@ -86,7 +84,7 @@
                 xhr.open(method, fullUrl, true);
                 xhr.setRequestHeader('Content-Type', 'text/plain');
                 console.log('request: URL: ', method + ' ' + fullUrl);
-                if (method === 'POST') { //console.log('POSTing: ', JSON.stringify(data));
+                if (method === 'POST') {
                     xhr.send(JSON.stringify(data));
                 } else {
                     xhr.send();
@@ -96,7 +94,7 @@
 
         poll: function poll(url, callback) {
             window.Babble.request('GET', url).then(function (ans) {
-                if (ans !== "") { //console.log('server answer: ', ans);
+                if (ans !== "") {
                     callback(JSON.parse(ans));
                 }
                 poll(url, callback);
