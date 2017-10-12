@@ -13,8 +13,8 @@ cd /home/student/Desktop/ClientSide/project/babble \
 && sed -i'' -e 's/<\/title>/<\/title><style>/' index.html \
 && sed -i'' '/<style>/ r client/styles/main.min.css' index.html \
 && sed -i'' -e 's/<\/head>/<\/style><\/head>/' index.html \
-&& sed -i'' -e 's/url(\.\.\/images\//url(images\//' index.html \
-&& sed -i'' -e 's/url(\/fonts\//url(fonts\//' index.html \
+&& sed -i'' -e 's/url(\.\.\/images\//url(images\//g' index.html \
+&& sed -i'' -e 's/url(\/fonts\//url(fonts\//g' index.html \
 && rm -f client/styles/main.min.css \
 && rm -f scripts/main.min.js \
 && git checkout master client/scripts/main.min.js  \
