@@ -117,16 +117,18 @@
         },
 
         postMessage: function postMessage(message, callback) {
-            callback('currentMessage', message.message);
-            window.Babble.request('POST', '/messages', message).catch(function (err) {
-                console.log(err);
-            });
+            window.Babble.updateKeyInLocalStorage('currentMessage', message.message);
+            window.Babble.request('POST', '/messages', message)
+                .then(function (ans) {
+                    callback(JSON.parse(ans));
+                }).catch(function (err) {
+                    console.log(err);
+                });
         },
 
         getMessages: function getMessages(counter, callback) {
             window.Babble.poll('/messages?counter=', callback);
         },
-
 
         getStats: function getStats(callback) {
             window.Babble.poll('/stats', callback);

@@ -41,6 +41,8 @@
             utils.doDELETEmessages(url, response, messages, stats);
         } else if (request.method === 'OPTIONS') {
             utils.responseWith(response, constants.httpSuccessCodes.NO_CONTENT);
+        } else if (request.method === 'GET') {
+            utils.responseWith(response, constants.httpErrorCodes.NOT_FOUND);
         } else {
             utils.responseWith(response, constants.httpErrorCodes.METHOD_NOT_ALLOWED);
         }

@@ -44,7 +44,7 @@
             };
             it('should issue POST /messages ', function () {
 
-                server.respondWith('POST', `${apiUrl}/messages`, [200, {
+                server.respondWith('POST', apiUrl + '/messages', [200, {
                         'Content-Type': 'text/plain',
                         'Access-Control-Allow-Origin': '*',
                         'Access-Control-Allow-Headers': 'Content-Type',
