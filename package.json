@@ -4,32 +4,32 @@
     "description": "Web Chat",
     "main": "server/main.js",
     "dependencies": {
-        "md5": "^2.2.1",
-        "node-sass": "^4.5.3",
-        "nodemon": "^1.11.0",
-        "serviceworker-cache-polyfill": "^4.0.0"
+        "gravatar": "^1.6.0",
+        "http-server": "^0.10.0"
     },
     "devDependencies": {
         "chai": "^4.1.1",
-        "chai-http": "^3.0.0",
-        "http-server": "^0.10.0",
         "minifier": "^0.8.1",
         "mocha": "^3.5.0",
-        "mocha-sinon": "^2.0.0",
+        "node-sass": "^4.5.3",
+        "nodemon": "^1.12.0",
         "npm-run-all": "^4.0.2",
-        "should-sinon": "0.0.5",
         "sinon": "^3.2.1"
     },
     "scripts": {
-        "test": "mocha --recursive test/server || true",
+        "test": "mocha test/server/messages-util-tests.js test/server/server-util-tests.js test/server/stats-tests.js test/server/users-tests.js || true",
         "test-in-browser": "http-server -p 8081",
         "test-all": "npm-run-all -p test test-in-browser",
-        "sass": "node-sass --watch styles/main.scss -o styles/",
+        "sass": "node-sass --watch client/styles/main.scss -o client/styles",
         "file-server": "http-server ./client -p 8080",
-        "start": "npm-run-all -p -r file-server",
-        "dev": "npm-run-all -p -r sass",
-        "min-css": "minify styles/main.css",
-        "min": "npm-run-all -p -r min-css"
+        "api-server": "node server/main.js",
+        "api-server-dev": "nodemon server/main.js",
+        "start": "npm-run-all -p -r file-server api-server",
+        "dev": "npm-run-all -p -r api-server-dev sass",
+        "min-js": "minify --output client/scripts/main.min.js client/scripts/main.js",
+        "min-css": "minify --output client/styles/main.min.css client/styles/main.css",
+        "min": "npm-run-all -p -s min-js min-css",
+        "release": "npm-run-all -p -s min test-all"
     },
     "repository": {
         "type": "git",
