@@ -4,7 +4,8 @@
 @import 'utils.scss';
 @import 'functions.scss';
 html > *,
-h1 {
+h1,
+h2 {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
 }
@@ -18,12 +19,19 @@ html {
     display: flex;
 }
 
-
-h1 {
-    font-size: 1.875rem;
+h1,
+h2 {
     margin-top: 0;
     word-break: break-all;
     word-wrap: break-word;
+}
+
+h1 {
+    font-size: 1.875rem;
+}
+
+h2 {
+    font-size: 1.75rem;
 }
 
 .MainHeader {
@@ -58,39 +66,46 @@ h1 {
 
 .Modal {
     border: 1px solid $c-border;
-    border-radius: 0.1rem;
+    border-radius: 0.2rem;
     margin: auto;
     background-color: $c-modalBackground;
 }
 
-.Modal p {
+.Modal div p {
     width: 100%;
     align-items: center;
     margin-top: 0;
 }
 
-.Modal p label {
+.Modal div p label {
     flex: 1;
     color: $c-msgText;
+    font-size: 1.5rem;
 }
 
-.Modal p label,
+.Modal div p label,
 input {
     font-weight: 700;
 }
 
-.Modal p input {
+.Modal-inputs {
+    flex: 10;
+    vertical-align: top;
+
+}
+
+.Modal-buttons {
+    vertical-align: bottom;
+
+}
+
+.Modal div p input {
     flex: 3;
-    padding: 0.4em;
     border-radius: $borderRadius;
     border: 2px solid $c-border;
     outline-style: none;
     font-family: inherit;
     font-size: 1.3rem;
-}
-
-.Modal-buttons {
-    flex-direction: row-reverse;
 }
 
 .Modal--anonymous {
@@ -109,6 +124,7 @@ input {
     margin-left: 1rem;
     margin-top: 1rem;
     font-family: inherit;
+    font-size: 1.3rem;
 }
 
 .ChatContainer,

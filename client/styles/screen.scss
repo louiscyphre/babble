@@ -1,7 +1,4 @@
 @media (min-width:0px) and (max-width:638px) {
-    html {
-        font-size: 72.5%;
-    }
     .ChatSideBar {
         display: none;
         visibility: hidden;
@@ -16,8 +13,30 @@
     .Logo {
         width: 40%;
     }
-    .Modal p > * {
-        font-size: 1.5rem;
+    .Modal {
+        width: 75%;
+        height: 80%;
+        overflow-y: auto;
+        display: flex;
+        flex-flow: column wrap
+    }
+    .Modal div button {
+        display: inline-block;
+        float: right;
+    }
+    .Modal div p label,
+    input {
+        margin-top: 2rem;
+    }
+    .Modal-buttons {
+        display: table-row;
+        float: right;
+        flex: 1;
+
+    }
+    .Modal-input {
+        padding-top: 2rem;
+
     }
 }
 
@@ -34,7 +53,7 @@
 @media (min-width:161px) {
 
     .Modal {
-        padding: 3rem;
+        padding: 2rem;
     }
     .Modal--anonymous {
         padding: 0.4rem 0.7rem 0.4rem 0.7rem;
@@ -45,6 +64,9 @@
 }
 
 @media (min-width:0px) and (max-width:320px) {
+    html {
+        font-size: 67.5%;
+    }
     .Chat-msgFormButton {
         background: url("../images/send_bg_s.webp");
     }
@@ -53,17 +75,28 @@
     .Chat-header,
     dl,
     dd .Modal,
-    .Modal p,
-    .Modal p input {
+    .Modal div,
+    .Modal div button,
+    .Modal div p input {
         display: block;
         word-break: break-all;
         word-wrap: break-word;
         min-width: 0%;
     }
     .Modal,
-    .Modal p,
-    .Modal p input {
+    .Modal div,
+    .Modal div p input {
         overflow-y: auto;
+    }
+    .Modal div p input {
+        padding: 0 0 0 0.4rem;
+    }
+    .Modal-buttons {
+        flex: 2;
+    }
+    .Modal div p label,
+    input {
+        width: 75%;
     }
     .Chat-msg-avatar {
         float: none;
@@ -82,15 +115,18 @@
     }
 }
 
+@media (min-width:321px) {
+    .Modal div p input {
+        padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+    }
+}
+
 @media (min-width:321px) and (max-width:638px) {
+    html {
+        font-size: 72.5%;
+    }
     .Chat-msgFormButton {
         background: url("../images/send_bg_m.webp");
-    }
-    .Modal p {
-        display: inline-flex;
-    }
-    .Modal {
-        display: table;
     }
     .Chat-header,
     .Chat-msg {
@@ -107,9 +143,13 @@
     .Chat-msgFormText {
         flex: 8;
     }
-    .Modal {
-        width: 60%;
-        height: 80%;
+    .Modal-buttons {
+        flex: 1;
+    }
+    .Modal p label,
+    input {
+        display: table-row;
+        width: 50%;
     }
 }
 
@@ -124,11 +164,12 @@
         width: 30%;
         display: table;
     }
-    .Modal p {
+    .Modal-input {
         display: inline-flex;
     }
-    .Modal p > * {
-        font-size: 1.2rem;
+    .Modal div button {
+        display: inline-block;
+        float: right;
     }
     .Chat-msgFormText {
         flex: 8;
