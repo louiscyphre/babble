@@ -4,8 +4,7 @@
 @import 'utils.scss';
 @import 'functions.scss';
 html > *,
-h1,
-h2 {
+h1 {
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
 }
@@ -19,19 +18,11 @@ html {
     display: flex;
 }
 
-h1,
-h2 {
+h1 {
+    font-size: 1.875rem;
     margin-top: 0;
     word-break: break-all;
     word-wrap: break-word;
-}
-
-h1 {
-    font-size: 1.875rem;
-}
-
-h2 {
-    font-size: 1.75rem;
 }
 
 .MainHeader {

@@ -52,14 +52,18 @@
 
 @media (min-width:161px) {
 
-    .Modal {
-        padding: 2rem;
-    }
     .Modal--anonymous {
-        padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+        padding: 0.3rem 0.7rem 0.3rem 0.7rem;
     }
     .Modal--login {
-        padding: 0.4rem 2.3rem 0.4rem 2.3rem;
+        padding: 0.3rem 2.3rem 0.3rem 2.3rem;
+    }
+}
+
+@media (min-width:161px) and (max-width:320px) {
+
+    .Modal {
+        padding: 2rem;
     }
 }
 
@@ -88,6 +92,7 @@
     .Modal div p input {
         overflow-y: auto;
     }
+
     .Modal div p input {
         padding: 0 0 0 0.4rem;
     }
@@ -151,6 +156,9 @@
         display: table-row;
         width: 50%;
     }
+    .Modal {
+        padding: 4rem;
+    }
 }
 
 @media (min-width:639px) {
@@ -163,6 +171,7 @@
     .Modal {
         width: 30%;
         display: table;
+        padding: 3rem;
     }
     .Modal-input {
         display: inline-flex;

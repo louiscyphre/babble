@@ -57,12 +57,14 @@
     padding: 0; } }
 
 @media (min-width: 161px) {
-  .Modal {
-    padding: 2rem; }
   .Modal--anonymous {
-    padding: 0.4rem 0.7rem 0.4rem 0.7rem; }
+    padding: 0.3rem 0.7rem 0.3rem 0.7rem; }
   .Modal--login {
-    padding: 0.4rem 2.3rem 0.4rem 2.3rem; } }
+    padding: 0.3rem 2.3rem 0.3rem 2.3rem; } }
+
+@media (min-width: 161px) and (max-width: 320px) {
+  .Modal {
+    padding: 2rem; } }
 
 @media (min-width: 0px) and (max-width: 320px) {
   html {
@@ -128,7 +130,9 @@
   .Modal p label,
   input {
     display: table-row;
-    width: 50%; } }
+    width: 50%; }
+  .Modal {
+    padding: 4rem; } }
 
 @media (min-width: 639px) {
   html {
@@ -137,7 +141,8 @@
     width: 15%; }
   .Modal {
     width: 30%;
-    display: table; }
+    display: table;
+    padding: 3rem; }
   .Modal-input {
     display: inline-flex; }
   .Modal div button {
@@ -196,8 +201,7 @@
   -webkit-border: 2px solid #DBDBDB; }
 
 html > *,
-h1,
-h2 {
+h1 {
   font-family: 'Nunito', sans-serif;
   font-weight: 400; }
 
@@ -209,17 +213,11 @@ html {
   height: 100%;
   display: flex; }
 
-h1,
-h2 {
+h1 {
+  font-size: 1.875rem;
   margin-top: 0;
   word-break: break-all;
   word-wrap: break-word; }
-
-h1 {
-  font-size: 1.875rem; }
-
-h2 {
-  font-size: 1.75rem; }
 
 .MainHeader {
   background-color: #353744;
